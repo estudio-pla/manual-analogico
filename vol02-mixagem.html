@@ -4,18 +4,20 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Volume 02 — A Mixagem Analógica | Estúdio Plá</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%23060d18'/><text x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='18' font-weight='bold' fill='%23D4A83A'>P</text></svg>"/>
+
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;0,700;1,600;1,700&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
 :root{
-  --bg:#060F1C;--bg-card:#0C1D31;--bg-card2:#0F2440;
+  --bg:#060d18;--bg-card:#0a1628;--bg-card2:#0d1e34;
   --blue:#1A6FBF;--blue-lt:#3A9FEF;--blue-glow:rgba(58,159,239,0.18);
   --gold:#D4A83A;--gold-lt:#F0C84A;
-  --txt:#EAF2FF;--txt2:#7EADD4;--border:#1C3A58;--div:rgba(58,159,239,0.22);
+  --txt:#c8daea;--txt2:#7a9ab8;--border:#1C3A58;--div:rgba(58,159,239,0.22);
   --green:#2ECC71;--amber:#E67E22;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--txt);font-family:'Manrope',system-ui,sans-serif;font-size:18px;line-height:1.7;}
+body{background:var(--bg);color:var(--txt);font-family:'Manrope', system-ui, sans-serif;font-size:18px;line-height:1.7;}
 .top-bar{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:52px;background:rgba(6,15,28,0.96);border-bottom:1px solid var(--border);backdrop-filter:blur(8px);flex-wrap:wrap;gap:8px;}
 .vol-nav{display:flex;gap:6px;flex-wrap:wrap;}
 .vol-link{background:transparent;border:1px solid var(--border);border-radius:6px;padding:6px 14px;font-size:13px;font-weight:600;color:var(--txt2);cursor:pointer;text-decoration:none;transition:all .2s;}
@@ -33,16 +35,16 @@ header{padding:56px 40px 56px;text-align:center;border-bottom:1px solid var(--di
 .vu-bar{width:7px;border-radius:3px 3px 0 0;animation:vup var(--d) ease-in-out infinite alternate;}
 @keyframes vup{from{height:var(--mn);opacity:.45}to{height:var(--mx);opacity:1}}
 .vol-badge{display:inline-flex;align-items:center;gap:8px;background:var(--bg-card);border:1px solid var(--blue);border-radius:24px;padding:8px 20px;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--blue-lt);margin-bottom:24px;}
-h1{font-family:'Lora',Georgia,serif;font-size:clamp(28px,5vw,60px);font-weight:700;line-height:1.1;color:#fff;margin-bottom:16px;}
-h1 em{color:var(--blue-lt);}
-.subtitle{font-size:clamp(15px,2vw,20px);color:var(--txt2);max-width:620px;margin:0 auto;}
+h1{font-family:'Lora', Georgia, serif;font-size:clamp(28px,5vw,60px);font-weight:900;line-height:1.1;color:#fff;margin-bottom:16px;}
+h1 em{color:var(--blue-lt);font-style:italic;}
+.subtitle{font-size:clamp(15px,2vw,20px);color:var(--txt2);max-width:620px;margin:0 auto;font-style:italic;}
 .player{background:var(--bg-card);border-bottom:1px solid var(--div);padding:40px;text-align:center;}
 .player-title{font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;}
 .key-row{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
 .key-wrap{position:relative;width:100%;max-width:460px;}
-.key-input{width:100%;background:var(--bg);border:2px solid var(--border);border-radius:10px;padding:13px 50px 13px 18px;font-size:16px;color:var(--txt);outline:none;font-family:monospace;letter-spacing:1px;transition:border-color .2s;}
+.key-input{width:100%;background:var(--bg);border:2px solid var(--border);border-radius:10px;padding:13px 50px 13px 18px;font-size:16px;color:var(--txt);outline:none;font-family:'JetBrains Mono',monospace;letter-spacing:1px;transition:border-color .2s;}
 .key-input:focus{border-color:var(--blue-lt);}
-.key-input::placeholder{color:var(--txt2);font-family:'Manrope',sans-serif;letter-spacing:0;}
+.key-input::placeholder{color:var(--txt2);font-family:'Manrope', sans-serif;letter-spacing:0;}
 .key-eye{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--txt2);cursor:pointer;font-size:18px;}
 .ai-link{display:inline-flex;align-items:center;gap:6px;color:var(--blue-lt);font-size:14px;text-decoration:none;font-weight:600;padding:10px 18px;border:1px solid var(--border);border-radius:8px;transition:all .2s;white-space:nowrap;}
 .ai-link:hover{border-color:var(--blue-lt);background:var(--blue-glow);}
@@ -53,7 +55,7 @@ h1 em{color:var(--blue-lt);}
 .voice-btn.active{background:var(--blue);border-color:var(--blue-lt);color:#fff;box-shadow:0 0 20px var(--blue-glow);}
 .vsub{font-size:11px;opacity:.7;font-weight:400;}
 .ctrl-row{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;}
-.btn-play{background:var(--gold);color:#060F1C;border:none;border-radius:40px;padding:13px 36px;font-size:16px;font-weight:800;cursor:pointer;transition:all .22s;}
+.btn-play{background:var(--gold);color:#060d18;border:none;border-radius:40px;padding:13px 36px;font-size:16px;font-weight:800;cursor:pointer;transition:all .22s;}
 .btn-play:hover{background:var(--gold-lt);transform:scale(1.03);}
 .btn-play:disabled{opacity:.5;cursor:not-allowed;transform:none;}
 .btn-pause{background:transparent;color:var(--txt2);border:2px solid var(--border);border-radius:40px;padding:13px 28px;font-size:16px;font-weight:600;cursor:pointer;transition:all .22s;}
@@ -61,7 +63,7 @@ h1 em{color:var(--blue-lt);}
 .btn-pause:disabled{opacity:.4;cursor:not-allowed;}
 .btn-stop{background:transparent;color:var(--txt2);border:2px solid var(--border);border-radius:40px;padding:13px 28px;font-size:16px;font-weight:600;cursor:pointer;transition:all .22s;}
 .btn-stop:hover{border-color:var(--txt2);color:var(--txt);}
-.p-status{margin-top:14px;font-size:14px;color:var(--txt2);min-height:22px;}
+.p-status{margin-top:14px;font-size:14px;color:var(--txt2);min-height:22px;font-style:italic;}
 .spinner{display:inline-block;width:13px;height:13px;border:2px solid var(--txt2);border-top-color:var(--blue-lt);border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:6px;}
 @keyframes spin{to{transform:rotate(360deg)}}
 main{max-width:900px;margin:0 auto;padding:64px 32px 80px;}
@@ -69,11 +71,11 @@ main{max-width:900px;margin:0 auto;padding:64px 32px 80px;}
 .chap-header{display:flex;align-items:flex-start;gap:20px;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--div);}
 .chap-num{font-family:'JetBrains Mono',monospace;font-size:48px;font-weight:600;color:var(--blue);opacity:.35;line-height:1;flex-shrink:0;margin-top:4px;}
 .chap-eyebrow{font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
-.chap-title{font-family:'Lora',Georgia,serif;font-size:clamp(24px,3.5vw,38px);font-weight:700;color:#fff;line-height:1.2;}
-.chap-sub{font-size:16px;color:var(--txt2);margin-top:8px;}
+.chap-title{font-family:'Lora', Georgia, serif;font-size:clamp(24px,3.5vw,38px);font-weight:700;color:#fff;line-height:1.2;}
+.chap-sub{font-size:16px;color:var(--txt2);margin-top:8px;font-style:italic;}
 .body-p{font-size:clamp(16px,1.6vw,18px);color:var(--txt);line-height:1.85;margin-bottom:20px;}
-.body-p strong{color:var(--blue-lt);}
-.subhead{font-family:'Lora',Georgia,serif;font-size:20px;color:#fff;margin:32px 0 12px;}
+.body-p strong{color:var(--gold);}
+.subhead{font-family:'Lora', Georgia, serif;font-size:20px;color:#fff;margin:32px 0 12px;}
 .body-list{margin:0 0 20px 0;padding-left:0;list-style:none;}
 .body-list li{font-size:clamp(16px,1.6vw,18px);color:var(--txt);line-height:1.85;margin-bottom:10px;padding-left:22px;position:relative;}
 .body-list li:before{content:"—";position:absolute;left:0;color:var(--blue-lt);}
@@ -81,11 +83,11 @@ main{max-width:900px;margin:0 auto;padding:64px 32px 80px;}
 .chap-audio-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:32px;}
 .chap-play-btn{background:var(--blue);color:#fff;border:none;border-radius:24px;padding:11px 22px;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:6px;}
 .chap-play-btn:hover:not(:disabled){background:var(--blue-lt);}
-.chap-play-btn.playing{background:var(--gold);color:#060F1C;}
+.chap-play-btn.playing{background:var(--gold);color:#060d18;}
 .chap-dl-btn{background:transparent;border:1.5px solid var(--border);color:var(--txt2);border-radius:24px;padding:11px 22px;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:6px;}
 .chap-dl-btn:hover:not(:disabled){border-color:var(--gold);color:var(--gold);}
 .chap-play-btn:disabled,.chap-dl-btn:disabled{opacity:.5;cursor:not-allowed;}
-.chap-audio-status{font-size:13px;color:var(--txt2);}
+.chap-audio-status{font-size:13px;color:var(--txt2);font-style:italic;}
 .section-tag{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin:0 0 14px;}
 .section-tag.tech{color:var(--blue-lt);margin-top:40px;}
 .section-tag.gear{color:var(--gold);margin-top:40px;}
@@ -110,21 +112,21 @@ tbody td:first-child{color:#fff;font-weight:600;}
 .tag-green{background:rgba(46,204,113,.15);color:var(--green);}
 .diagram-wrap{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:32px 24px;margin:28px 0;overflow-x:auto;}
 .diagram-label{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;text-align:center;}
-svg text{font-family:'Manrope',system-ui,sans-serif;}
+svg text{font-family:'Manrope', system-ui, sans-serif;}
 .eq-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:24px 0;}
 .eq-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:22px 20px;transition:box-shadow .2s;}
 .eq-card:hover{box-shadow:0 0 24px var(--blue-glow);}
 .eq-card-type{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
-.eq-card-name{font-family:'Lora',Georgia,serif;font-size:20px;color:#fff;margin-bottom:12px;}
+.eq-card-name{font-family:'Lora', Georgia, serif;font-size:20px;color:#fff;margin-bottom:12px;}
 .eq-card-spec{font-size:14px;color:var(--txt2);line-height:1.65;}
 .eq-card-spec strong{color:var(--txt);}
 hr.sdiv{border:none;border-top:1px solid var(--div);margin:60px 0;}
 .vol-footer{background:var(--bg-card2);border-top:1px solid var(--div);padding:48px 32px;text-align:center;}
-.vol-footer h3{font-family:'Lora',Georgia,serif;font-size:clamp(22px,3vw,34px);color:#fff;margin-bottom:16px;}
+.vol-footer h3{font-family:'Lora', Georgia, serif;font-size:clamp(22px,3vw,34px);color:#fff;margin-bottom:16px;}
 .vol-footer p{font-size:16px;color:var(--txt2);max-width:580px;margin:0 auto 28px;}
 .vol-nav-btns{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
 .nav-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 30px;border-radius:40px;font-size:15px;font-weight:700;cursor:pointer;text-decoration:none;transition:all .22s;border:2px solid var(--border);}
-.nav-btn.primary{background:var(--blue-lt);color:#060F1C;border-color:var(--blue-lt);}
+.nav-btn.primary{background:var(--blue-lt);color:#060d18;border-color:var(--blue-lt);}
 .nav-btn.primary:hover{background:#fff;transform:translateY(-2px);}
 .nav-btn.secondary{color:var(--txt2);}
 .nav-btn.secondary:hover{border-color:var(--txt2);color:var(--txt);}
@@ -141,16 +143,15 @@ footer strong{color:var(--blue-lt);}
   .vol-link{padding:6px 10px;font-size:12px;}
 }
 </style>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%23060d18'/><text x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='12' font-weight='bold' fill='%23D4A83A'>MA</text></svg>"/>
 </head>
 <body>
 
 <div class="top-bar">
   <div class="vol-nav">
-    <a class="vol-link" href="vol01-tracking-analogico-v4.html" data-i18n="navVol1"></a>
+    <a class="vol-link" href="vol01-tracking.html" data-i18n="navVol1"></a>
     <a class="vol-link active" href="#" data-i18n="navVol2"></a>
     <a class="vol-link" href="vol03-masterizacao.html" data-i18n="navVol3"></a>
-    <a class="vol-link" href="bonus-alquimia-do-sulco.html" data-i18n="navBonus"></a>
+    <a class="vol-link" href="bonus-alquimia.html" data-i18n="navBonus"></a>
   </div>
   <div class="lang-toggle">
     <button class="lang-btn active" id="btnPT" onclick="setLang('pt')">PT</button>
@@ -226,12 +227,12 @@ footer strong{color:var(--blue-lt);}
   <div class="diagram-wrap">
     <p class="diagram-label" data-i18n="d1label"></p>
     <svg viewBox="0 0 820 120" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
-      <rect x="10" y="35" width="100" height="50" rx="8" fill="#0C1D31" stroke="#1C3A58" stroke-width="1.5"/>
-      <rect x="150" y="35" width="100" height="50" rx="8" fill="#0C1D31" stroke="#1C3A58" stroke-width="1.5"/>
-      <rect x="290" y="35" width="110" height="50" rx="8" fill="#0C1D31" stroke="#1A6FBF" stroke-width="1.5"/>
-      <rect x="440" y="35" width="110" height="50" rx="8" fill="#0C1D31" stroke="#1A6FBF" stroke-width="1.5"/>
-      <rect x="590" y="35" width="100" height="50" rx="8" fill="#0C1D31" stroke="#D4A83A" stroke-width="1.5"/>
-      <rect x="710" y="35" width="100" height="50" rx="8" fill="#0C1D31" stroke="#D4A83A" stroke-width="1.5"/>
+      <rect x="10" y="35" width="100" height="50" rx="8" fill="#0a1628" stroke="#1C3A58" stroke-width="1.5"/>
+      <rect x="150" y="35" width="100" height="50" rx="8" fill="#0a1628" stroke="#1C3A58" stroke-width="1.5"/>
+      <rect x="290" y="35" width="110" height="50" rx="8" fill="#0a1628" stroke="#1A6FBF" stroke-width="1.5"/>
+      <rect x="440" y="35" width="110" height="50" rx="8" fill="#0a1628" stroke="#1A6FBF" stroke-width="1.5"/>
+      <rect x="590" y="35" width="100" height="50" rx="8" fill="#0a1628" stroke="#D4A83A" stroke-width="1.5"/>
+      <rect x="710" y="35" width="100" height="50" rx="8" fill="#0a1628" stroke="#D4A83A" stroke-width="1.5"/>
       <line x1="110" y1="60" x2="147" y2="60" stroke="#1C3A58" stroke-width="2"/>
       <polygon points="147,55 155,60 147,65" fill="#3A9FEF"/>
       <line x1="250" y1="60" x2="287" y2="60" stroke="#1C3A58" stroke-width="2"/>
@@ -242,23 +243,23 @@ footer strong{color:var(--blue-lt);}
       <polygon points="587,55 595,60 587,65" fill="#D4A83A"/>
       <line x1="690" y1="60" x2="707" y2="60" stroke="#1C3A58" stroke-width="2"/>
       <polygon points="707,55 715,60 707,65" fill="#D4A83A"/>
-      <text x="60" y="27" text-anchor="middle" font-size="10" fill="#7EADD4" font-weight="600">TAPE</text>
-      <text x="200" y="27" text-anchor="middle" font-size="10" fill="#7EADD4" font-weight="600">LINE IN</text>
+      <text x="60" y="27" text-anchor="middle" font-size="10" fill="#7a9ab8" font-weight="600">TAPE</text>
+      <text x="200" y="27" text-anchor="middle" font-size="10" fill="#7a9ab8" font-weight="600">LINE IN</text>
       <text x="345" y="27" text-anchor="middle" font-size="10" fill="#3A9FEF" font-weight="600">OUTBOARD</text>
       <text x="495" y="27" text-anchor="middle" font-size="10" fill="#3A9FEF" font-weight="600">EQ SECTION</text>
       <text x="640" y="27" text-anchor="middle" font-size="10" fill="#D4A83A" font-weight="600">CHANNEL</text>
       <text x="760" y="27" text-anchor="middle" font-size="10" fill="#D4A83A" font-weight="600">SUMMING</text>
-      <text x="60" y="64" text-anchor="middle" font-size="13" fill="#EAF2FF" font-weight="700">FITA</text>
-      <text x="200" y="57" text-anchor="middle" font-size="12" fill="#EAF2FF" font-weight="700">LINE IN</text>
-      <text x="200" y="74" text-anchor="middle" font-size="11" fill="#7EADD4">Canal</text>
-      <text x="345" y="57" text-anchor="middle" font-size="12" fill="#EAF2FF" font-weight="700">INSERT</text>
-      <text x="345" y="74" text-anchor="middle" font-size="11" fill="#7EADD4">Outboard</text>
-      <text x="495" y="57" text-anchor="middle" font-size="12" fill="#EAF2FF" font-weight="700">EQ</text>
-      <text x="495" y="74" text-anchor="middle" font-size="11" fill="#7EADD4">+ Aux Sends</text>
-      <text x="640" y="57" text-anchor="middle" font-size="12" fill="#EAF2FF" font-weight="700">FADER</text>
-      <text x="640" y="74" text-anchor="middle" font-size="11" fill="#7EADD4">+ Pan Pot</text>
-      <text x="760" y="57" text-anchor="middle" font-size="12" fill="#EAF2FF" font-weight="700">BUS</text>
-      <text x="760" y="74" text-anchor="middle" font-size="11" fill="#7EADD4">Mix Bus</text>
+      <text x="60" y="64" text-anchor="middle" font-size="13" fill="#c8daea" font-weight="700">FITA</text>
+      <text x="200" y="57" text-anchor="middle" font-size="12" fill="#c8daea" font-weight="700">LINE IN</text>
+      <text x="200" y="74" text-anchor="middle" font-size="11" fill="#7a9ab8">Canal</text>
+      <text x="345" y="57" text-anchor="middle" font-size="12" fill="#c8daea" font-weight="700">INSERT</text>
+      <text x="345" y="74" text-anchor="middle" font-size="11" fill="#7a9ab8">Outboard</text>
+      <text x="495" y="57" text-anchor="middle" font-size="12" fill="#c8daea" font-weight="700">EQ</text>
+      <text x="495" y="74" text-anchor="middle" font-size="11" fill="#7a9ab8">+ Aux Sends</text>
+      <text x="640" y="57" text-anchor="middle" font-size="12" fill="#c8daea" font-weight="700">FADER</text>
+      <text x="640" y="74" text-anchor="middle" font-size="11" fill="#7a9ab8">+ Pan Pot</text>
+      <text x="760" y="57" text-anchor="middle" font-size="12" fill="#c8daea" font-weight="700">BUS</text>
+      <text x="760" y="74" text-anchor="middle" font-size="11" fill="#7a9ab8">Mix Bus</text>
       <text x="410" y="112" text-anchor="middle" font-size="11" fill="#3A6088" font-style="italic" data-i18n="d1note"></text>
     </svg>
   </div>
@@ -556,7 +557,7 @@ footer strong{color:var(--blue-lt);}
   <h3 data-i18n="vf_title"></h3>
   <p data-i18n="vf_desc"></p>
   <div class="vol-nav-btns">
-    <a class="nav-btn secondary" href="vol01-tracking-analogico-v4.html" data-i18n="vf_back"></a>
+    <a class="nav-btn secondary" href="vol01-tracking.html" data-i18n="vf_back"></a>
     <a class="nav-btn primary" href="vol03-masterizacao.html" data-i18n="vf_next"></a>
   </div>
 </div>
