@@ -1,69 +1,412 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" id="htmlRoot">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Manual Definitivo de Gravação, Mixagem e Masterização Analógica — Estúdio Plá</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%23060d18'/><text x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='14' font-weight='bold' fill='%23D4A83A'>MA</text></svg>"/>
-<link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<title>Manual Definitivo de Gravação, Mixagem e Masterização Analógica | Estúdio Plá</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%23060d18'/><text x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='18' font-weight='bold' fill='%23D4A83A'>P</text></svg>"/>
+
 <style>
-  *{box-sizing:border-box;margin:0;padding:0;}
-  :root{--bg:#060d18;--card:#0a1628;--blue-lt:#3A9FEF;--gold:#D4A83A;--txt:#c8daea;--txt2:#7a9ab8;--div:rgba(58,159,239,0.12);}
-  body{background:var(--bg);color:var(--txt);font-family:'Manrope',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 24px;}
-  .wrap{max-width:640px;width:100%;}
-  .eyebrow{font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
-  h1{font-family:'Lora',Georgia,serif;font-size:clamp(26px,4vw,42px);font-weight:700;color:#fff;line-height:1.2;margin-bottom:10px;}
-  .subtitle{font-family:'Manrope',sans-serif;font-size:16px;color:var(--txt2);margin-bottom:48px;line-height:1.6;}
-  .vol-list{display:flex;flex-direction:column;gap:12px;}
-  .vol{display:flex;align-items:center;gap:20px;padding:20px 24px;background:var(--card);border:1px solid var(--div);border-radius:8px;text-decoration:none;transition:border-color .2s;}
-  .vol:hover{border-color:var(--blue-lt);}
-  .vol-num{font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);min-width:80px;}
-  .vol-info{}
-  .vol-title{font-family:'Lora',Georgia,serif;font-size:18px;font-weight:700;color:#fff;margin-bottom:4px;}
-  .vol-sub{font-family:'Manrope',sans-serif;font-size:13px;color:var(--txt2);}
-  .divider{border:none;height:1px;background:var(--div);margin:24px 0;}
-  footer{margin-top:48px;font-family:'Manrope',sans-serif;font-size:11px;color:#1a3050;letter-spacing:2px;text-align:center;}
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;0,700;1,600;1,700&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+:root{
+  --bg:#060d18;--bg-card:#0a1628;--bg-card2:#0d1e34;
+  --blue:#1A6FBF;--blue-lt:#3A9FEF;--blue-glow:rgba(58,159,239,0.18);
+  --gold:#D4A83A;--gold-lt:#F0C84A;
+  --txt:#c8daea;--txt2:#7a9ab8;--border:#1C3A58;--div:rgba(58,159,239,0.22);
+  --green:#2ECC71;--amber:#E67E22;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--txt);font-family:'Manrope', system-ui, sans-serif;font-size:18px;line-height:1.7;}
+.top-bar{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:52px;background:rgba(6,15,28,0.96);border-bottom:1px solid var(--border);backdrop-filter:blur(8px);flex-wrap:wrap;gap:8px;}
+.vol-nav{display:flex;gap:6px;flex-wrap:wrap;}
+.vol-link{background:transparent;border:1px solid var(--border);border-radius:6px;padding:6px 14px;font-size:13px;font-weight:600;color:var(--txt2);cursor:pointer;text-decoration:none;transition:all .2s;}
+.vol-link:hover{border-color:var(--blue-lt);color:var(--txt);}
+.lang-toggle{display:flex;border:1.5px solid var(--border);border-radius:7px;overflow:hidden;}
+.lang-btn{background:var(--bg-card);border:none;color:var(--txt2);font-size:13px;font-weight:700;letter-spacing:1px;padding:8px 15px;cursor:pointer;transition:all .2s;}
+.lang-btn.active{background:var(--blue);color:#fff;}
+.lang-btn:hover:not(.active){background:var(--bg-card2);color:var(--txt);}
+.chap-nav{display:flex;justify-content:center;gap:8px;padding:16px 24px;flex-wrap:wrap;border-bottom:1px solid var(--div);background:var(--bg-card);margin-top:52px;}
+.chap-link{background:transparent;border:1px solid var(--border);border-radius:20px;padding:7px 18px;font-size:13px;font-weight:600;color:var(--txt2);cursor:pointer;text-decoration:none;transition:all .2s;}
+.chap-link:hover{border-color:var(--blue-lt);color:var(--txt);}
+header{padding:72px 40px 64px;text-align:center;border-bottom:1px solid var(--div);background:linear-gradient(180deg,#071828 0%,var(--bg) 100%);}
+.vu-wrap{display:flex;justify-content:center;align-items:flex-end;gap:5px;height:48px;margin-bottom:32px;}
+.vu-bar{width:7px;border-radius:3px 3px 0 0;animation:vup var(--d) ease-in-out infinite alternate;}
+@keyframes vup{from{height:var(--mn);opacity:.45}to{height:var(--mx);opacity:1}}
+.vol-badge{display:inline-flex;align-items:center;gap:8px;background:var(--bg-card);border:1px solid var(--blue);border-radius:24px;padding:8px 20px;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--blue-lt);margin-bottom:24px;}
+h1{font-family:'Lora', Georgia, serif;font-size:clamp(28px,5.4vw,62px);font-weight:900;line-height:1.12;color:#fff;margin-bottom:18px;}
+h1 em{color:var(--blue-lt);font-style:italic;}
+.subtitle{font-size:clamp(15px,2vw,20px);color:var(--txt2);max-width:680px;margin:0 auto 20px;font-style:italic;}
+.author-line{font-size:14px;color:var(--txt2);letter-spacing:.5px;}
+.author-line strong{color:var(--gold);}
+main{max-width:900px;margin:0 auto;padding:64px 32px 0;}
+.section{margin-bottom:88px;scroll-margin-top:80px;}
+.section-eyebrow{font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;text-align:center;}
+.section-title{font-family:'Lora', Georgia, serif;font-size:clamp(24px,3.5vw,38px);font-weight:700;color:#fff;text-align:center;margin-bottom:40px;}
+.body-p{font-size:clamp(16px,1.6vw,18px);color:var(--txt);line-height:1.9;margin-bottom:22px;}
+.body-p strong{color:var(--gold);}
+.preface{max-width:720px;margin:0 auto;}
+.preface .body-p{font-family:'Lora', Georgia, serif;font-size:clamp(17px,1.9vw,21px);font-style:italic;line-height:1.9;color:#c8daea;}
+.signature{text-align:right;margin-top:12px;font-size:15px;color:var(--gold);font-style:normal;}
+.usage-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
+.usage-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:26px 24px;}
+.usage-card .u-icon{font-size:26px;margin-bottom:14px;display:block;}
+.usage-card h3{font-family:'Lora', Georgia, serif;font-size:19px;color:#fff;margin-bottom:10px;}
+.usage-card p{font-size:14.5px;color:var(--txt2);line-height:1.7;}
+.usage-card p strong{color:var(--txt);}
+.usage-card a{color:var(--blue-lt);font-weight:600;text-decoration:none;}
+.usage-card a:hover{text-decoration:underline;}
+.callout{background:var(--bg-card2);border-left:4px solid var(--blue-lt);border-radius:0 10px 10px 0;padding:20px 24px;margin:32px 0 0;}
+.callout.gold{border-left-color:var(--gold);}
+.callout p{font-size:clamp(14.5px,1.5vw,16px);color:var(--txt);line-height:1.7;margin:0;}
+.callout-label{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.reading-order{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:36px 0 0;font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--txt2);}
+.reading-order .ro-step{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:8px 18px;color:var(--txt);font-weight:600;}
+.reading-order .ro-arrow{color:var(--gold);}
+.toc-grid{display:flex;flex-direction:column;gap:20px;}
+.toc-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:28px 28px;transition:box-shadow .2s;}
+.toc-card:hover{box-shadow:0 0 28px var(--blue-glow);}
+.toc-card.bonus{border-color:var(--gold);}
+.toc-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px;}
+.toc-num{font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:600;color:var(--blue);opacity:.4;line-height:1;}
+.toc-card.bonus .toc-num{color:var(--gold);opacity:.55;}
+.toc-titlewrap{flex:1;min-width:200px;}
+.toc-eyebrow{font-size:10.5px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.toc-title{font-family:'Lora', Georgia, serif;font-size:clamp(20px,2.6vw,28px);color:#fff;}
+.toc-sub{font-size:14.5px;color:var(--txt2);font-style:italic;margin-top:6px;}
+.toc-open{display:inline-flex;align-items:center;gap:8px;padding:10px 24px;border-radius:40px;font-size:14px;font-weight:700;text-decoration:none;white-space:nowrap;background:var(--blue-lt);color:#060d18;transition:all .2s;}
+.toc-open:hover{background:#fff;transform:translateY(-2px);}
+.toc-card.bonus .toc-open{background:var(--gold);}
+.toc-card.bonus .toc-open:hover{background:var(--gold-lt);}
+.toc-chapters{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;}
+.toc-chip{background:var(--bg-card2);border:1px solid var(--border);border-radius:16px;padding:6px 14px;font-size:13px;color:var(--txt2);}
+footer{text-align:center;padding:40px 32px;font-size:13px;color:var(--txt2);border-top:1px solid var(--div);margin-top:24px;}
+footer strong{color:var(--blue-lt);}
+@media(max-width:600px){
+  header{padding:56px 20px 44px;}
+  main{padding:44px 20px 0;}
+  .top-bar{padding:8px 12px;}
+  .vol-link{padding:6px 10px;font-size:12px;}
+  .toc-head{flex-direction:column;}
+}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="eyebrow">Estúdio Plá · PLA v0.1</div>
-  <h1>Manual Definitivo de Gravação, Mixagem e Masterização Analógica</h1>
-  <p class="subtitle">Do diafragma do microfone ao sulco do vinil.</p>
 
-  <div class="vol-list">
-    <a class="vol" href="vol01-tracking.html">
-      <div class="vol-num">Volume 01</div>
-      <div class="vol-info">
-        <div class="vol-title">Captação e Gravação</div>
-        <div class="vol-sub">Microfones, pré-amplificadores, fita magnética e alinhamento analógico</div>
-      </div>
-    </a>
-    <a class="vol" href="vol02-mixagem.html">
-      <div class="vol-num">Volume 02</div>
-      <div class="vol-info">
-        <div class="vol-title">A Mixagem Analógica</div>
-        <div class="vol-sub">Consoles, equalizadores, compressores e a arquitetura do mix</div>
-      </div>
-    </a>
-    <a class="vol" href="vol03-masterizacao.html">
-      <div class="vol-num">Volume 03</div>
-      <div class="vol-info">
-        <div class="vol-title">A Masterização</div>
-        <div class="vol-sub">A fita master, processamento de linha e preparação para o vinil</div>
-      </div>
-    </a>
-    <hr class="divider"/>
-    <a class="vol" href="bonus-alquimia.html">
-      <div class="vol-num">Bônus</div>
-      <div class="vol-info">
-        <div class="vol-title">A Alquimia do Sulco</div>
-        <div class="vol-sub">O vinil — curva RIAA, cantilever e a lei de Faraday</div>
-      </div>
-    </a>
+<div class="top-bar">
+  <div class="vol-nav">
+    <a class="vol-link" href="vol01-tracking.html" data-i18n="navVol1"></a>
+    <a class="vol-link" href="vol02-mixagem.html" data-i18n="navVol2"></a>
+    <a class="vol-link" href="vol03-masterizacao.html" data-i18n="navVol3"></a>
+    <a class="vol-link" href="bonus-alquimia.html" data-i18n="navBonus"></a>
+  </div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="btnPT" onclick="setLang('pt')">PT</button>
+    <button class="lang-btn" id="btnEN" onclick="setLang('en')">EN</button>
+  </div>
+</div>
+
+<nav class="chap-nav">
+  <a class="chap-link" href="#prefacio" data-i18n="navPreface"></a>
+  <a class="chap-link" href="#comousar" data-i18n="navUsage"></a>
+  <a class="chap-link" href="#indice" data-i18n="navIndex"></a>
+</nav>
+
+<header>
+  <div class="vu-wrap" id="vu"></div>
+  <div class="vol-badge">&#127925; <span data-i18n="volBadge"></span></div>
+  <h1 data-i18n="h1"></h1>
+  <p class="subtitle" data-i18n="subtitle"></p>
+  <p class="author-line" data-i18n="authorLine"></p>
+</header>
+
+<main>
+
+<!-- PREFÁCIO -->
+<section class="section preface" id="prefacio">
+  <p class="section-eyebrow" data-i18n="prefEyebrow"></p>
+  <h2 class="section-title" data-i18n="prefTitle"></h2>
+  <p class="body-p" data-i18n="pref1"></p>
+  <p class="body-p" data-i18n="pref2"></p>
+  <p class="body-p" data-i18n="pref3"></p>
+  <p class="body-p" data-i18n="pref4"></p>
+  <p class="signature" data-i18n="signature"></p>
+</section>
+
+<!-- COMO USAR -->
+<section class="section" id="comousar">
+  <p class="section-eyebrow" data-i18n="useEyebrow"></p>
+  <h2 class="section-title" data-i18n="useTitle"></h2>
+
+  <div class="usage-grid">
+    <div class="usage-card">
+      <span class="u-icon">&#128214;</span>
+      <h3 data-i18n="u1h"></h3>
+      <p data-i18n="u1p"></p>
+    </div>
+    <div class="usage-card">
+      <span class="u-icon">&#127908;</span>
+      <h3 data-i18n="u2h"></h3>
+      <p data-i18n="u2p"></p>
+    </div>
+    <div class="usage-card">
+      <span class="u-icon">&#9203;</span>
+      <h3 data-i18n="u3h"></h3>
+      <p data-i18n="u3p"></p>
+    </div>
+    <div class="usage-card">
+      <span class="u-icon">&#11015;&#65039;</span>
+      <h3 data-i18n="u4h"></h3>
+      <p data-i18n="u4p"></p>
+    </div>
+    <div class="usage-card">
+      <span class="u-icon">&#127760;</span>
+      <h3 data-i18n="u5h"></h3>
+      <p data-i18n="u5p"></p>
+    </div>
+    <div class="usage-card">
+      <span class="u-icon">&#128273;</span>
+      <h3 data-i18n="u6h"></h3>
+      <p data-i18n="u6p"></p>
+    </div>
   </div>
 
-  <footer>© 2026 Estúdio Plá · Bauru, Brasil · Todos os direitos reservados</footer>
-</div>
+  <div class="reading-order">
+    <span class="ro-step" data-i18n="roV1"></span>
+    <span class="ro-arrow">&#8594;</span>
+    <span class="ro-step" data-i18n="roV2"></span>
+    <span class="ro-arrow">&#8594;</span>
+    <span class="ro-step" data-i18n="roV3"></span>
+    <span class="ro-arrow">&#8594;</span>
+    <span class="ro-step" data-i18n="roBonus"></span>
+  </div>
+
+  <div class="callout gold">
+    <p class="callout-label" data-i18n="privLabel"></p>
+    <p data-i18n="privText"></p>
+  </div>
+</section>
+
+<!-- ÍNDICE -->
+<section class="section" id="indice">
+  <p class="section-eyebrow" data-i18n="idxEyebrow"></p>
+  <h2 class="section-title" data-i18n="idxTitle"></h2>
+
+  <div class="toc-grid">
+    <div class="toc-card">
+      <div class="toc-head">
+        <div style="display:flex;gap:16px;align-items:flex-start;">
+          <div class="toc-num">01</div>
+          <div class="toc-titlewrap">
+            <p class="toc-eyebrow" data-i18n="v1ey"></p>
+            <h3 class="toc-title" data-i18n="v1title"></h3>
+            <p class="toc-sub" data-i18n="v1sub"></p>
+          </div>
+        </div>
+        <a class="toc-open" href="vol01-tracking.html" data-i18n="openLabel"></a>
+      </div>
+      <div class="toc-chapters">
+        <span class="toc-chip" data-i18n="v1c1"></span>
+        <span class="toc-chip" data-i18n="v1c2"></span>
+        <span class="toc-chip" data-i18n="v1c3"></span>
+        <span class="toc-chip" data-i18n="v1c4"></span>
+      </div>
+    </div>
+
+    <div class="toc-card">
+      <div class="toc-head">
+        <div style="display:flex;gap:16px;align-items:flex-start;">
+          <div class="toc-num">02</div>
+          <div class="toc-titlewrap">
+            <p class="toc-eyebrow" data-i18n="v2ey"></p>
+            <h3 class="toc-title" data-i18n="v2title"></h3>
+            <p class="toc-sub" data-i18n="v2sub"></p>
+          </div>
+        </div>
+        <a class="toc-open" href="vol02-mixagem.html" data-i18n="openLabel"></a>
+      </div>
+      <div class="toc-chapters">
+        <span class="toc-chip" data-i18n="v2c1"></span>
+        <span class="toc-chip" data-i18n="v2c2"></span>
+        <span class="toc-chip" data-i18n="v2c3"></span>
+        <span class="toc-chip" data-i18n="v2c4"></span>
+      </div>
+    </div>
+
+    <div class="toc-card">
+      <div class="toc-head">
+        <div style="display:flex;gap:16px;align-items:flex-start;">
+          <div class="toc-num">03</div>
+          <div class="toc-titlewrap">
+            <p class="toc-eyebrow" data-i18n="v3ey"></p>
+            <h3 class="toc-title" data-i18n="v3title"></h3>
+            <p class="toc-sub" data-i18n="v3sub"></p>
+          </div>
+        </div>
+        <a class="toc-open" href="vol03-masterizacao.html" data-i18n="openLabel"></a>
+      </div>
+      <div class="toc-chapters">
+        <span class="toc-chip" data-i18n="v3c1"></span>
+        <span class="toc-chip" data-i18n="v3c2"></span>
+        <span class="toc-chip" data-i18n="v3c3"></span>
+        <span class="toc-chip" data-i18n="v3c4"></span>
+      </div>
+    </div>
+
+    <div class="toc-card bonus">
+      <div class="toc-head">
+        <div style="display:flex;gap:16px;align-items:flex-start;">
+          <div class="toc-num">&#127925;</div>
+          <div class="toc-titlewrap">
+            <p class="toc-eyebrow" data-i18n="v4ey"></p>
+            <h3 class="toc-title" data-i18n="v4title"></h3>
+            <p class="toc-sub" data-i18n="v4sub"></p>
+          </div>
+        </div>
+        <a class="toc-open" href="bonus-alquimia.html" data-i18n="openLabel"></a>
+      </div>
+      <div class="toc-chapters">
+        <span class="toc-chip" data-i18n="v4c1"></span>
+        <span class="toc-chip" data-i18n="v4c2"></span>
+        <span class="toc-chip" data-i18n="v4c3"></span>
+        <span class="toc-chip" data-i18n="v4c4"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <strong>Estúdio Plá</strong> &nbsp;&middot;&nbsp; Bauru, São Paulo, Brasil<br>
+  <span data-i18n="ft_title"></span><br>
+  <span style="opacity:.45;font-size:12px">&copy; 2026 Estúdio Plá &middot; Kaue Ferreira Moraes &middot; <span data-i18n="ft_rights"></span></span>
+</footer>
+
+<script>
+var T = {
+pt:{
+  navVol1:"Vol. 01", navVol2:"Vol. 02", navVol3:"Vol. 03", navBonus:"Bônus Track",
+  navPreface:"Prefácio", navUsage:"Como Usar", navIndex:"Índice",
+  volBadge:"MANUAL COMPLETO — 4 PARTES",
+  h1:"Manual Definitivo de<br><em>Gravação, Mixagem e Masterização Analógica</em>",
+  subtitle:"Do diafragma do microfone ao sulco do vinil — a física completa de uma era que moldou o som do século XX.",
+  authorLine:"Um projeto de <strong>Kaue Ferreira Moraes</strong> — Estúdio Plá",
+  prefEyebrow:"Abertura", prefTitle:"Prefácio",
+  pref1:"Este manual nasceu de uma convicção simples: entender por que o som analógico soa do jeito que soa exige compreender a física — não apenas repetir o vocabulário do mercado de equipamentos vintage.",
+  pref2:"Ao longo dos quatro volumes seguintes, você vai percorrer o mesmo caminho que a música percorre dentro de um estúdio analógico: do ar que sai de um instrumento até o sulco gravado num disco de vinil. Cada etapa dessa jornada — o microfone, o pré-amplificador, o console, a fita magnética, o torno de corte, a agulha — tem uma física própria, e é essa física, não a nostalgia, que explica por que engenheiros ainda buscam esse som.",
+  pref3:"Este não é um manual de operação de equipamento. É uma tentativa de tornar visível o que normalmente fica escondido dentro dos circuitos: a transformação contínua de energia que carrega uma performance musical do momento em que ela acontece até o momento em que alguém, décadas depois, a ouve de novo.",
+  pref4:"Espero que este material sirva tanto para quem já vive dessa física todos os dias quanto para quem está descobrindo, pela primeira vez, que o som pode ser tocado, gravado e ouvido sem nunca virar um número.",
+  signature:"— Kaue Ferreira Moraes, Estúdio Plá",
+  useEyebrow:"Orientação", useTitle:"Bem-vindo — Como Usar Este Manual",
+  u1h:"Duas camadas em cada capítulo",
+  u1p:"Todo capítulo abre com <strong>Para Todos</strong> — uma introdução acessível, com analogias, para quem está começando — e aprofunda em <strong>Nível Técnico</strong>, com a física, as fórmulas e as fichas de equipamento completas.",
+  u2h:"Narração por IA, capítulo a capítulo",
+  u2p:"Cada capítulo tem um botão <strong>▶ Ouvir este Capítulo</strong>, e cada volume tem um <strong>▶ Reproduzir Volume Completo</strong> que toca tudo em sequência. Escolha voz masculina ou feminina no player do topo de cada volume.",
+  u3h:"Pause e retome quando quiser",
+  u3p:"A narração pode ser pausada e retomada a qualquer momento, dentro de um capítulo ou entre capítulos, sem perder o lugar.",
+  u4h:"Baixe o áudio em .wav",
+  u4p:"Cada capítulo tem um botão de download que gera um arquivo <strong>.wav</strong> da narração, pronto para ouvir offline ou guardar.",
+  u5h:"Totalmente bilíngue",
+  u5p:"Alterne entre <strong>PT</strong> e <strong>EN</strong> a qualquer momento pelo botão no topo — texto, tabelas, diagramas e narração acompanham o idioma escolhido.",
+  u6h:"Sua própria chave Gemini",
+  u6p:"O sistema de áudio usa a API do Gemini. Cole sua chave gratuita no campo do player — <a href=\"https://aistudio.google.com/app/apikey\" target=\"_blank\" rel=\"noopener\">obtenha uma aqui</a>.",
+  roV1:"Volume 01", roV2:"Volume 02", roV3:"Volume 03", roBonus:"Bônus Track",
+  privLabel:"Privacidade",
+  privText:"Sua chave Gemini nunca é armazenada nem enviada aos nossos servidores — ela fica apenas na sessão do seu navegador e é usada diretamente para chamar a API do Gemini.",
+  idxEyebrow:"Sumário", idxTitle:"Índice do Manual",
+  openLabel:"Abrir Volume &#8594;",
+  v1ey:"Volume 01 de 03", v1title:"Captação e Gravação", v1sub:"The Tracking — do diafragma do microfone ao óxido de ferro da fita.",
+  v1c1:"01 A Filosofia do Fluxo Físico", v1c2:"02 Os Microfones", v1c3:"03 O Caminho do Sinal", v1c4:"04 A Máquina de Fita",
+  v2ey:"Volume 02 de 03", v2title:"A Mixagem Analógica", v2sub:"The Mixdown — da soma de voltagens ao espaço tridimensional do som.",
+  v2c1:"01 A Arquitetura do Console", v2c2:"02 Equalizadores Analógicos", v2c3:"03 Compressores Analógicos", v2c4:"04 Espaço e Profundidade",
+  v3ey:"Volume 03 de 03", v3title:"A Masterização", v3sub:"The Pre-Mastering — da mixagem final ao sulco do vinil.",
+  v3c1:"01 A Fita Master", v3c2:"02 O Processamento de Linha", v3c3:"03 A Preparação para o Vinil", v3c4:"04 Da Fita ao Acetato",
+  v4ey:"Bônus Track", v4title:"A Alquimia do Sulco", v4sub:"O milagre mecânico da reprodução fonográfica.",
+  v4c1:"01 O Desfiladeiro Microscópico", v4c2:"02 O Sistema Gerador", v4c3:"03 A Curva RIAA", v4c4:"04 O Ciclo Completo",
+  ft_title:"Manual Definitivo de Gravação, Mixagem e Masterização Analógica",
+  ft_rights:"Todos os direitos reservados"
+},
+en:{
+  navVol1:"Vol. 01", navVol2:"Vol. 02", navVol3:"Vol. 03", navBonus:"Bonus Track",
+  navPreface:"Preface", navUsage:"How to Use", navIndex:"Index",
+  volBadge:"COMPLETE MANUAL — 4 PARTS",
+  h1:"Definitive Manual of<br><em>Analog Recording, Mixing and Mastering</em>",
+  subtitle:"From microphone diaphragm to the vinyl groove — the complete physics of an era that shaped the sound of the twentieth century.",
+  authorLine:"A project by <strong>Kaue Ferreira Moraes</strong> — Estúdio Plá",
+  prefEyebrow:"Opening", prefTitle:"Preface",
+  pref1:"This manual was born from a simple conviction: understanding why analog sound sounds the way it does requires understanding physics — not just repeating the vocabulary of the vintage-gear market.",
+  pref2:"Across the four volumes that follow, you'll travel the same path the music travels inside an analog studio: from the air leaving an instrument to the groove cut into a vinyl record. Every stage of that journey — the microphone, the preamplifier, the console, the magnetic tape, the cutting lathe, the needle — has its own physics, and it's that physics, not nostalgia, that explains why engineers still chase this sound.",
+  pref3:"This is not an equipment operation manual. It's an attempt to make visible what usually stays hidden inside the circuits: the continuous transformation of energy that carries a musical performance from the moment it happens to the moment someone, decades later, hears it again.",
+  pref4:"I hope this material serves both those who already live this physics every day and those discovering, for the first time, that sound can be played, recorded, and heard without ever becoming a number.",
+  signature:"— Kaue Ferreira Moraes, Estúdio Plá",
+  useEyebrow:"Guidance", useTitle:"Welcome — How to Use This Manual",
+  u1h:"Two layers in every chapter",
+  u1p:"Every chapter opens with <strong>For Everyone</strong> — an accessible introduction, with analogies, for beginners — and goes deeper into <strong>Technical Level</strong>, with the full physics, formulas, and equipment spec sheets.",
+  u2h:"AI narration, chapter by chapter",
+  u2p:"Every chapter has a <strong>▶ Listen to this Chapter</strong> button, and every volume has a <strong>▶ Play Full Volume</strong> button that plays everything in sequence. Choose a male or female voice in the player at the top of each volume.",
+  u3h:"Pause and resume anytime",
+  u3p:"Narration can be paused and resumed at any point, within a chapter or between chapters, without losing your place.",
+  u4h:"Download the audio as .wav",
+  u4p:"Every chapter has a download button that generates a <strong>.wav</strong> file of the narration, ready to listen offline or keep.",
+  u5h:"Fully bilingual",
+  u5p:"Switch between <strong>PT</strong> and <strong>EN</strong> anytime with the button at the top — text, tables, diagrams, and narration all follow the chosen language.",
+  u6h:"Your own Gemini key",
+  u6p:"The audio system uses the Gemini API. Paste your free key into the player's field — <a href=\"https://aistudio.google.com/app/apikey\" target=\"_blank\" rel=\"noopener\">get one here</a>.",
+  roV1:"Volume 01", roV2:"Volume 02", roV3:"Volume 03", roBonus:"Bonus Track",
+  privLabel:"Privacy",
+  privText:"Your Gemini key is never stored or sent to our servers — it stays only in your browser session and is used directly to call the Gemini API.",
+  idxEyebrow:"Contents", idxTitle:"Manual Index",
+  openLabel:"Open Volume &#8594;",
+  v1ey:"Volume 01 of 03", v1title:"Capture & Recording", v1sub:"The Tracking — from microphone diaphragm to iron oxide tape.",
+  v1c1:"01 The Philosophy of Physical Flow", v1c2:"02 Microphones", v1c3:"03 The Signal Path", v1c4:"04 Tape Machine Alignment",
+  v2ey:"Volume 02 of 03", v2title:"Analog Mixing", v2sub:"The Mixdown — from voltage summation to the three-dimensional space of sound.",
+  v2c1:"01 The Architecture of the Console", v2c2:"02 Analog Equalizers", v2c3:"03 Analog Compressors", v2c4:"04 Space and Depth",
+  v3ey:"Volume 03 of 03", v3title:"Mastering", v3sub:"The Pre-Mastering — from the final mix to the vinyl groove.",
+  v3c1:"01 The Master Tape", v3c2:"02 Line Processing", v3c3:"03 Preparation for Vinyl", v3c4:"04 From Tape to Acetate",
+  v4ey:"Bonus Track", v4title:"The Groove Alchemy", v4sub:"The mechanical miracle of phonographic reproduction.",
+  v4c1:"01 The Microscopic Canyon", v4c2:"02 The Generator System", v4c3:"03 The RIAA Curve", v4c4:"04 The Complete Cycle",
+  ft_title:"Definitive Manual of Analog Recording, Mixing and Mastering",
+  ft_rights:"All rights reserved"
+}
+};
+
+var lang = 'pt';
+
+function setLang(l){
+  lang = l;
+  document.getElementById('htmlRoot').lang = l === 'pt' ? 'pt-BR' : 'en-US';
+  document.getElementById('btnPT').classList.toggle('active', l === 'pt');
+  document.getElementById('btnEN').classList.toggle('active', l === 'en');
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var k = el.getAttribute('data-i18n');
+    if(T[l][k] !== undefined) el.innerHTML = T[l][k];
+  });
+}
+
+(function(){
+  var vu = document.getElementById('vu');
+  var bars = [
+    {mn:'10px',mx:'46px',d:'.55s',c:'#3A9FEF'},{mn:'18px',mx:'44px',d:'.70s',c:'#D4A83A'},
+    {mn:'8px',mx:'48px',d:'.45s',c:'#3A9FEF'},{mn:'22px',mx:'40px',d:'.85s',c:'#D4A83A'},
+    {mn:'12px',mx:'48px',d:'.60s',c:'#3A9FEF'},{mn:'16px',mx:'36px',d:'.50s',c:'#D4A83A'},
+    {mn:'6px',mx:'46px',d:'.40s',c:'#3A9FEF'},{mn:'20px',mx:'42px',d:'.75s',c:'#3A9FEF'},
+    {mn:'14px',mx:'46px',d:'.65s',c:'#D4A83A'},{mn:'10px',mx:'38px',d:'.55s',c:'#3A9FEF'},
+    {mn:'24px',mx:'48px',d:'.80s',c:'#D4A83A'},{mn:'8px',mx:'44px',d:'.48s',c:'#3A9FEF'}
+  ];
+  bars.forEach(function(b){
+    var el = document.createElement('div');
+    el.className = 'vu-bar';
+    el.style.setProperty('--mn',b.mn);
+    el.style.setProperty('--mx',b.mx);
+    el.style.setProperty('--d',b.d);
+    el.style.background = b.c;
+    el.style.height = b.mn;
+    vu.appendChild(el);
+  });
+})();
+
+setLang('pt');
+</script>
 </body>
 </html>
