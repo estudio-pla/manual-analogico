@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="pt-BR" id="htmlRoot">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Volume 03 — A Masterização | Estúdio Plá</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+:root{
+  --bg:#060F1C;--bg-card:#0C1D31;--bg-card2:#0F2440;
+  --blue:#1A6FBF;--blue-lt:#3A9FEF;--blue-glow:rgba(58,159,239,0.18);
+  --gold:#D4A83A;--gold-lt:#F0C84A;
+  --txt:#EAF2FF;--txt2:#7EADD4;--border:#1C3A58;--div:rgba(58,159,239,0.22);
+  --green:#2ECC71;--amber:#E67E22;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--txt);font-family:'Inter',system-ui,sans-serif;font-size:18px;line-height:1.7;}
+.top-bar{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:52px;background:rgba(6,15,28,0.96);border-bottom:1px solid var(--border);backdrop-filter:blur(8px);flex-wrap:wrap;gap:8px;}
+.vol-nav{display:flex;gap:6px;flex-wrap:wrap;}
+.vol-link{background:transparent;border:1px solid var(--border);border-radius:6px;padding:6px 14px;font-size:13px;font-weight:600;color:var(--txt2);cursor:pointer;text-decoration:none;transition:all .2s;}
+.vol-link.active{background:var(--blue);border-color:var(--blue-lt);color:#fff;}
+.vol-link:hover:not(.active){border-color:var(--blue-lt);color:var(--txt);}
+.lang-toggle{display:flex;border:1.5px solid var(--border);border-radius:7px;overflow:hidden;}
+.lang-btn{background:var(--bg-card);border:none;color:var(--txt2);font-size:13px;font-weight:700;letter-spacing:1px;padding:8px 15px;cursor:pointer;transition:all .2s;}
+.lang-btn.active{background:var(--blue);color:#fff;}
+.lang-btn:hover:not(.active){background:var(--bg-card2);color:var(--txt);}
+.chap-nav{display:flex;justify-content:center;gap:8px;padding:16px 24px;flex-wrap:wrap;border-bottom:1px solid var(--div);background:var(--bg-card);margin-top:52px;}
+.chap-link{background:transparent;border:1px solid var(--border);border-radius:20px;padding:7px 18px;font-size:13px;font-weight:600;color:var(--txt2);cursor:pointer;text-decoration:none;transition:all .2s;}
+.chap-link:hover{border-color:var(--blue-lt);color:var(--txt);}
+header{padding:56px 40px 56px;text-align:center;border-bottom:1px solid var(--div);background:linear-gradient(180deg,#071828 0%,var(--bg) 100%);}
+.vu-wrap{display:flex;justify-content:center;align-items:flex-end;gap:5px;height:48px;margin-bottom:32px;}
+.vu-bar{width:7px;border-radius:3px 3px 0 0;animation:vup var(--d) ease-in-out infinite alternate;}
+@keyframes vup{from{height:var(--mn);opacity:.45}to{height:var(--mx);opacity:1}}
+.vol-badge{display:inline-flex;align-items:center;gap:8px;background:var(--bg-card);border:1px solid var(--blue);border-radius:24px;padding:8px 20px;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--blue-lt);margin-bottom:24px;}
+h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(28px,5vw,60px);font-weight:900;line-height:1.1;color:#fff;margin-bottom:16px;}
+h1 em{color:var(--blue-lt);font-style:italic;}
+.subtitle{font-size:clamp(15px,2vw,20px);color:var(--txt2);max-width:620px;margin:0 auto;font-style:italic;}
+.player{background:var(--bg-card);border-bottom:1px solid var(--div);padding:40px;text-align:center;}
+.player-title{font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;}
+.key-row{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
+.key-wrap{position:relative;width:100%;max-width:460px;}
+.key-input{width:100%;background:var(--bg);border:2px solid var(--border);border-radius:10px;padding:13px 50px 13px 18px;font-size:16px;color:var(--txt);outline:none;font-family:monospace;letter-spacing:1px;transition:border-color .2s;}
+.key-input:focus{border-color:var(--blue-lt);}
+.key-input::placeholder{color:var(--txt2);font-family:'Inter',sans-serif;letter-spacing:0;}
+.key-eye{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--txt2);cursor:pointer;font-size:18px;}
+.ai-link{display:inline-flex;align-items:center;gap:6px;color:var(--blue-lt);font-size:14px;text-decoration:none;font-weight:600;padding:10px 18px;border:1px solid var(--border);border-radius:8px;transition:all .2s;white-space:nowrap;}
+.ai-link:hover{border-color:var(--blue-lt);background:var(--blue-glow);}
+.key-hint{font-size:13px;color:var(--txt2);margin-bottom:24px;}
+.voice-row{display:flex;justify-content:center;gap:12px;margin-bottom:20px;flex-wrap:wrap;}
+.voice-btn{background:transparent;border:2px solid var(--border);border-radius:40px;padding:11px 28px;font-size:15px;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .22s;display:flex;align-items:center;gap:8px;}
+.voice-btn:hover{border-color:var(--blue-lt);color:var(--txt);}
+.voice-btn.active{background:var(--blue);border-color:var(--blue-lt);color:#fff;box-shadow:0 0 20px var(--blue-glow);}
+.vsub{font-size:11px;opacity:.7;font-weight:400;}
+.ctrl-row{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;}
+.btn-play{background:var(--gold);color:#060F1C;border:none;border-radius:40px;padding:13px 36px;font-size:16px;font-weight:800;cursor:pointer;transition:all .22s;}
+.btn-play:hover{background:var(--gold-lt);transform:scale(1.03);}
+.btn-play:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+.btn-pause{background:transparent;color:var(--txt2);border:2px solid var(--border);border-radius:40px;padding:13px 28px;font-size:16px;font-weight:600;cursor:pointer;transition:all .22s;}
+.btn-pause:hover:not(:disabled){border-color:var(--blue-lt);color:var(--txt);}
+.btn-pause:disabled{opacity:.4;cursor:not-allowed;}
+.btn-stop{background:transparent;color:var(--txt2);border:2px solid var(--border);border-radius:40px;padding:13px 28px;font-size:16px;font-weight:600;cursor:pointer;transition:all .22s;}
+.btn-stop:hover{border-color:var(--txt2);color:var(--txt);}
+.p-status{margin-top:14px;font-size:14px;color:var(--txt2);min-height:22px;font-style:italic;}
+.spinner{display:inline-block;width:13px;height:13px;border:2px solid var(--txt2);border-top-color:var(--blue-lt);border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:6px;}
+@keyframes spin{to{transform:rotate(360deg)}}
+main{max-width:900px;margin:0 auto;padding:64px 32px 80px;}
+.chapter{margin-bottom:80px;scroll-margin-top:80px;}
+.chap-header{display:flex;align-items:flex-start;gap:20px;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--div);}
+.chap-num{font-family:'JetBrains Mono',monospace;font-size:48px;font-weight:600;color:var(--blue);opacity:.35;line-height:1;flex-shrink:0;margin-top:4px;}
+.chap-eyebrow{font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.chap-title{font-family:'Playfair Display',Georgia,serif;font-size:clamp(24px,3.5vw,38px);font-weight:700;color:#fff;line-height:1.2;}
+.chap-sub{font-size:16px;color:var(--txt2);margin-top:8px;font-style:italic;}
+.body-p{font-size:clamp(16px,1.6vw,18px);color:var(--txt);line-height:1.85;margin-bottom:20px;}
+.body-p strong{color:var(--blue-lt);}
+.subhead{font-family:'Playfair Display',Georgia,serif;font-size:20px;color:#fff;margin:32px 0 12px;}
+.subhead2{font-family:'Inter',sans-serif;font-weight:700;font-size:16px;color:var(--blue-lt);margin:24px 0 10px;}
+.body-list{margin:0 0 20px 0;padding-left:0;list-style:none;}
+.body-list li{font-size:clamp(16px,1.6vw,18px);color:var(--txt);line-height:1.85;margin-bottom:10px;padding-left:22px;position:relative;}
+.body-list li:before{content:"—";position:absolute;left:0;color:var(--blue-lt);}
+.body-list li strong{color:var(--blue-lt);}
+.chap-audio-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:32px;}
+.chap-play-btn{background:var(--blue);color:#fff;border:none;border-radius:24px;padding:11px 22px;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:6px;}
+.chap-play-btn:hover:not(:disabled){background:var(--blue-lt);}
+.chap-play-btn.playing{background:var(--gold);color:#060F1C;}
+.chap-dl-btn{background:transparent;border:1.5px solid var(--border);color:var(--txt2);border-radius:24px;padding:11px 22px;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:6px;}
+.chap-dl-btn:hover:not(:disabled){border-color:var(--gold);color:var(--gold);}
+.chap-play-btn:disabled,.chap-dl-btn:disabled{opacity:.5;cursor:not-allowed;}
+.chap-audio-status{font-size:13px;color:var(--txt2);font-style:italic;}
+.section-tag{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin:0 0 14px;}
+.section-tag.tech{color:var(--blue-lt);margin-top:40px;}
+.section-tag.gear{color:var(--gold);margin-top:40px;}
+.callout{background:var(--bg-card2);border-left:4px solid var(--blue-lt);border-radius:0 10px 10px 0;padding:20px 24px;margin:28px 0;}
+.callout.gold{border-left-color:var(--gold);}
+.callout.green{border-left-color:var(--green);}
+.callout p{font-size:clamp(15px,1.5vw,17px);color:var(--txt);line-height:1.7;margin:0;}
+.callout-label{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--blue-lt);margin-bottom:8px;}
+.callout.gold .callout-label{color:var(--gold);}
+.callout.green .callout-label{color:var(--green);}
+.tbl-wrap{overflow-x:auto;margin:24px 0;}
+table{width:100%;border-collapse:collapse;font-size:clamp(14px,1.4vw,16px);}
+thead tr{background:var(--bg-card2);}
+thead th{padding:14px 18px;text-align:left;font-weight:700;color:var(--blue-lt);font-size:12px;letter-spacing:2px;text-transform:uppercase;border-bottom:2px solid var(--blue);}
+tbody tr{border-bottom:1px solid var(--border);transition:background .15s;}
+tbody tr:hover{background:var(--bg-card);}
+tbody td{padding:14px 18px;color:var(--txt);line-height:1.5;vertical-align:top;}
+tbody td:first-child{color:#fff;font-weight:600;}
+.tag{display:inline-block;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600;}
+.tag-blue{background:rgba(58,159,239,.15);color:var(--blue-lt);}
+.tag-gold{background:rgba(212,168,58,.15);color:var(--gold);}
+.tag-green{background:rgba(46,204,113,.15);color:var(--green);}
+.diagram-wrap{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:32px 24px;margin:28px 0;overflow-x:auto;}
+.diagram-label{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;text-align:center;}
+svg text{font-family:'Inter',system-ui,sans-serif;}
+.chain-list{display:flex;flex-direction:column;align-items:center;max-width:480px;margin:0 auto;}
+.chain-step{background:var(--bg-card2);border:1px solid var(--border);border-radius:8px;padding:12px 18px;text-align:center;width:100%;}
+.chain-step .stage{font-weight:700;color:#fff;font-size:14px;letter-spacing:.5px;}
+.chain-step .detail{font-size:12.5px;color:var(--txt2);margin-top:3px;}
+.chain-arrow{color:var(--blue-lt);font-size:16px;padding:2px 0;}
+.eq-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:24px 0;}
+.eq-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:22px 20px;transition:box-shadow .2s;}
+.eq-card:hover{box-shadow:0 0 24px var(--blue-glow);}
+.eq-card-type{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.eq-card-name{font-family:'Playfair Display',Georgia,serif;font-size:20px;color:#fff;margin-bottom:12px;}
+.eq-card-spec{font-size:14px;color:var(--txt2);line-height:1.65;}
+.eq-card-spec strong{color:var(--txt);}
+hr.sdiv{border:none;border-top:1px solid var(--div);margin:60px 0;}
+.vol-footer{background:var(--bg-card2);border-top:1px solid var(--div);padding:48px 32px;text-align:center;}
+.vol-footer h3{font-family:'Playfair Display',Georgia,serif;font-size:clamp(22px,3vw,34px);color:#fff;margin-bottom:16px;}
+.vol-footer p{font-size:16px;color:var(--txt2);max-width:580px;margin:0 auto 28px;}
+.vol-nav-btns{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+.nav-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 30px;border-radius:40px;font-size:15px;font-weight:700;cursor:pointer;text-decoration:none;transition:all .22s;border:2px solid var(--border);}
+.nav-btn.primary{background:var(--blue-lt);color:#060F1C;border-color:var(--blue-lt);}
+.nav-btn.primary:hover{background:#fff;transform:translateY(-2px);}
+.nav-btn.secondary{color:var(--txt2);}
+.nav-btn.secondary:hover{border-color:var(--txt2);color:var(--txt);}
+footer{text-align:center;padding:24px 32px;font-size:13px;color:var(--txt2);border-top:1px solid var(--div);}
+footer strong{color:var(--blue-lt);}
+@media(max-width:600px){
+  header{padding:44px 20px 44px;}
+  main{padding:44px 20px 64px;}
+  .player{padding:32px 20px;}
+  .chap-header{flex-direction:column;gap:8px;}
+  .chap-num{font-size:32px;}
+  .key-row{flex-direction:column;align-items:stretch;}
+  .top-bar{padding:8px 12px;}
+  .vol-link{padding:6px 10px;font-size:12px;}
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="vol-nav">
+    <a class="vol-link" href="vol01-tracking-analogico-v4.html" data-i18n="navVol1"></a>
+    <a class="vol-link" href="vol02-mixagem-analogica.html" data-i18n="navVol2"></a>
+    <a class="vol-link active" href="#" data-i18n="navVol3"></a>
+    <a class="vol-link" href="bonus-alquimia-do-sulco.html" data-i18n="navBonus"></a>
+  </div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="btnPT" onclick="setLang('pt')">PT</button>
+    <button class="lang-btn" id="btnEN" onclick="setLang('en')">EN</button>
+  </div>
+</div>
+
+<nav class="chap-nav">
+  <a class="chap-link" href="#cap1" data-i18n="cnav1"></a>
+  <a class="chap-link" href="#cap2" data-i18n="cnav2"></a>
+  <a class="chap-link" href="#cap3" data-i18n="cnav3"></a>
+  <a class="chap-link" href="#cap4" data-i18n="cnav4"></a>
+</nav>
+
+<header>
+  <div class="vu-wrap" id="vu"></div>
+  <div class="vol-badge">&#127926; <span data-i18n="volBadge"></span></div>
+  <h1 data-i18n="h1"></h1>
+  <p class="subtitle" data-i18n="subtitle"></p>
+</header>
+
+<section class="player">
+  <p class="player-title" data-i18n="playerTitle"></p>
+  <div class="key-row">
+    <div class="key-wrap">
+      <input class="key-input" id="apiKey" type="password" data-i18n-ph="keyPh" autocomplete="off" spellcheck="false"/>
+      <button class="key-eye" onclick="toggleKey()">&#128065;</button>
+    </div>
+    <a class="ai-link" href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener" data-i18n="keyLink"></a>
+  </div>
+  <p class="key-hint" data-i18n="keyHint"></p>
+  <div class="voice-row">
+    <button class="voice-btn active" id="btnM" onclick="setVoice('masc')">
+      &#128104;&#8205;&#127908; <span data-i18n="vMasc"></span> <span class="vsub">Charon</span>
+    </button>
+    <button class="voice-btn" id="btnF" onclick="setVoice('fem')">
+      &#128105;&#8205;&#127908; <span data-i18n="vFem"></span> <span class="vsub">Kore</span>
+    </button>
+  </div>
+  <div class="ctrl-row">
+    <button class="btn-play" id="btnPlayAll" onclick="playSequence([1,2,3,4])" data-i18n="btnPlayAll"></button>
+    <button class="btn-pause" id="btnPauseResume" onclick="togglePause()" disabled></button>
+    <button class="btn-stop" onclick="stopAudio()" data-i18n="btnStop"></button>
+  </div>
+  <p class="p-status" id="pStatus"></p>
+</section>
+
+<main>
+
+<!-- CAP 1 -->
+<section class="chapter" id="cap1">
+  <div class="chap-header">
+    <div class="chap-num">01</div>
+    <div>
+      <p class="chap-eyebrow" data-i18n="c1ey"></p>
+      <h2 class="chap-title" data-i18n="c1title"></h2>
+      <p class="chap-sub" data-i18n="c1sub"></p>
+    </div>
+  </div>
+
+  <div class="chap-audio-row">
+    <button class="chap-play-btn" id="chapPlayBtn1" onclick="playSequence([1])" data-i18n="chapPlay"></button>
+    <button class="chap-dl-btn" id="chapDlBtn1" onclick="downloadChapter(1)" data-i18n="chapDl"></button>
+    <span class="chap-audio-status" id="chapStatus1"></span>
+  </div>
+
+  <p class="section-tag" data-i18n="tagAll"></p>
+  <p class="body-p" data-i18n="c1_o1"></p>
+  <p class="body-p" data-i18n="c1_o2"></p>
+
+  <p class="section-tag tech" data-i18n="tagTech"></p>
+
+  <div class="diagram-wrap">
+    <p class="diagram-label" data-i18n="d1label"></p>
+    <svg viewBox="0 0 820 100" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="25" width="140" height="50" rx="8" fill="#0C1D31" stroke="#1A6FBF" stroke-width="1.5"/>
+      <rect x="190" y="25" width="140" height="50" rx="8" fill="#0C1D31" stroke="#1A6FBF" stroke-width="1.5"/>
+      <rect x="370" y="25" width="140" height="50" rx="8" fill="#0C1D31" stroke="#3A9FEF" stroke-width="1.5"/>
+      <rect x="550" y="25" width="130" height="50" rx="8" fill="#0C1D31" stroke="#D4A83A" stroke-width="1.5"/>
+      <rect x="710" y="25" width="100" height="50" rx="8" fill="#0C1D31" stroke="#D4A83A" stroke-width="1.5"/>
+      <line x1="150" y1="50" x2="187" y2="50" stroke="#1C3A58" stroke-width="2"/>
+      <polygon points="187,45 195,50 187,55" fill="#3A9FEF"/>
+      <line x1="330" y1="50" x2="367" y2="50" stroke="#1C3A58" stroke-width="2"/>
+      <polygon points="367,45 375,50 367,55" fill="#3A9FEF"/>
+      <line x1="510" y1="50" x2="547" y2="50" stroke="#1C3A58" stroke-width="2"/>
+      <polygon points="547,45 555,50 547,55" fill="#D4A83A"/>
+      <line x1="680" y1="50" x2="707" y2="50" stroke="#1C3A58" stroke-width="2"/>
+      <polygon points="707,45 715,50 707,55" fill="#D4A83A"/>
+      <text x="80" y="55" text-anchor="middle" font-size="11" fill="#EAF2FF" font-weight="700">MIX BUS</text>
+      <text x="260" y="48" text-anchor="middle" font-size="11" fill="#EAF2FF" font-weight="700">GRAVADOR</text>
+      <text x="260" y="62" text-anchor="middle" font-size="10" fill="#7EADD4">Master ½&quot; 30 IPS</text>
+      <text x="440" y="55" text-anchor="middle" font-size="11" fill="#EAF2FF" font-weight="700">REPRODUÇÃO</text>
+      <text x="615" y="48" text-anchor="middle" font-size="11" fill="#EAF2FF" font-weight="700">PROC. LINHA</text>
+      <text x="615" y="62" text-anchor="middle" font-size="10" fill="#7EADD4">EQ + Comp.</text>
+      <text x="760" y="55" text-anchor="middle" font-size="11" fill="#EAF2FF" font-weight="700">CORTE</text>
+    </svg>
+  </div>
+
+  <p class="subhead" data-i18n="c1sh1"></p>
+  <p class="subhead2" data-i18n="c1sh2"></p>
+  <p class="body-p" data-i18n="c1p1"></p>
+  <p class="subhead2" data-i18n="c1sh3"></p>
+  <p class="body-p" data-i18n="c1p2"></p>
+
+  <p class="subhead" data-i18n="c1sh4"></p>
+  <p class="body-p" data-i18n="c1p3"></p>
+
+  <p class="subhead" data-i18n="c1sh5"></p>
+  <p class="body-p" data-i18n="c1p4"></p>
+  <ul class="body-list">
+    <li data-i18n="c1l1"></li>
+    <li data-i18n="c1l2"></li>
+    <li data-i18n="c1l3"></li>
+    <li data-i18n="c1l4"></li>
+  </ul>
+
+  <p class="section-tag gear" data-i18n="tagGear"></p>
+  <div class="eq-grid">
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_master"></p>
+      <h3 class="eq-card-name">Ampex ATR-102</h3>
+      <p class="eq-card-spec" data-i18n="atr102spec"></p>
+    </div>
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_master"></p>
+      <h3 class="eq-card-name">Studer A80 RC</h3>
+      <p class="eq-card-spec" data-i18n="a80spec"></p>
+    </div>
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_tapemaster"></p>
+      <h3 class="eq-card-name">ATR Magnetics GP9</h3>
+      <p class="eq-card-spec" data-i18n="gp9spec"></p>
+    </div>
+  </div>
+</section>
+
+<hr class="sdiv"/>
+
+<!-- CAP 2 -->
+<section class="chapter" id="cap2">
+  <div class="chap-header">
+    <div class="chap-num">02</div>
+    <div>
+      <p class="chap-eyebrow" data-i18n="c2ey"></p>
+      <h2 class="chap-title" data-i18n="c2title"></h2>
+      <p class="chap-sub" data-i18n="c2sub"></p>
+    </div>
+  </div>
+
+  <div class="chap-audio-row">
+    <button class="chap-play-btn" id="chapPlayBtn2" onclick="playSequence([2])" data-i18n="chapPlay"></button>
+    <button class="chap-dl-btn" id="chapDlBtn2" onclick="downloadChapter(2)" data-i18n="chapDl"></button>
+    <span class="chap-audio-status" id="chapStatus2"></span>
+  </div>
+
+  <p class="section-tag" data-i18n="tagAll"></p>
+  <p class="body-p" data-i18n="c2_o1"></p>
+  <p class="body-p" data-i18n="c2_o2"></p>
+  <p class="body-p" data-i18n="c2_o3"></p>
+
+  <p class="section-tag tech" data-i18n="tagTech"></p>
+
+  <p class="subhead" data-i18n="c2sh1"></p>
+  <p class="body-p" data-i18n="c2p1"></p>
+
+  <p class="subhead" data-i18n="c2sh2"></p>
+  <p class="subhead2" data-i18n="c2sh2a"></p>
+  <ul class="body-list">
+    <li data-i18n="c2l1"></li>
+    <li data-i18n="c2l2"></li>
+    <li data-i18n="c2l3"></li>
+  </ul>
+  <p class="subhead2" data-i18n="c2sh2b"></p>
+  <ul class="body-list">
+    <li data-i18n="c2l4"></li>
+    <li data-i18n="c2l5"></li>
+    <li data-i18n="c2l6"></li>
+  </ul>
+
+  <p class="subhead" data-i18n="c2sh3"></p>
+  <p class="body-p" data-i18n="c2p2"></p>
+  <p class="subhead2" data-i18n="c2sh3a"></p>
+  <ul class="body-list">
+    <li data-i18n="c2l7"></li>
+    <li data-i18n="c2l8"></li>
+    <li data-i18n="c2l9"></li>
+    <li data-i18n="c2l10"></li>
+  </ul>
+
+  <div class="callout gold">
+    <p class="callout-label" data-i18n="c2cl_label"></p>
+    <p data-i18n="c2cl"></p>
+  </div>
+
+  <p class="section-tag gear" data-i18n="tagGear"></p>
+  <div class="eq-grid">
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_masterEq"></p>
+      <h3 class="eq-card-name">Sontec MES-432C</h3>
+      <p class="eq-card-spec" data-i18n="sontecspec"></p>
+    </div>
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_masterEq"></p>
+      <h3 class="eq-card-name">GML 8200</h3>
+      <p class="eq-card-spec" data-i18n="gml8200mspec"></p>
+    </div>
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_masterComp"></p>
+      <h3 class="eq-card-name">Manley Variable Mu</h3>
+      <p class="eq-card-spec" data-i18n="manleyspec"></p>
+    </div>
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_masterComp"></p>
+      <h3 class="eq-card-name">Fairchild 670</h3>
+      <p class="eq-card-spec" data-i18n="fairchildmspec"></p>
+    </div>
+  </div>
+</section>
+
+<hr class="sdiv"/>
+
+<!-- CAP 3 -->
+<section class="chapter" id="cap3">
+  <div class="chap-header">
+    <div class="chap-num">03</div>
+    <div>
+      <p class="chap-eyebrow" data-i18n="c3ey"></p>
+      <h2 class="chap-title" data-i18n="c3title"></h2>
+      <p class="chap-sub" data-i18n="c3sub"></p>
+    </div>
+  </div>
+
+  <div class="chap-audio-row">
+    <button class="chap-play-btn" id="chapPlayBtn3" onclick="playSequence([3])" data-i18n="chapPlay"></button>
+    <button class="chap-dl-btn" id="chapDlBtn3" onclick="downloadChapter(3)" data-i18n="chapDl"></button>
+    <span class="chap-audio-status" id="chapStatus3"></span>
+  </div>
+
+  <p class="section-tag" data-i18n="tagAll"></p>
+  <p class="body-p" data-i18n="c3_o1"></p>
+  <p class="body-p" data-i18n="c3_o2"></p>
+
+  <p class="section-tag tech" data-i18n="tagTech"></p>
+
+  <p class="subhead" data-i18n="c3sh1"></p>
+  <p class="body-p" data-i18n="c3p1"></p>
+  <ul class="body-list">
+    <li data-i18n="c3l1"></li>
+    <li data-i18n="c3l2"></li>
+  </ul>
+
+  <p class="subhead" data-i18n="c3sh2"></p>
+  <p class="body-p" data-i18n="c3p2"></p>
+  <ul class="body-list">
+    <li data-i18n="c3l3"></li>
+    <li data-i18n="c3l4"></li>
+    <li data-i18n="c3l5"></li>
+  </ul>
+  <div class="callout">
+    <p class="callout-label" data-i18n="c3cl1_label"></p>
+    <p data-i18n="c3cl1"></p>
+  </div>
+
+  <p class="subhead" data-i18n="c3sh3"></p>
+  <p class="body-p" data-i18n="c3p3"></p>
+  <ul class="body-list">
+    <li data-i18n="c3l6"></li>
+    <li data-i18n="c3l7"></li>
+    <li data-i18n="c3l8"></li>
+  </ul>
+  <div class="callout">
+    <p class="callout-label" data-i18n="c3cl2_label"></p>
+    <p data-i18n="c3cl2"></p>
+  </div>
+
+  <p class="subhead" data-i18n="c3sh4"></p>
+  <p class="body-p" data-i18n="c3p4"></p>
+  <ul class="body-list">
+    <li data-i18n="c3l9"></li>
+    <li data-i18n="c3l10"></li>
+  </ul>
+  <p class="body-p" data-i18n="c3p5"></p>
+
+  <p class="subhead" data-i18n="c3sh5"></p>
+  <ul class="body-list">
+    <li data-i18n="c3l11"></li>
+    <li data-i18n="c3l12"></li>
+    <li data-i18n="c3l13"></li>
+  </ul>
+  <p class="body-p" data-i18n="c3p6"></p>
+
+  <p class="section-tag gear" data-i18n="tagGear"></p>
+  <div class="eq-grid">
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_lathe"></p>
+      <h3 class="eq-card-name">Neumann VMS-80</h3>
+      <p class="eq-card-spec" data-i18n="vms80spec"></p>
+    </div>
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_ampCorte"></p>
+      <h3 class="eq-card-name">Neumann SAL-74</h3>
+      <p class="eq-card-spec" data-i18n="sal74spec"></p>
+    </div>
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_cabecaCorte"></p>
+      <h3 class="eq-card-name">Westrex 3D</h3>
+      <p class="eq-card-spec" data-i18n="westrexspec"></p>
+    </div>
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_latheHist"></p>
+      <h3 class="eq-card-name">Presto 1200A</h3>
+      <p class="eq-card-spec" data-i18n="prestospec"></p>
+    </div>
+  </div>
+</section>
+
+<hr class="sdiv"/>
+
+<!-- CAP 4 -->
+<section class="chapter" id="cap4">
+  <div class="chap-header">
+    <div class="chap-num">04</div>
+    <div>
+      <p class="chap-eyebrow" data-i18n="c4ey"></p>
+      <h2 class="chap-title" data-i18n="c4title"></h2>
+      <p class="chap-sub" data-i18n="c4sub"></p>
+    </div>
+  </div>
+
+  <div class="chap-audio-row">
+    <button class="chap-play-btn" id="chapPlayBtn4" onclick="playSequence([4])" data-i18n="chapPlay"></button>
+    <button class="chap-dl-btn" id="chapDlBtn4" onclick="downloadChapter(4)" data-i18n="chapDl"></button>
+    <span class="chap-audio-status" id="chapStatus4"></span>
+  </div>
+
+  <p class="section-tag" data-i18n="tagAll"></p>
+  <p class="body-p" data-i18n="c4_o1"></p>
+  <p class="body-p" data-i18n="c4_o2"></p>
+  <p class="body-p" data-i18n="c4_o3"></p>
+
+  <p class="section-tag tech" data-i18n="tagTech"></p>
+
+  <div class="diagram-wrap">
+    <p class="diagram-label" data-i18n="d2label"></p>
+    <div class="chain-list" id="chainList"></div>
+  </div>
+
+  <p class="subhead" data-i18n="c4sh1"></p>
+  <p class="body-p" data-i18n="c4p1"></p>
+  <p class="body-p" data-i18n="c4p2"></p>
+  <p class="body-p" data-i18n="c4p3"></p>
+
+  <p class="subhead" data-i18n="c4sh2"></p>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th data-i18n="th_etapa"></th><th data-i18n="th_dominio"></th><th data-i18n="th_energia"></th></tr>
+      </thead>
+      <tbody id="chainTable"></tbody>
+    </table>
+  </div>
+
+  <p class="section-tag gear" data-i18n="tagGear"></p>
+  <div class="eq-grid">
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_cuttingSys"></p>
+      <h3 class="eq-card-name" data-i18n="cuttingsysname"></h3>
+      <p class="eq-card-spec" data-i18n="cuttingsysspec"></p>
+    </div>
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_turntable"></p>
+      <h3 class="eq-card-name">Technics SL-1200</h3>
+      <p class="eq-card-spec" data-i18n="sl1200spec"></p>
+    </div>
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_cartridge"></p>
+      <h3 class="eq-card-name">Ortofon 2M Black</h3>
+      <p class="eq-card-spec" data-i18n="ortofonspec"></p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="vol-footer">
+  <h3 data-i18n="vf_title"></h3>
+  <p data-i18n="vf_desc"></p>
+  <div class="vol-nav-btns">
+    <a class="nav-btn secondary" href="vol02-mixagem-analogica.html" data-i18n="vf_back"></a>
+    <a class="nav-btn primary" href="bonus-alquimia-do-sulco.html" data-i18n="vf_next"></a>
+  </div>
+</div>
+
+<footer>
+  <strong>Estúdio Plá</strong> &nbsp;&middot;&nbsp; Bauru, São Paulo, Brasil<br>
+  <span data-i18n="ft_title"></span><br>
+  <span style="opacity:.45;font-size:12px">&copy; 2026 Estúdio Plá &middot; Kaue Ferreira Moraes &middot; <span data-i18n="ft_rights"></span></span>
+</footer>
+
+<script>
+var CHAIN = {
+pt:[
+  ["SALA DE GRAVAÇÃO","Pressão Acústica (Ar)"],
+  ["MICROFONE","Voltagem Elétrica (~1 mV)"],
+  ["TRANSFORMADOR DE ENTRADA","Casamento de impedância + coloração"],
+  ["PRÉ-AMPLIFICADOR","Voltagem Elétrica (+4 dBu)"],
+  ["CONSOLE ANALÓGICO","Soma, EQ, compressão de canal"],
+  ["GRAVADOR MULTIPISTA (2\")","Fluxo Magnético (fita de rolo)"],
+  ["REPRODUÇÃO DA FITA","Voltagem Elétrica (mixagem)"],
+  ["BARRAMENTO ESTÉREO DO CONSOLE","Soma analógica final"],
+  ["GRAVADOR MASTER (½\" a 30 IPS)","Fluxo Magnético (master tape)"],
+  ["MESA DE MASTERIZAÇÃO","EQ de precisão + compressão de barramento"],
+  ["EQ ELÍPTICA + HF LIMITER","Preparação para o vinil"],
+  ["TORNO DE CORTE (VMS-80)","Sulco Físico no Lacquer de Acetato"],
+  ["GALVANOPLASTIA","Matriz de Níquel (stamper)"],
+  ["PRENSAGEM","Disco de Vinil (PVC)"],
+  ["AGULHA DO TOCA-DISCOS","Voltagem Elétrica (~5 mV)"],
+  ["PRÉ-AMP DE PHONO (RIAA inversa)","Voltagem Elétrica (nível de linha)"],
+  ["AMPLIFICADOR","Corrente Elétrica (potência)"],
+  ["ALTO-FALANTE","Pressão Acústica (Ar)"],
+  ["TÍMPANO DO OUVINTE","Percepção Musical"]
+],
+en:[
+  ["RECORDING ROOM","Acoustic Pressure (Air)"],
+  ["MICROPHONE","Electrical Voltage (~1 mV)"],
+  ["INPUT TRANSFORMER","Impedance matching + coloration"],
+  ["PREAMPLIFIER","Electrical Voltage (+4 dBu)"],
+  ["ANALOG CONSOLE","Summing, EQ, channel compression"],
+  ["MULTITRACK RECORDER (2\")","Magnetic Flux (reel tape)"],
+  ["TAPE PLAYBACK","Electrical Voltage (mix)"],
+  ["CONSOLE STEREO BUS","Final analog summing"],
+  ["MASTER RECORDER (½\" at 30 IPS)","Magnetic Flux (master tape)"],
+  ["MASTERING CONSOLE","Precision EQ + bus compression"],
+  ["ELLIPTICAL EQ + HF LIMITER","Preparation for vinyl"],
+  ["CUTTING LATHE (VMS-80)","Physical Groove in Acetate Lacquer"],
+  ["ELECTROPLATING","Nickel Matrix (stamper)"],
+  ["PRESSING","Vinyl Record (PVC)"],
+  ["TURNTABLE NEEDLE","Electrical Voltage (~5 mV)"],
+  ["PHONO PREAMP (inverse RIAA)","Electrical Voltage (line level)"],
+  ["AMPLIFIER","Electrical Current (power)"],
+  ["LOUDSPEAKER","Acoustic Pressure (Air)"],
+  ["LISTENER'S EARDRUM","Musical Perception"]
+]
+};
+var CHAIN_TABLE = {
+pt:[
+  ["Instrumento → Microfone","Acústico","Pressão do ar"],
+  ["Microfone → Pré-amp","Elétrico","~1 mV"],
+  ["Pré-amp → Console","Elétrico","+4 dBu (~1,23 V)"],
+  ["Console → Fita (gravação)","Magnético","~320–520 nWb/m"],
+  ["Fita (reprodução) → Console master","Elétrico","+4 dBu"],
+  ["Console master → Fita master","Magnético","~520 nWb/m"],
+  ["Fita master → Torno de corte","Elétrico","+4 dBu"],
+  ["Torno → Lacquer","Mecânico","Sulco físico no acetato"],
+  ["Lacquer → Vinil (prensagem)","Mecânico","Relevo físico em PVC"],
+  ["Vinil → Cápsula","Elétrico","~5 mV"],
+  ["Cápsula → Amplificador","Elétrico","+4 dBu (pós-RIAA)"],
+  ["Amplificador → Alto-falante","Elétrico + Mecânico","Watts"],
+  ["Alto-falante → Ouvinte","Acústico","Pressão do ar"]
+],
+en:[
+  ["Instrument → Microphone","Acoustic","Air pressure"],
+  ["Microphone → Preamp","Electrical","~1 mV"],
+  ["Preamp → Console","Electrical","+4 dBu (~1.23 V)"],
+  ["Console → Tape (recording)","Magnetic","~320–520 nWb/m"],
+  ["Tape (playback) → Master console","Electrical","+4 dBu"],
+  ["Master console → Master tape","Magnetic","~520 nWb/m"],
+  ["Master tape → Cutting lathe","Electrical","+4 dBu"],
+  ["Lathe → Lacquer","Mechanical","Physical groove in acetate"],
+  ["Lacquer → Vinyl (pressing)","Mechanical","Physical relief in PVC"],
+  ["Vinyl → Cartridge","Electrical","~5 mV"],
+  ["Cartridge → Amplifier","Electrical","+4 dBu (post-RIAA)"],
+  ["Amplifier → Loudspeaker","Electrical + Mechanical","Watts"],
+  ["Loudspeaker → Listener","Acoustic","Air pressure"]
+]
+};
+
+function renderChain(l){
+  var wrap = document.getElementById('chainList');
+  wrap.innerHTML = '';
+  var data = CHAIN[l];
+  data.forEach(function(step, idx){
+    var el = document.createElement('div');
+    el.className = 'chain-step';
+    el.innerHTML = '<div class="stage">'+step[0]+'</div><div class="detail">'+step[1]+'</div>';
+    wrap.appendChild(el);
+    if(idx < data.length - 1){
+      var arrow = document.createElement('div');
+      arrow.className = 'chain-arrow';
+      arrow.textContent = '↓';
+      wrap.appendChild(arrow);
+    }
+  });
+  var tbody = document.getElementById('chainTable');
+  tbody.innerHTML = '';
+  CHAIN_TABLE[l].forEach(function(row){
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>'+row[0]+'</td><td>'+row[1]+'</td><td>'+row[2]+'</td>';
+    tbody.appendChild(tr);
+  });
+}
+
+var T = {
+pt:{
+  navVol1:"Vol. 01", navVol2:"Vol. 02", navVol3:"Vol. 03", navBonus:"Bônus Track",
+  cnav1:"01 — Fita Master", cnav2:"02 — Proc. de Linha", cnav3:"03 — Preparação p/ Vinil", cnav4:"04 — O Legado",
+  volBadge:"VOLUME 03 DE 03",
+  h1:"A Masterização<br><em>The Pre-Mastering</em>",
+  subtitle:"Da mixagem final ao sulco do vinil — a última etapa antes da prensagem.",
+  playerTitle:"Sistema de Áudio — Narração Completa por Gemini AI",
+  keyPh:"Cole sua chave Gemini API aqui",
+  keyLink:"&#128273; Obter chave grátis",
+  keyHint:"Sua chave permanece apenas nesta sessão do navegador — nunca é enviada aos nossos servidores.",
+  vMasc:"Voz Masculina", vFem:"Voz Feminina",
+  btnPlayAll:"&#9654; Reproduzir Volume Completo",
+  btnPauseLabel:"&#10074;&#10074; Pausar", btnResumeLabel:"&#9654; Retomar",
+  btnStop:"&#9632; Parar",
+  chapPlay:"&#9654; Ouvir este Capítulo",
+  chapDl:"&#11015; Baixar Áudio (.wav)",
+  tagAll:"Para Todos", tagTech:"Nível Técnico", tagGear:"Fichas de Equipamento",
+  statusInit:"Insira sua chave, escolha a voz e escolha um capítulo ou o volume completo.",
+  statusGen:"Gerando narração — Capítulo ", statusGenOf:" de ",
+  statusPlay:"&#9654; Reproduzindo — Capítulo ",
+  statusDone:"&#10004; Reprodução concluída.", statusDoneAll:"&#10004; Volume completo reproduzido.",
+  statusPaused:"&#10074;&#10074; Pausado.", statusStop:"&#9632; Parado.",
+  statusNoKey:"&#9888; Cole sua chave Gemini no campo acima.",
+  statusErr:"&#9888; Erro: ",
+  statusDownloading:"Preparando download do Capítulo ",
+  statusDownloaded:"&#10004; Áudio do Capítulo ", statusDownloadedEnd:" baixado.",
+  c1ey:"Captura Final", c1title:"A Fita Master",
+  c1sub:"A mixagem sai do console e se cristaliza em ½&quot; — a mais alta fidelidade do analógico de dois canais.",
+  c1_o1:"Imagine que semanas de trabalho — escolha de microfones, calibração de máquinas, equalização, compressão, o posicionamento de cada instrumento no espaço — convergem para um único momento: a mixagem sendo gravada em tempo real numa fita de rolo.",
+  c1_o2:"Essa fita não vai para um computador. Ela não vira arquivo. Ela é o destino. É nela que a música existe em sua forma mais completa e contínua antes de ser prensada num disco. Um rolo de fita de meia polegada a trinta polegadas por segundo é o ponto mais alto da fidelidade analógica de dois canais — e é a última decisão de caráter sonoro antes que a música chegue ao ouvinte.",
+  d1label:"O PROCESSO DE MASTERIZAÇÃO ANALÓGICA",
+  c1sh1:"A Escolha da Fita Master",
+  c1sh2:"¼&quot; a 15 IPS — O Caráter Clássico",
+  c1p1:"Traz a assinatura da compressão de fita de forma mais pronunciada. Head bump na região de 40–80 Hz adiciona peso e corpo. Agudos com saturação suave e natural. É a escolha quando a mixagem original precisa de mais cola, calor e suavização nas altas frequências. O som dos álbuns de rock clássico dos anos 70.",
+  c1sh3:"½&quot; a 30 IPS — O Ápice da Fidelidade",
+  c1p2:"Largura dupla de fita por canal estéreo. Reduz o ruído térmico a níveis quase imperceptíveis. Elimina o crosstalk (vazamento entre canais esquerdo e direito). Entrega imagem estéreo cirúrgica, transientes ultra-rápidos e agudos cristalinos. É a escolha para projetos que exigem máxima fidelidade e transparência.",
+  c1sh4:"A Física da Meia Polegada",
+  c1p3:"Cada canal estéreo (L e R) ocupa uma trilha de 6,35 mm de largura. Comparado ao ¼&quot; (com trilhas de ~2 mm por canal), a área magnética disponível é mais que três vezes maior — o que se traduz diretamente em menor ruído de fita, maior dinâmica e melhor separação de canais.",
+  c1sh5:"O Alinhamento do Gravador Master",
+  c1p4:"Antes da captura, o gravador de masterização é alinhado com rigor superior ao dos gravadores multipistas de tracking. Calibrado para 520 nWb/m (ATR GP9 ou equivalente). O engenheiro verifica:",
+  c1l1:"Resposta de frequência plana de 20 Hz a 20 kHz ±0,5 dB",
+  c1l2:"Ruído de fita abaixo de -70 dBu",
+  c1l3:"Separação entre canais superior a 70 dB",
+  c1l4:"Wow and flutter abaixo de 0,03% (WRMS)",
+  eq_master:"Gravador Master", eq_tapemaster:"Fita Master de Alta Saída",
+  atr102spec:"<strong>Formato:</strong> ½&quot; · <strong>Pistas:</strong> 2 · <strong>Velocidades:</strong> 15 e 30 IPS · O gravador de masterização de referência absoluta. Resposta de frequência extraordinariamente plana a 30 IPS. Presente nos melhores estúdios de masterização do mundo por décadas.",
+  a80spec:"<strong>Formato:</strong> ¼&quot; e ½&quot; · <strong>Pistas:</strong> 2 · <strong>Velocidades:</strong> 7,5, 15 e 30 IPS · O concorrente suíço do ATR-102. Construção de precisão relojoeira com eletrônica modular. Usado extensivamente em estúdios europeus.",
+  gp9spec:"<strong>Largura:</strong> ¼&quot; e ½&quot; · <strong>Calibração:</strong> 520 nWb/m (+9 dB sobre padrão NAB) · A fita de masterização de referência atual. Óxido de alta energia com resposta de frequência estendida.",
+  c2ey:"Precisão Cirúrgica", c2title:"O Processamento de Linha",
+  c2sub:"Equalizadores e compressores de masterização — ajustes de décimos de decibel que definem um álbum.",
+  c2_o1:"Se a mixagem é a escultura, a masterização é o polimento final. O engenheiro de masterização não reprograma nada — ele escuta a música como um todo e faz ajustes mínimos que têm impacto máximo.",
+  c2_o2:"Um ganho de meio decibel em doze quilohertz pode abrir o topo de um álbum inteiro. Um corte suave abaixo de vinte hertz pode dar energia a uma mixagem que parecia pesada sem razão aparente. E uma compressão sutilíssima no barramento estéreo pode fazer uma coleção de músicas soar como um álbum coeso em vez de uma playlist.",
+  c2_o3:"A precisão aqui é outra. Os equipamentos têm potenciômetros de passos fixos com resistores de precisão militar — cada clique é exatamente o mesmo, em qualquer máquina, em qualquer estúdio do mundo.",
+  c2sh1:"Diferença Fundamental: Mixagem vs Masterização",
+  c2p1:"Na mixagem, o engenheiro trabalha com elementos individuais — modela a voz, comprime o bumbo, equaliza a guitarra. Na masterização, o engenheiro trabalha com a <strong>soma estéreo unificada</strong> — qualquer ajuste afeta todos os elementos simultaneamente. Isso exige equipamentos de altíssima transparência eletrônica e ajustes mínimos.",
+  c2sh2:"Equalizadores de Masterização",
+  c2sh2a:"Características obrigatórias:",
+  c2l1:"<strong>Stepped attenuators:</strong> potenciômetros de passos fixos com resistores de precisão — garantem recall perfeito e casamento L/R absoluto",
+  c2l2:"<strong>Transparência eletrônica máxima:</strong> distorção harmônica abaixo de 0,001%",
+  c2l3:"<strong>Curvas suaves e musicais:</strong> Q muito largo — ajustes afetam oitavas inteiras, não frequências pontuais",
+  c2sh2b:"Aplicações típicas:",
+  c2l4:"High-shelf de +0,5 a +1 dB acima de 10 kHz — abre o topo sem soar artificial",
+  c2l5:"Low-shelf de -1 a -2 dB abaixo de 60 Hz — limpa a lama sem tirar o corpo",
+  c2l6:"High-pass filter suave em 20–30 Hz — elimina sub-frequências inúteis",
+  c2sh3:"Compressores de Masterização",
+  c2p2:"O objetivo não é controlar transientes individuais (como na mixagem) — é <strong>aumentar a densidade perceptível</strong> da música sem esmagar os picos. A compressão de masterização deve ser quase inaudível na ação, mas claramente audível na falta.",
+  c2sh3a:"Parâmetros típicos:",
+  c2l7:"Ratio: 1,5:1 a 3:1",
+  c2l8:"Ataque: 30–100 ms (lento o suficiente para deixar os transientes passarem)",
+  c2l9:"Release: 200–400 ms (rápido o suficiente para não 'bombear')",
+  c2l10:"Ganho de redução: 1–3 dB máximo",
+  c2cl_label:"Limitadores de Pico Analógico",
+  c2cl:"Diferente dos limitadores digitais brickwall, os limitadores analógicos usam diodos ou circuitos de resposta rápida para realizar uma ceifa suave dos picos (soft-clipping). O resultado é o arredondamento musical da forma de onda — nunca o corte abrupto que o digital produz.",
+  eq_masterEq:"Equalizador de Masterização", eq_masterComp:"Compressor/Limitador de Masterização",
+  sontecspec:"<strong>Bandas:</strong> 5 paramétricas + HPF/LPF · Stepped attenuators de precisão · O equalizador de masterização analógico mais respeitado da história. Transparência eletrônica lendária.",
+  gml8200mspec:"<strong>Bandas:</strong> 5 paramétricas · Stepped attenuators George Massenburg · Projetado pelo inventor do equalizador paramétrico. Padrão de referência para masterização de alta resolução.",
+  manleyspec:"<strong>Ratio:</strong> Variável (1,5:1 a 10:1) · <strong>Válvulas:</strong> 5670 e 6BA6 · O compressor de masterização mais usado do mundo. Ação suave e orgânica das válvulas.",
+  fairchildmspec:"<strong>Ratio:</strong> Variável · <strong>Release:</strong> 6 tempos selecionáveis · <strong>14 válvulas por canal</strong> · O compressor mais raro e mais cobiçado da masterização analógica.",
+  c3ey:"Física Mecânica", c3title:"A Preparação para o Vinil",
+  c3sub:"As limitações do sulco e como o engenheiro de masterização as respeita para que a agulha não pule.",
+  c3_o1:"O disco de vinil não é apenas um formato de armazenamento. Ele é um objeto físico com limitações físicas muito concretas. A música é literalmente esculpida como um relevo microscópico num sulco em espiral de PVC — e a agulha do toca-discos precisa seguir esse sulco sem pular, sem travar, sem distorcer.",
+  c3_o2:"Isso significa que certas combinações de frequências e volumes que funcionam perfeitamente numa gravação digital podem fazer a agulha literalmente pular o sulco num disco de vinil. O trabalho do engenheiro de masterização é preparar a música para respeitar as leis da física mecânica — sem tirar o caráter e a energia da mixagem original.",
+  c3sh1:"O Sistema de Corte 45/45",
+  c3p1:"O sulco do vinil usa o padrão estereofônico 45/45: duas paredes inclinadas a 45° cada, formando um V. A parede interna carrega o canal esquerdo (L). A parede externa carrega o canal direito (R).",
+  c3l1:"<strong>Horizontal</strong> → representa a soma dos canais (L+R) = mono/centro",
+  c3l2:"<strong>Vertical</strong> → representa a diferença dos canais (L-R) = abertura estéreo",
+  c3sh2:"Problema 1 — Monofonia dos Graves (Elliptical Equalization)",
+  c3p2:"Frequências graves abaixo de 100–150 Hz com muita informação estéreo (L≠R) causam movimento vertical excessivo na agulha. O torno de corte tenta esculpir um sulco muito profundo e vertical — o que pode:",
+  c3l3:"Romper a parede entre sulcos adjacentes",
+  c3l4:"Fazer a agulha pular durante a reprodução",
+  c3l5:"Causar distorção severa em sistemas de reprodução domésticos",
+  c3cl1_label:"Solução: Equalização Elíptica (EE)",
+  c3cl1:"Um circuito de rede de cruzamento que filtra a informação estéreo abaixo de 100–150 Hz, somando os graves em mono. A energia dos graves fica intacta — apenas a abertura estéreo nessa região é reduzida ao necessário.",
+  c3sh3:"Problema 2 — Sibilância e Altas Frequências",
+  c3p3:"Frequências agudas muito intensas (7–10 kHz+) obrigam o torno de corte a oscilar sua lâmina em velocidades altíssimas. Riscos:",
+  c3l6:"Superaquecimento e queima da cabeça de corte do torno",
+  c3l7:"Sulcos estreitos demais que a agulha doméstica não consegue rastrear",
+  c3l8:"Distorção de sibilância (mistracking) nos 'S' e 'T' da voz",
+  c3cl2_label:"Solução: Limitadores de Alta Frequência (HF Limiters)",
+  c3cl2:"Circuitos de limitação ultrarápida ajustados especificamente para 7–10 kHz. Atuam apenas quando os picos ultrapassam o limiar crítico — invisíveis na maior parte do tempo.",
+  c3sh4:"A Curva RIAA",
+  c3p4:"Toda gravação de vinil aplica a equalização RIAA no corte:",
+  c3l9:"Graves atenuados drasticamente (para sulcos mais estreitos = mais música por face)",
+  c3l10:"Agudos amplificados drasticamente (para ficarem acima do ruído de superfície do PVC)",
+  c3p5:"No pré-amplificador de phono do toca-discos, a curva inversa RIAA reconstrói o espectro original. Sem esse circuito, o vinil soa sem graves e com agudos insuportáveis.",
+  c3sh5:"A Velocidade de Corte e a Profundidade do Sulco",
+  c3l11:"Velocidade de corte mais alta = sulcos mais largos = melhor qualidade sonora = menos música por face",
+  c3l12:"Profundidade maior = risco de pular sulcos adjacentes",
+  c3l13:"O engenheiro de corte equilibra qualidade sonora vs. duração de cada face",
+  c3p6:"<strong>Típico:</strong> Face A de LP = máximo 20 minutos, face B = máximo 22 minutos (velocidade de corte menor na borda = melhor qualidade).",
+  eq_lathe:"Torno de Corte de Lacquer", eq_ampCorte:"Amplificador de Corte", eq_cabecaCorte:"Cabeça de Corte Estéreo", eq_latheHist:"Lathe de Corte Histórico",
+  vms80spec:"<strong>Velocidade:</strong> Variável (automática por programa) · <strong>Profundidade:</strong> Variável · O torno de corte de referência absoluta. O computador de controle ajusta velocidade e profundidade automaticamente.",
+  sal74spec:"<strong>Potência:</strong> 2 × 90W · <strong>Resposta:</strong> DC a 50 kHz · O amplificador que alimenta a cabeça de corte do VMS-80.",
+  westrexspec:"<strong>Sistema:</strong> 45/45 · <strong>Agulha:</strong> Diamante natural lapidado · A cabeça que esculpe fisicamente os sulcos no lacquer de acetato.",
+  prestospec:"<strong>Período:</strong> Anos 1940–1960 · <strong>Velocidade:</strong> 33⅓ e 45 RPM · O lathe dos maiores estúdios de masterização do período clássico — Capitol, Atlantic, Columbia.",
+  c4ey:"Conclusão", c4title:"Da Fita ao Acetato — O Legado",
+  c4sub:"A cadeia completa do som analógico — e por que ela ainda importa.",
+  c4_o1:"Pense em tudo que aconteceu. Uma nota musical saiu de um instrumento, moveu o ar da sala, entrou num microfone, virou eletricidade, atravessou transformadores e transistores, foi gravada em fita magnética, saiu da fita, foi equalizada, comprimida, e agora está sendo esculpida fisicamente com uma agulha de diamante num disco de acetato.",
+  c4_o2:"Em nenhum momento ela virou um número. Em nenhum momento foi fatiada, aproximada ou reconstruída matematicamente. Ela foi a própria energia do músico, em transição perpétua de matéria em matéria, até se cristalizar num sulco de vinil que vai durar décadas.",
+  c4_o3:"É por isso que o analógico ainda importa. Não por nostalgia. Por física.",
+  d2label:"A CADEIA COMPLETA — DO AR AO VINIL",
+  c4sh1:"Por Que o Analógico Ainda Importa",
+  c4p1:"O argumento não é que o analógico seja 'melhor' que o digital em termos absolutos. É que ele opera sob uma física diferente — uma física de continuidade, de imperfeições musicais, de saturação harmônica que a faixa dinâmica infinita do digital não produz naturalmente.",
+  c4p2:"Os melhores engenheiros do mundo hoje trabalham em ambientes híbridos: gravação digital para as vantagens práticas (edição não-destrutiva, recall perfeito, custo operacional) com processamento analógico estratégico nas etapas críticas (pré-amplificação, compressão de barramento, masterização) para capturar as características sonoras que os circuitos analógicos produzem naturalmente.",
+  c4p3:"Compreender o analógico não é um exercício de nostalgia. É compreender a base física sobre a qual toda a engenharia de áudio — analógica ou digital — foi construída.",
+  c4sh2:"Os Números da Cadeia",
+  th_etapa:"Etapa", th_dominio:"Domínio", th_energia:"Energia",
+  eq_cuttingSys:"Sistema de Corte Completo", eq_turntable:"Toca-discos de Referência", eq_cartridge:"Cápsula de Referência",
+  cuttingsysname:"Neumann VMS-80 + SAL-74",
+  cuttingsysspec:"O sistema de corte de referência absoluta. Presente em Sterling Sound (NY), Abbey Road (Londres), Masterdisk (NY), Optimal Media (Alemanha).",
+  sl1200spec:"<strong>Velocidades:</strong> 33⅓ e 45 RPM · <strong>Motor:</strong> Direct drive · O toca-discos mais vendido da história. Referência absoluta para DJs e audiófilos.",
+  ortofonspec:"<strong>Tipo:</strong> Moving Magnet · <strong>Agulha:</strong> Diamante Shibata lapidado · A cápsula audiófila de referência para toca-discos de alta performance.",
+  vf_title:"Próximo: Bônus Track — A Alquimia do Sulco",
+  vf_desc:"A jornada da agulha — como o relevo microscópico do PVC reconstitui a magia sonora. A física do milagre mecânico contada como nunca antes.",
+  vf_back:"&#8592; Volume 02 — A Mixagem Analógica",
+  vf_next:"Bônus Track &#8594;",
+  ft_title:"Manual Definitivo de Gravação, Mixagem e Masterização Analógica — Volume 03",
+  ft_rights:"Todos os direitos reservados",
+  narration:{
+    1:"Capítulo Um. A Fita Master. A masterização analógica começa com a captura da saída estéreo do console em tempo real — a mixagem sendo gravada numa fita de rolo de meia polegada ou um quarto de polegada, sem interrupções, do início ao fim. Essa fita não é um arquivo. Ela é o destino. A fita de meia polegada a trinta polegadas por segundo representa o ápice da fidelidade analógica de dois canais: cada canal estéreo ocupa seis vírgula trinta e cinco milímetros de largura de óxido magnético, entregando imagem estéreo cirúrgica, transientes ultrarápidos e agudos cristalinos com ruído de fita quase imperceptível. A fita de um quarto de polegada a quinze IPS entrega um caráter diferente — o head bump nos graves, a saturação suave nos agudos, a cola de fita que define o som dos álbuns de rock clássico dos anos setenta. Antes de gravar, o gravador master é alinhado com rigor superior ao dos gravadores de tracking: resposta de frequência plana de vinte a vinte mil hertz, separação entre canais acima de setenta decibéis, wow and flutter abaixo de zero vírgula zero três por cento. A perfeição mecânica é o pré-requisito da perfeição sonora.",
+    2:"Capítulo Dois. O Processamento de Linha. Na masterização, o engenheiro trabalha com a soma estéreo unificada — qualquer ajuste afeta todos os instrumentos simultaneamente. Isso exige uma precisão completamente diferente da mixagem. Os equalizadores de masterização têm potenciômetros de passos fixos com resistores de precisão militar — cada clique é exatamente reprodutível, em qualquer sessão, em qualquer estúdio do mundo. Um ganho de meio decibel em doze quilohertz pode abrir o topo de um álbum inteiro. Um corte suave abaixo de vinte hertz pode devolver energia a uma mixagem que parecia pesada sem razão. Os compressores de masterização trabalham com ratios baixíssimos — um vírgula cinco a três para um — e reduções de ganho mínimas, de um a três decibéis no máximo. O objetivo não é controlar transientes. É aumentar a densidade perceptível da música sem sufocar os picos. O Sontec MES e o GML oitocentos são os equalizadores de referência absoluta. O Manley Variable Mu e o Fairchild seiscentos e setenta são os compressores que colocaram a cola final em décadas de masterização analógica.",
+    3:"Capítulo Três. A Preparação para o Vinil. O disco de vinil é um objeto físico com limitações físicas concretas. A música é esculpida como relevo microscópico num sulco em espiral de PVC, e a agulha precisa seguir esse sulco sem pular. O sulco usa o sistema quarenta e cinco quarenta e cinco: duas paredes inclinadas que carregam os canais esquerdo e direito. O movimento horizontal da agulha representa a soma — o mono. O movimento vertical representa a diferença — a abertura estéreo. E é aqui que surgem os dois grandes desafios do corte de vinil. Frequências graves com muita informação estéreo causam movimento vertical excessivo — o sulco fica largo demais e pode romper a parede para o sulco adjacente, fazendo a agulha pular. A solução é a equalização elíptica, que some os graves em mono abaixo de cem a cento e cinquenta hertz. Frequências agudas muito intensas obrigam o torno de corte a oscilar em velocidades altíssimas — o sulco fica estreito demais e a agulha doméstica não consegue rastrear. A solução são os limitadores de alta frequência, que atuam cirurgicamente apenas quando os picos ultrapassam o limiar crítico. E toda a gravação é feita com a curva RIAA: graves atenuados, agudos amplificados. O pré-amplificador de phono do toca-discos aplica a curva inversa e reconstrói o espectro original. É a última camada de física antes da música chegar ao ouvinte.",
+    4:"Capítulo Quatro. Da Fita ao Acetato — O Legado. A cadeia está completa. Da pressão acústica do instrumento ao sulco físico no lacquer de acetato — sem nenhum momento em que a energia do músico se tornou um número. Ela viajou como eletricidade, se cristalizou como magnetismo, e agora existe como relevo mecânico num pedaço de plástico que vai durar décadas. E quando a agulha percorrer esse sulco, ela vai fazer o caminho inverso: mecânico de volta a elétrico, elétrico de volta a acústico, pressão de volta ao tímpano. O ciclo da matéria, completo. Compreender o analógico não é nostalgia. É compreender a física sobre a qual toda a engenharia de áudio foi construída. Os melhores engenheiros do mundo trabalham hoje em ambientes híbridos, usando o digital para as vantagens práticas e o analógico nas etapas críticas — porque os circuitos analógicos produzem, pela sua própria natureza física, características sonoras que o digital precisa trabalhar para aproximar. Este foi o Volume Três do Manual Definitivo de Gravação, Mixagem e Masterização Analógica. O próximo capítulo é o Bônus Track — a alquimia do sulco, a magia mecânica da agulha no vinil."
+  }
+},
+en:{
+  navVol1:"Vol. 01", navVol2:"Vol. 02", navVol3:"Vol. 03", navBonus:"Bonus Track",
+  cnav1:"01 — Master Tape", cnav2:"02 — Line Processing", cnav3:"03 — Vinyl Preparation", cnav4:"04 — The Legacy",
+  volBadge:"VOLUME 03 OF 03",
+  h1:"Mastering<br><em>The Pre-Mastering</em>",
+  subtitle:"From the final mix to the vinyl groove — the last step before pressing.",
+  playerTitle:"Audio System — Full Narration by Gemini AI",
+  keyPh:"Paste your Gemini API key here",
+  keyLink:"&#128273; Get free key",
+  keyHint:"Your key stays in this browser session only — it is never sent to our servers.",
+  vMasc:"Male Voice", vFem:"Female Voice",
+  btnPlayAll:"&#9654; Play Full Volume",
+  btnPauseLabel:"&#10074;&#10074; Pause", btnResumeLabel:"&#9654; Resume",
+  btnStop:"&#9632; Stop",
+  chapPlay:"&#9654; Listen to this Chapter",
+  chapDl:"&#11015; Download Audio (.wav)",
+  tagAll:"For Everyone", tagTech:"Technical Level", tagGear:"Equipment Spec Sheets",
+  statusInit:"Enter your Gemini key, choose a voice, and pick a chapter or the full volume.",
+  statusGen:"Generating narration — Chapter ", statusGenOf:" of ",
+  statusPlay:"&#9654; Playing — Chapter ",
+  statusDone:"&#10004; Playback complete.", statusDoneAll:"&#10004; Full volume playback complete.",
+  statusPaused:"&#10074;&#10074; Paused.", statusStop:"&#9632; Stopped.",
+  statusNoKey:"&#9888; Paste your Gemini key in the field above.",
+  statusErr:"&#9888; Error: ",
+  statusDownloading:"Preparing download for Chapter ",
+  statusDownloaded:"&#10004; Chapter ", statusDownloadedEnd:" audio downloaded.",
+  c1ey:"Final Capture", c1title:"The Master Tape",
+  c1sub:"The mix leaves the console and crystallizes at ½&quot; — the highest fidelity of two-channel analog.",
+  c1_o1:"Imagine that weeks of work — choosing microphones, calibrating machines, equalization, compression, positioning every instrument in space — converge into a single moment: the mix being recorded in real time onto a reel of tape.",
+  c1_o2:"That tape doesn't go to a computer. It doesn't become a file. It is the destination. It's where the music exists in its most complete and continuous form before being pressed onto a record. A reel of half-inch tape at thirty inches per second is the highest point of two-channel analog fidelity — and it's the last decision of sonic character before the music reaches the listener.",
+  d1label:"THE ANALOG MASTERING PROCESS",
+  c1sh1:"Choosing the Master Tape",
+  c1sh2:"¼&quot; at 15 IPS — The Classic Character",
+  c1p1:"Brings the tape compression signature in a more pronounced way. Head bump in the 40–80 Hz region adds weight and body. Highs with gentle, natural saturation. The choice when the original mix needs more glue, warmth, and smoothing at high frequencies. The sound of classic 70s rock albums.",
+  c1sh3:"½&quot; at 30 IPS — The Pinnacle of Fidelity",
+  c1p2:"Double the tape width per stereo channel. Reduces thermal noise to nearly imperceptible levels. Eliminates crosstalk (leakage between left and right channels). Delivers surgical stereo imaging, ultra-fast transients, and crystal-clear highs. The choice for projects demanding maximum fidelity and transparency.",
+  c1sh4:"The Physics of Half-Inch",
+  c1p3:"Each stereo channel (L and R) occupies a 6.35 mm wide track. Compared to ¼&quot; (with ~2 mm tracks per channel), the available magnetic area is more than three times larger — which translates directly into lower tape noise, greater dynamic range, and better channel separation.",
+  c1sh5:"Aligning the Master Recorder",
+  c1p4:"Before capture, the mastering recorder is aligned with rigor exceeding that of multitrack tracking recorders. Calibrated to 520 nWb/m (ATR GP9 or equivalent). The engineer verifies:",
+  c1l1:"Flat frequency response from 20 Hz to 20 kHz ±0.5 dB",
+  c1l2:"Tape noise below -70 dBu",
+  c1l3:"Channel separation above 70 dB",
+  c1l4:"Wow and flutter below 0.03% (WRMS)",
+  eq_master:"Master Recorder", eq_tapemaster:"High-Output Master Tape",
+  atr102spec:"<strong>Format:</strong> ½&quot; · <strong>Tracks:</strong> 2 · <strong>Speeds:</strong> 15 and 30 IPS · The absolute reference mastering recorder. Extraordinarily flat frequency response at 30 IPS. Found in the world's best mastering studios for decades.",
+  a80spec:"<strong>Format:</strong> ¼&quot; and ½&quot; · <strong>Tracks:</strong> 2 · <strong>Speeds:</strong> 7.5, 15 and 30 IPS · The Swiss competitor to the ATR-102. Clockwork-precision construction with modular electronics.",
+  gp9spec:"<strong>Width:</strong> ¼&quot; and ½&quot; · <strong>Calibration:</strong> 520 nWb/m (+9 dB over NAB standard) · The current reference mastering tape. High-energy oxide with extended frequency response.",
+  c2ey:"Surgical Precision", c2title:"Line Processing",
+  c2sub:"Mastering equalizers and compressors — tenths-of-a-decibel adjustments that define an album.",
+  c2_o1:"If mixing is sculpture, mastering is the final polish. The mastering engineer doesn't reprogram anything — they listen to the music as a whole and make minimal adjustments that have maximum impact.",
+  c2_o2:"A half-decibel boost at twelve kilohertz can open up the top end of an entire album. A gentle cut below twenty hertz can bring energy to a mix that felt heavy for no apparent reason. And an extremely subtle compression on the stereo bus can make a collection of songs sound like a cohesive album instead of a playlist.",
+  c2_o3:"The precision here is on another level. The equipment has stepped potentiometers with military-precision resistors — every click is exactly the same, on any machine, in any studio in the world.",
+  c2sh1:"Fundamental Difference: Mixing vs Mastering",
+  c2p1:"In mixing, the engineer works with individual elements — shaping the voice, compressing the kick, equalizing the guitar. In mastering, the engineer works with the <strong>unified stereo sum</strong> — any adjustment affects every element simultaneously. This demands equipment with extremely high electronic transparency and minimal adjustments.",
+  c2sh2:"Mastering Equalizers",
+  c2sh2a:"Mandatory characteristics:",
+  c2l1:"<strong>Stepped attenuators:</strong> fixed-step potentiometers with precision resistors — guarantee perfect recall and absolute L/R matching",
+  c2l2:"<strong>Maximum electronic transparency:</strong> harmonic distortion below 0.001%",
+  c2l3:"<strong>Smooth, musical curves:</strong> very wide Q — adjustments affect entire octaves, not pinpoint frequencies",
+  c2sh2b:"Typical applications:",
+  c2l4:"High-shelf of +0.5 to +1 dB above 10 kHz — opens up the top end without sounding artificial",
+  c2l5:"Low-shelf of -1 to -2 dB below 60 Hz — cleans up mud without removing body",
+  c2l6:"Gentle high-pass filter at 20–30 Hz — eliminates useless sub-frequencies",
+  c2sh3:"Mastering Compressors",
+  c2p2:"The goal is not to control individual transients (as in mixing) — it's to <strong>increase the perceptible density</strong> of the music without crushing the peaks. Mastering compression should be nearly inaudible in action, but clearly audible in its absence.",
+  c2sh3a:"Typical parameters:",
+  c2l7:"Ratio: 1.5:1 to 3:1",
+  c2l8:"Attack: 30–100 ms (slow enough to let transients through)",
+  c2l9:"Release: 200–400 ms (fast enough to avoid 'pumping')",
+  c2l10:"Gain reduction: 1–3 dB maximum",
+  c2cl_label:"Analog Peak Limiters",
+  c2cl:"Unlike digital brickwall limiters, analog limiters use diodes or fast-response circuits to perform a gentle shaving of peaks (soft-clipping). The result is a musical rounding of the waveform — never the abrupt cutoff that digital produces.",
+  eq_masterEq:"Mastering Equalizer", eq_masterComp:"Mastering Compressor/Limiter",
+  sontecspec:"<strong>Bands:</strong> 5 parametric + HPF/LPF · Precision stepped attenuators · The most respected analog mastering equalizer in history. Legendary electronic transparency.",
+  gml8200mspec:"<strong>Bands:</strong> 5 parametric · George Massenburg stepped attenuators · Designed by the inventor of the parametric equalizer. The reference standard for high-resolution mastering.",
+  manleyspec:"<strong>Ratio:</strong> Variable (1.5:1 to 10:1) · <strong>Tubes:</strong> 5670 and 6BA6 · The most widely used mastering compressor in the world. Smooth, organic tube action.",
+  fairchildmspec:"<strong>Ratio:</strong> Variable · <strong>Release:</strong> 6 selectable times · <strong>14 tubes per channel</strong> · The rarest and most coveted compressor in analog mastering.",
+  c3ey:"Mechanical Physics", c3title:"Preparation for Vinyl",
+  c3sub:"The limitations of the groove, and how the mastering engineer respects them so the needle doesn't skip.",
+  c3_o1:"The vinyl record isn't just a storage format. It's a physical object with very concrete physical limitations. The music is literally sculpted as microscopic relief in a spiral groove of PVC — and the turntable needle must follow that groove without skipping, sticking, or distorting.",
+  c3_o2:"This means certain combinations of frequency and volume that work perfectly in a digital recording can literally make the needle skip the groove on a vinyl record. The mastering engineer's job is to prepare the music to respect the laws of mechanical physics — without stripping the character and energy of the original mix.",
+  c3sh1:"The 45/45 Cutting System",
+  c3p1:"The vinyl groove uses the 45/45 stereophonic standard: two walls each inclined at 45°, forming a V. The inner wall carries the left channel (L). The outer wall carries the right channel (R).",
+  c3l1:"<strong>Horizontal</strong> → represents the sum of the channels (L+R) = mono/center",
+  c3l2:"<strong>Vertical</strong> → represents the difference between channels (L-R) = stereo width",
+  c3sh2:"Problem 1 — Bass Mono Compatibility (Elliptical Equalization)",
+  c3p2:"Low frequencies below 100–150 Hz with a lot of stereo information (L≠R) cause excessive vertical needle movement. The cutting lathe tries to sculpt a groove that's too deep and vertical — which can:",
+  c3l3:"Break through the wall between adjacent grooves",
+  c3l4:"Cause the needle to skip during playback",
+  c3l5:"Cause severe distortion on home playback systems",
+  c3cl1_label:"Solution: Elliptical Equalization (EE)",
+  c3cl1:"A crossover network circuit that filters stereo information below 100–150 Hz, summing the bass to mono. The bass energy stays intact — only the stereo width in that region is reduced to what's necessary.",
+  c3sh3:"Problem 2 — Sibilance and High Frequencies",
+  c3p3:"Very intense high frequencies (7–10 kHz+) force the cutting lathe to oscillate its blade at extremely high speeds. Risks:",
+  c3l6:"Overheating and burning out the lathe's cutting head",
+  c3l7:"Grooves too narrow for a home needle to track",
+  c3l8:"Sibilance distortion (mistracking) on the 'S' and 'T' sounds of the voice",
+  c3cl2_label:"Solution: High-Frequency Limiters (HF Limiters)",
+  c3cl2:"Ultra-fast limiting circuits tuned specifically for 7–10 kHz. They act only when peaks exceed the critical threshold — invisible most of the time.",
+  c3sh4:"The RIAA Curve",
+  c3p4:"Every vinyl cut applies RIAA equalization:",
+  c3l9:"Bass drastically attenuated (for narrower grooves = more music per side)",
+  c3l10:"Highs drastically boosted (to sit above the PVC's surface noise)",
+  c3p5:"In the turntable's phono preamplifier, the inverse RIAA curve reconstructs the original spectrum. Without that circuit, vinyl would sound bass-less with unbearable highs.",
+  c3sh5:"Cutting Speed and Groove Depth",
+  c3l11:"Higher cutting speed = wider grooves = better sound quality = less music per side",
+  c3l12:"Greater depth = risk of breaking into adjacent grooves",
+  c3l13:"The cutting engineer balances sound quality vs. the duration of each side",
+  c3p6:"<strong>Typical:</strong> LP Side A = 20 minutes maximum, Side B = 22 minutes maximum (lower cutting speed near the edge = better quality).",
+  eq_lathe:"Lacquer Cutting Lathe", eq_ampCorte:"Cutting Amplifier", eq_cabecaCorte:"Stereo Cutting Head", eq_latheHist:"Historic Cutting Lathe",
+  vms80spec:"<strong>Speed:</strong> Variable (automatic by program) · <strong>Depth:</strong> Variable · The absolute reference cutting lathe. The control computer automatically adjusts speed and depth.",
+  sal74spec:"<strong>Power:</strong> 2 × 90W · <strong>Response:</strong> DC to 50 kHz · The amplifier that drives the VMS-80's cutting head.",
+  westrexspec:"<strong>System:</strong> 45/45 · <strong>Stylus:</strong> Lapped natural diamond · The head that physically sculpts the grooves into the acetate lacquer.",
+  prestospec:"<strong>Period:</strong> 1940s–1960s · <strong>Speed:</strong> 33⅓ and 45 RPM · The lathe found in the largest mastering studios of the classic era — Capitol, Atlantic, Columbia.",
+  c4ey:"Conclusion", c4title:"From Tape to Acetate — The Legacy",
+  c4sub:"The complete chain of analog sound — and why it still matters.",
+  c4_o1:"Think about everything that happened. A musical note left an instrument, moved the air in the room, entered a microphone, became electricity, passed through transformers and transistors, was recorded onto magnetic tape, left the tape, was equalized, compressed, and is now being physically sculpted with a diamond stylus onto a disc of acetate.",
+  c4_o2:"At no point did it become a number. At no point was it sliced, approximated, or mathematically reconstructed. It was the musician's own energy, in perpetual transition from matter to matter, until it crystallized into a vinyl groove that will last for decades.",
+  c4_o3:"That's why analog still matters. Not out of nostalgia. Because of physics.",
+  d2label:"THE COMPLETE CHAIN — FROM AIR TO VINYL",
+  c4sh1:"Why Analog Still Matters",
+  c4p1:"The argument isn't that analog is 'better' than digital in absolute terms. It's that it operates under a different physics — a physics of continuity, of musical imperfections, of harmonic saturation that digital's infinite dynamic range doesn't naturally produce.",
+  c4p2:"The world's best engineers today work in hybrid environments: digital recording for its practical advantages (non-destructive editing, perfect recall, operating cost) with strategic analog processing at critical stages (preamplification, bus compression, mastering) to capture the sonic characteristics that analog circuits produce naturally.",
+  c4p3:"Understanding analog is not an exercise in nostalgia. It's understanding the physical foundation upon which all audio engineering — analog or digital — was built.",
+  c4sh2:"The Numbers of the Chain",
+  th_etapa:"Stage", th_dominio:"Domain", th_energia:"Energy",
+  eq_cuttingSys:"Complete Cutting System", eq_turntable:"Reference Turntable", eq_cartridge:"Reference Cartridge",
+  cuttingsysname:"Neumann VMS-80 + SAL-74",
+  cuttingsysspec:"The absolute reference cutting system. Found at Sterling Sound (NY), Abbey Road (London), Masterdisk (NY), Optimal Media (Germany).",
+  sl1200spec:"<strong>Speeds:</strong> 33⅓ and 45 RPM · <strong>Motor:</strong> Direct drive · The best-selling turntable in history. The absolute reference for DJs and audiophiles.",
+  ortofonspec:"<strong>Type:</strong> Moving Magnet · <strong>Stylus:</strong> Lapped Shibata diamond · The reference audiophile cartridge for high-performance turntables.",
+  vf_title:"Next: Bonus Track — The Alchemy of the Groove",
+  vf_desc:"The journey of the needle — how the microscopic relief of PVC reconstitutes sonic magic. The physics of the mechanical miracle, told like never before.",
+  vf_back:"&#8592; Volume 02 — Analog Mixing",
+  vf_next:"Bonus Track &#8594;",
+  ft_title:"Definitive Manual of Analog Recording, Mixing and Mastering — Volume 03",
+  ft_rights:"All rights reserved",
+  narration:{
+    1:"Chapter One. The Master Tape. Analog mastering begins with capturing the stereo output of the console in real time — the mix being recorded onto a reel of half-inch or quarter-inch tape, uninterrupted, from beginning to end. This tape is not a file. It is the destination. Half-inch tape at 30 IPS represents the pinnacle of two-channel analog fidelity: each stereo channel occupies 6.35 millimeters of magnetic oxide width, delivering surgical stereo imaging, ultrafast transients, and crystal-clear highs with nearly imperceptible tape noise. Quarter-inch tape at 15 IPS delivers a different character — the head bump in the low end, the gentle saturation in the highs, the tape glue that defines the sound of classic rock albums from the seventies. Before recording, the master recorder is aligned with rigor exceeding that of tracking recorders: flat frequency response from 20 to 20,000 hertz, channel separation above 70 decibels, wow and flutter below 0.03 percent. Mechanical perfection is the prerequisite of sonic perfection.",
+    2:"Chapter Two. Line Processing. In mastering, the engineer works with the unified stereo sum — any adjustment affects all instruments simultaneously. This demands a completely different kind of precision from mixing. Mastering equalizers have stepped attenuators with military-grade precision resistors — each click is exactly reproducible, in any session, in any studio in the world. A gain of half a decibel at twelve kilohertz can open the top of an entire album. A gentle cut below twenty hertz can restore energy to a mix that seemed heavy for no apparent reason. Mastering compressors work with very low ratios — one point five to three to one — and minimal gain reductions, one to three decibels maximum. The objective is not to control transients. It is to increase the perceptible density of the music without suffocating the peaks. The Sontec MES and GML 8200 are the absolute reference equalizers. The Manley Variable Mu and the Fairchild 670 are the compressors that put the final glue on decades of analog mastering.",
+    3:"Chapter Three. Preparation for Vinyl. The vinyl record is a physical object with concrete physical limitations. The music is sculpted as microscopic relief in a spiral groove of PVC, and the needle must follow that groove without skipping. The groove uses the 45/45 system: two inclined walls that carry the left and right channels. The horizontal movement of the needle represents the sum — the mono. The vertical movement represents the difference — the stereo width. And this is where the two great challenges of vinyl cutting arise. Low frequencies with too much stereo information cause excessive vertical movement — the groove becomes too wide and may break through the wall to the adjacent groove, causing the needle to skip. The solution is elliptical equalization, which sums the low end to mono below one hundred to one hundred fifty hertz. Very intense high frequencies force the cutting lathe to oscillate at extremely high speeds — the groove becomes too narrow for a domestic needle to track. The solution is high-frequency limiters, which act surgically only when peaks exceed the critical threshold. And the entire recording is made with the RIAA curve: lows attenuated, highs amplified. The phono preamplifier in the turntable applies the inverse curve and reconstructs the original spectrum. It is the final layer of physics before the music reaches the listener.",
+    4:"Chapter Four. From Tape to Acetate — The Legacy. The chain is complete. From the acoustic pressure of the instrument to the physical groove in the lacquer acetate — without a single moment in which the musician's energy became a number. It traveled as electricity, crystallized as magnetism, and now exists as mechanical relief on a piece of plastic that will last for decades. And when the needle traces that groove, it will make the reverse journey: mechanical back to electrical, electrical back to acoustic, pressure back to the eardrum. The cycle of matter, complete. Understanding analog is not nostalgia. It is understanding the physics upon which all audio engineering was built. The world's finest engineers work today in hybrid environments, using digital for practical advantages and analog at the critical stages — because analog circuits produce, by their very physical nature, sonic characteristics that digital must work to approximate. This was Volume Three of the Definitive Manual of Analog Recording, Mixing and Mastering. The next chapter is the Bonus Track — the alchemy of the groove, the mechanical magic of the needle on vinyl."
+  }
+}
+};
+
+var lang = 'pt';
+var voiceName = 'Charon';
+
+function setLang(l){
+  lang = l;
+  document.getElementById('htmlRoot').lang = l === 'pt' ? 'pt-BR' : 'en-US';
+  document.getElementById('btnPT').classList.toggle('active', l === 'pt');
+  document.getElementById('btnEN').classList.toggle('active', l === 'en');
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var k = el.getAttribute('data-i18n');
+    if(T[l][k] !== undefined) el.innerHTML = T[l][k];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(function(el){
+    var k = el.getAttribute('data-i18n-ph');
+    if(T[l][k] !== undefined) el.placeholder = T[l][k];
+  });
+  renderChain(l);
+  if(!isPlaying){ setStatus(T[lang].statusInit); }
+  updatePauseBtn();
+}
+
+function toggleKey(){ var i = document.getElementById('apiKey'); i.type = i.type==='password'?'text':'password'; }
+function setVoice(t){
+  voiceName = t==='masc'?'Charon':'Kore';
+  document.getElementById('btnM').classList.toggle('active',t==='masc');
+  document.getElementById('btnF').classList.toggle('active',t==='fem');
+  if(isPlaying) stopAudio();
+}
+
+(function(){
+  var vu = document.getElementById('vu');
+  var bars = [
+    {mn:'10px',mx:'46px',d:'.55s',c:'#3A9FEF'},{mn:'18px',mx:'44px',d:'.70s',c:'#D4A83A'},
+    {mn:'8px',mx:'48px',d:'.45s',c:'#3A9FEF'},{mn:'22px',mx:'40px',d:'.85s',c:'#D4A83A'},
+    {mn:'12px',mx:'48px',d:'.60s',c:'#3A9FEF'},{mn:'16px',mx:'36px',d:'.50s',c:'#D4A83A'},
+    {mn:'6px',mx:'46px',d:'.40s',c:'#3A9FEF'},{mn:'20px',mx:'42px',d:'.75s',c:'#3A9FEF'},
+    {mn:'14px',mx:'46px',d:'.65s',c:'#D4A83A'},{mn:'10px',mx:'38px',d:'.55s',c:'#3A9FEF'},
+    {mn:'24px',mx:'48px',d:'.80s',c:'#D4A83A'},{mn:'8px',mx:'44px',d:'.48s',c:'#3A9FEF'}
+  ];
+  bars.forEach(function(b){
+    var el = document.createElement('div');
+    el.className = 'vu-bar';
+    el.style.setProperty('--mn',b.mn);
+    el.style.setProperty('--mx',b.mx);
+    el.style.setProperty('--d',b.d);
+    el.style.background = b.c;
+    el.style.height = b.mn;
+    vu.appendChild(el);
+  });
+})();
+
+var sessionId = 0;
+var stopSignal = null;
+var pauseGate = null;
+var audioCtx = null;
+var currentSource = null;
+var isPlaying = false;
+var isPaused = false;
+var audioCache = {};
+
+function setStatus(msg, spin){
+  var el = document.getElementById('pStatus');
+  el.innerHTML = spin ? '<span class="spinner"></span>' + msg : msg;
+}
+function setChapStatus(ch, msg){
+  var el = document.getElementById('chapStatus'+ch);
+  if(el) el.textContent = msg;
+}
+function clearChapStatuses(){
+  for(var i=1;i<=4;i++) setChapStatus(i,'');
+}
+function highlightChapter(ch){
+  for(var i=1;i<=4;i++){
+    var btn = document.getElementById('chapPlayBtn'+i);
+    if(btn) btn.classList.toggle('playing', i===ch);
+  }
+}
+function updatePauseBtn(){
+  var btn = document.getElementById('btnPauseResume');
+  btn.disabled = !isPlaying;
+  btn.innerHTML = isPaused ? T[lang].btnResumeLabel : T[lang].btnPauseLabel;
+}
+function setPlayingUI(playing){
+  isPlaying = playing;
+  document.getElementById('btnPlayAll').disabled = playing;
+  for(var i=1;i<=4;i++){
+    var pb = document.getElementById('chapPlayBtn'+i);
+    var db = document.getElementById('chapDlBtn'+i);
+    if(pb) pb.disabled = playing;
+    if(db) db.disabled = playing;
+  }
+  updatePauseBtn();
+  if(!playing) highlightChapter(null);
+}
+
+function makeDeferred(){
+  var resolveFn, rejectFn;
+  var p = new Promise(function(resolve, reject){ resolveFn = resolve; rejectFn = reject; });
+  p.catch(function(){});
+  return { promise:p, resolve:resolveFn, reject:rejectFn };
+}
+
+function resetPlaybackState(){
+  sessionId++;
+  if(stopSignal){ try{ stopSignal.reject(new Error('stopped')); }catch(e){} }
+  if(pauseGate){ try{ pauseGate.resolve(); }catch(e){} }
+  if(currentSource){ try{ currentSource.stop(); }catch(e){} }
+  if(audioCtx){ try{ audioCtx.close(); }catch(e){} }
+  audioCtx = null; currentSource = null;
+  stopSignal = null; pauseGate = null;
+  isPaused = false;
+  setPlayingUI(false);
+}
+
+function stopAudio(){
+  resetPlaybackState();
+  setStatus(T[lang].statusStop);
+  clearChapStatuses();
+}
+
+function togglePause(){
+  if(!isPlaying) return;
+  if(!isPaused){
+    isPaused = true;
+    if(audioCtx) audioCtx.suspend();
+    pauseGate = makeDeferred();
+    setStatus(T[lang].statusPaused);
+  } else {
+    isPaused = false;
+    if(audioCtx) audioCtx.resume();
+    if(pauseGate){ pauseGate.resolve(); pauseGate = null; }
+  }
+  updatePauseBtn();
+}
+
+function fetchChapterAudio(ch, key){
+  var text = T[lang].narration[ch];
+  return fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key='+encodeURIComponent(key),{
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      contents:[{parts:[{text:text}]}],
+      generationConfig:{responseModalities:['AUDIO'],speechConfig:{voiceConfig:{prebuiltVoiceConfig:{voiceName:voiceName}}}}
+    })
+  }).then(function(r){ return r.json(); }).then(function(d){
+    if(d.error) throw new Error(d.error.message);
+    var part = d.candidates[0].content.parts[0];
+    var mime = part.inlineData.mimeType || 'audio/L16;rate=24000';
+    var rm = mime.match(/rate=(\d+)/);
+    var rate = rm ? parseInt(rm[1],10) : 24000;
+    return { b64: part.inlineData.data, rate: rate, voice: voiceName };
+  });
+}
+
+function playBuffer(bufData, mySession, ch){
+  return new Promise(function(resolve, reject){
+    try{
+      var bin = atob(bufData.b64), raw = new Uint8Array(bin.length);
+      for(var i=0;i<bin.length;i++) raw[i] = bin.charCodeAt(i);
+      if(audioCtx){ try{ audioCtx.close(); }catch(e){} }
+      audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+      var i16 = new Int16Array(raw.buffer), f32 = new Float32Array(i16.length);
+      for(var j=0;j<i16.length;j++) f32[j] = i16[j]/32768;
+      var ab = audioCtx.createBuffer(1, f32.length, bufData.rate);
+      ab.getChannelData(0).set(f32);
+      currentSource = audioCtx.createBufferSource();
+      currentSource.buffer = ab;
+      currentSource.connect(audioCtx.destination);
+      currentSource.onended = function(){ if(mySession === sessionId) resolve(); };
+      highlightChapter(ch);
+      currentSource.start();
+    }catch(e){ reject(e); }
+  });
+}
+
+async function playSequence(chapters){
+  var key = document.getElementById('apiKey').value.trim();
+  if(!key){ setStatus(T[lang].statusNoKey); return; }
+  resetPlaybackState();
+  var mySession = sessionId;
+  stopSignal = makeDeferred();
+  setPlayingUI(true);
+  clearChapStatuses();
+  try{
+    for(var i=0;i<chapters.length;i++){
+      if(mySession !== sessionId) return;
+      if(isPaused && pauseGate) await Promise.race([pauseGate.promise, stopSignal.promise]);
+      if(mySession !== sessionId) return;
+
+      var ch = chapters[i];
+      setStatus(T[lang].statusGen + ch + T[lang].statusGenOf + '4 — ' + voiceName + '...', true);
+      setChapStatus(ch, T[lang].statusGen + ch + '...');
+
+      var buf = await Promise.race([fetchChapterAudio(ch, key), stopSignal.promise]);
+      if(mySession !== sessionId) return;
+      audioCache[ch] = buf;
+
+      setStatus(T[lang].statusPlay + ch + ' · ' + voiceName);
+      setChapStatus(ch, T[lang].statusPlay + ch);
+
+      await Promise.race([playBuffer(buf, mySession, ch), stopSignal.promise]);
+      if(mySession !== sessionId) return;
+      setChapStatus(ch, T[lang].statusDone);
+    }
+    if(mySession === sessionId){
+      setStatus(chapters.length > 1 ? T[lang].statusDoneAll : T[lang].statusDone);
+    }
+  }catch(e){
+    if(mySession === sessionId){ setStatus(T[lang].statusErr + e.message); }
+  }finally{
+    if(mySession === sessionId) setPlayingUI(false);
+  }
+}
+
+function pcmBase64ToWavBlob(b64, sampleRate){
+  var bin = atob(b64), len = bin.length;
+  var pcm = new Uint8Array(len);
+  for(var i=0;i<len;i++) pcm[i] = bin.charCodeAt(i);
+  var blockAlign = 2, byteRate = sampleRate*blockAlign;
+  var buffer = new ArrayBuffer(44 + pcm.length);
+  var view = new DataView(buffer);
+  function writeStr(offset,str){ for(var i=0;i<str.length;i++) view.setUint8(offset+i, str.charCodeAt(i)); }
+  writeStr(0,'RIFF'); view.setUint32(4, 36+pcm.length, true); writeStr(8,'WAVE');
+  writeStr(12,'fmt '); view.setUint32(16,16,true); view.setUint16(20,1,true); view.setUint16(22,1,true);
+  view.setUint32(24,sampleRate,true); view.setUint32(28,byteRate,true); view.setUint16(32,blockAlign,true); view.setUint16(34,16,true);
+  writeStr(36,'data'); view.setUint32(40,pcm.length,true);
+  new Uint8Array(buffer,44).set(pcm);
+  return new Blob([buffer], {type:'audio/wav'});
+}
+
+function triggerDownload(blob, filename){
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+}
+
+async function downloadChapter(ch){
+  var key = document.getElementById('apiKey').value.trim();
+  if(!key){ setStatus(T[lang].statusNoKey); return; }
+  var dlBtn = document.getElementById('chapDlBtn'+ch);
+  try{
+    var buf = audioCache[ch];
+    if(!buf || buf.voice !== voiceName){
+      dlBtn.disabled = true;
+      setChapStatus(ch, T[lang].statusDownloading + ch + '...');
+      setStatus(T[lang].statusDownloading + ch + '...', true);
+      buf = await fetchChapterAudio(ch, key);
+      audioCache[ch] = buf;
+    }
+    var blob = pcmBase64ToWavBlob(buf.b64, buf.rate);
+    triggerDownload(blob, 'volume03-capitulo0'+ch+'-'+buf.voice.toLowerCase()+'.wav');
+    setChapStatus(ch, T[lang].statusDownloaded + ch + T[lang].statusDownloadedEnd);
+    setStatus(T[lang].statusDownloaded + ch + T[lang].statusDownloadedEnd);
+  }catch(e){
+    setStatus(T[lang].statusErr + e.message);
+    setChapStatus(ch, '');
+  }finally{
+    dlBtn.disabled = isPlaying;
+  }
+}
+
+setLang('pt');
+</script>
+</body>
+</html>

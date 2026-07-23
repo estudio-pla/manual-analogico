@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="pt-BR" id="htmlRoot">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Bônus Track — A Alquimia do Sulco | Estúdio Plá</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+:root{
+  --bg:#060F1C;--bg-card:#0C1D31;--bg-card2:#0F2440;
+  --blue:#1A6FBF;--blue-lt:#3A9FEF;--blue-glow:rgba(58,159,239,0.18);
+  --gold:#D4A83A;--gold-lt:#F0C84A;
+  --txt:#EAF2FF;--txt2:#7EADD4;--border:#1C3A58;--div:rgba(58,159,239,0.22);
+  --green:#2ECC71;--amber:#E67E22;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--txt);font-family:'Inter',system-ui,sans-serif;font-size:18px;line-height:1.7;}
+.top-bar{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:52px;background:rgba(6,15,28,0.96);border-bottom:1px solid var(--border);backdrop-filter:blur(8px);flex-wrap:wrap;gap:8px;}
+.vol-nav{display:flex;gap:6px;flex-wrap:wrap;}
+.vol-link{background:transparent;border:1px solid var(--border);border-radius:6px;padding:6px 14px;font-size:13px;font-weight:600;color:var(--txt2);cursor:pointer;text-decoration:none;transition:all .2s;}
+.vol-link.active{background:var(--gold);border-color:var(--gold-lt);color:#060F1C;}
+.vol-link:hover:not(.active){border-color:var(--blue-lt);color:var(--txt);}
+.lang-toggle{display:flex;border:1.5px solid var(--border);border-radius:7px;overflow:hidden;}
+.lang-btn{background:var(--bg-card);border:none;color:var(--txt2);font-size:13px;font-weight:700;letter-spacing:1px;padding:8px 15px;cursor:pointer;transition:all .2s;}
+.lang-btn.active{background:var(--blue);color:#fff;}
+.lang-btn:hover:not(.active){background:var(--bg-card2);color:var(--txt);}
+.chap-nav{display:flex;justify-content:center;gap:8px;padding:16px 24px;flex-wrap:wrap;border-bottom:1px solid var(--div);background:var(--bg-card);margin-top:52px;}
+.chap-link{background:transparent;border:1px solid var(--border);border-radius:20px;padding:7px 18px;font-size:13px;font-weight:600;color:var(--txt2);cursor:pointer;text-decoration:none;transition:all .2s;}
+.chap-link:hover{border-color:var(--gold);color:var(--txt);}
+header{padding:56px 40px 56px;text-align:center;border-bottom:1px solid var(--div);background:linear-gradient(180deg,#071828 0%,var(--bg) 100%);}
+.vu-wrap{display:flex;justify-content:center;align-items:flex-end;gap:5px;height:48px;margin-bottom:32px;}
+.vu-bar{width:7px;border-radius:3px 3px 0 0;animation:vup var(--d) ease-in-out infinite alternate;}
+@keyframes vup{from{height:var(--mn);opacity:.45}to{height:var(--mx);opacity:1}}
+.vol-badge{display:inline-flex;align-items:center;gap:8px;background:var(--bg-card);border:1px solid var(--gold);border-radius:24px;padding:8px 20px;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;}
+h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(26px,4.6vw,54px);font-weight:900;line-height:1.15;color:#fff;margin-bottom:16px;}
+h1 em{color:var(--gold);font-style:italic;}
+.subtitle{font-size:clamp(15px,2vw,20px);color:var(--txt2);max-width:640px;margin:0 auto;font-style:italic;}
+.player{background:var(--bg-card);border-bottom:1px solid var(--div);padding:40px;text-align:center;}
+.player-title{font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;}
+.key-row{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
+.key-wrap{position:relative;width:100%;max-width:460px;}
+.key-input{width:100%;background:var(--bg);border:2px solid var(--border);border-radius:10px;padding:13px 50px 13px 18px;font-size:16px;color:var(--txt);outline:none;font-family:monospace;letter-spacing:1px;transition:border-color .2s;}
+.key-input:focus{border-color:var(--blue-lt);}
+.key-input::placeholder{color:var(--txt2);font-family:'Inter',sans-serif;letter-spacing:0;}
+.key-eye{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--txt2);cursor:pointer;font-size:18px;}
+.ai-link{display:inline-flex;align-items:center;gap:6px;color:var(--blue-lt);font-size:14px;text-decoration:none;font-weight:600;padding:10px 18px;border:1px solid var(--border);border-radius:8px;transition:all .2s;white-space:nowrap;}
+.ai-link:hover{border-color:var(--blue-lt);background:var(--blue-glow);}
+.key-hint{font-size:13px;color:var(--txt2);margin-bottom:24px;}
+.voice-row{display:flex;justify-content:center;gap:12px;margin-bottom:20px;flex-wrap:wrap;}
+.voice-btn{background:transparent;border:2px solid var(--border);border-radius:40px;padding:11px 28px;font-size:15px;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .22s;display:flex;align-items:center;gap:8px;}
+.voice-btn:hover{border-color:var(--blue-lt);color:var(--txt);}
+.voice-btn.active{background:var(--blue);border-color:var(--blue-lt);color:#fff;box-shadow:0 0 20px var(--blue-glow);}
+.vsub{font-size:11px;opacity:.7;font-weight:400;}
+.ctrl-row{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;}
+.btn-play{background:var(--gold);color:#060F1C;border:none;border-radius:40px;padding:13px 36px;font-size:16px;font-weight:800;cursor:pointer;transition:all .22s;}
+.btn-play:hover{background:var(--gold-lt);transform:scale(1.03);}
+.btn-play:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+.btn-pause{background:transparent;color:var(--txt2);border:2px solid var(--border);border-radius:40px;padding:13px 28px;font-size:16px;font-weight:600;cursor:pointer;transition:all .22s;}
+.btn-pause:hover:not(:disabled){border-color:var(--blue-lt);color:var(--txt);}
+.btn-pause:disabled{opacity:.4;cursor:not-allowed;}
+.btn-stop{background:transparent;color:var(--txt2);border:2px solid var(--border);border-radius:40px;padding:13px 28px;font-size:16px;font-weight:600;cursor:pointer;transition:all .22s;}
+.btn-stop:hover{border-color:var(--txt2);color:var(--txt);}
+.p-status{margin-top:14px;font-size:14px;color:var(--txt2);min-height:22px;font-style:italic;}
+.spinner{display:inline-block;width:13px;height:13px;border:2px solid var(--txt2);border-top-color:var(--blue-lt);border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:6px;}
+@keyframes spin{to{transform:rotate(360deg)}}
+main{max-width:900px;margin:0 auto;padding:64px 32px 0;}
+.chapter{margin-bottom:80px;scroll-margin-top:80px;}
+.chap-header{display:flex;align-items:flex-start;gap:20px;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--div);}
+.chap-num{font-family:'JetBrains Mono',monospace;font-size:48px;font-weight:600;color:var(--gold);opacity:.4;line-height:1;flex-shrink:0;margin-top:4px;}
+.chap-eyebrow{font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.chap-title{font-family:'Playfair Display',Georgia,serif;font-size:clamp(24px,3.5vw,38px);font-weight:700;color:#fff;line-height:1.2;}
+.chap-sub{font-size:16px;color:var(--txt2);margin-top:8px;font-style:italic;}
+.body-p{font-size:clamp(16px,1.6vw,18px);color:var(--txt);line-height:1.85;margin-bottom:20px;}
+.body-p strong{color:var(--gold);}
+.subhead{font-family:'Playfair Display',Georgia,serif;font-size:20px;color:#fff;margin:32px 0 12px;}
+.subhead2{font-family:'Inter',sans-serif;font-weight:700;font-size:16px;color:var(--gold);margin:24px 0 10px;}
+.body-list{margin:0 0 20px 0;padding-left:0;list-style:none;}
+.body-list li{font-size:clamp(16px,1.6vw,18px);color:var(--txt);line-height:1.85;margin-bottom:10px;padding-left:22px;position:relative;}
+.body-list li:before{content:"—";position:absolute;left:0;color:var(--gold);}
+.body-list li strong{color:var(--gold);}
+.body-list.numbered{counter-reset:num;}
+.body-list.numbered li:before{content:counter(num) ".";counter-increment:num;color:var(--gold);font-weight:700;}
+.chap-audio-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:32px;}
+.chap-play-btn{background:var(--blue);color:#fff;border:none;border-radius:24px;padding:11px 22px;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:6px;}
+.chap-play-btn:hover:not(:disabled){background:var(--blue-lt);}
+.chap-play-btn.playing{background:var(--gold);color:#060F1C;}
+.chap-dl-btn{background:transparent;border:1.5px solid var(--border);color:var(--txt2);border-radius:24px;padding:11px 22px;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:6px;}
+.chap-dl-btn:hover:not(:disabled){border-color:var(--gold);color:var(--gold);}
+.chap-play-btn:disabled,.chap-dl-btn:disabled{opacity:.5;cursor:not-allowed;}
+.chap-audio-status{font-size:13px;color:var(--txt2);font-style:italic;}
+.section-tag{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin:0 0 14px;}
+.section-tag.tech{color:var(--blue-lt);margin-top:40px;}
+.section-tag.gear{color:var(--gold);margin-top:40px;}
+.callout{background:var(--bg-card2);border-left:4px solid var(--blue-lt);border-radius:0 10px 10px 0;padding:20px 24px;margin:28px 0;}
+.callout.gold{border-left-color:var(--gold);}
+.callout.green{border-left-color:var(--green);}
+.callout p{font-size:clamp(15px,1.5vw,17px);color:var(--txt);line-height:1.7;margin:0;}
+.callout-label{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--blue-lt);margin-bottom:8px;}
+.callout.gold .callout-label{color:var(--gold);}
+.callout.green .callout-label{color:var(--green);}
+.tbl-wrap{overflow-x:auto;margin:24px 0;}
+table{width:100%;border-collapse:collapse;font-size:clamp(14px,1.4vw,16px);}
+thead tr{background:var(--bg-card2);}
+thead th{padding:14px 18px;text-align:left;font-weight:700;color:var(--blue-lt);font-size:12px;letter-spacing:2px;text-transform:uppercase;border-bottom:2px solid var(--blue);}
+tbody tr{border-bottom:1px solid var(--border);transition:background .15s;}
+tbody tr:hover{background:var(--bg-card);}
+tbody td{padding:14px 18px;color:var(--txt);line-height:1.5;vertical-align:top;}
+tbody td:first-child{color:#fff;font-weight:600;}
+.diagram-wrap{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:32px 24px;margin:28px 0;overflow-x:auto;}
+.diagram-label{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;text-align:center;}
+.chain-list{display:flex;flex-direction:column;align-items:center;max-width:480px;margin:0 auto;}
+.chain-step{background:var(--bg-card2);border:1px solid var(--border);border-radius:8px;padding:12px 18px;text-align:center;width:100%;}
+.chain-step .stage{font-weight:700;color:#fff;font-size:14px;letter-spacing:.5px;}
+.chain-step .detail{font-size:12.5px;color:var(--txt2);margin-top:3px;}
+.chain-arrow{color:var(--gold);font-size:16px;padding:2px 0;}
+.eq-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:24px 0;}
+.eq-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:22px 20px;transition:box-shadow .2s;}
+.eq-card:hover{box-shadow:0 0 24px var(--blue-glow);}
+.eq-card-type{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.eq-card-name{font-family:'Playfair Display',Georgia,serif;font-size:20px;color:#fff;margin-bottom:12px;}
+.eq-card-spec{font-size:14px;color:var(--txt2);line-height:1.65;}
+.eq-card-spec strong{color:var(--txt);}
+hr.sdiv{border:none;border-top:1px solid var(--div);margin:60px 0;}
+.series-end{max-width:680px;margin:0 auto;text-align:center;padding:56px 24px 64px;border-top:1px solid var(--div);}
+.series-end-label{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
+.series-end-text{font-family:'Playfair Display',Georgia,serif;font-size:clamp(19px,2.4vw,28px);color:#fff;line-height:1.6;font-style:italic;}
+.vol-footer{background:var(--bg-card2);border-top:1px solid var(--div);padding:48px 32px;text-align:center;}
+.vol-footer h3{font-family:'Playfair Display',Georgia,serif;font-size:clamp(22px,3vw,34px);color:#fff;margin-bottom:16px;}
+.vol-footer p{font-size:16px;color:var(--txt2);max-width:580px;margin:0 auto 28px;}
+.vol-nav-btns{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+.nav-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 30px;border-radius:40px;font-size:15px;font-weight:700;cursor:pointer;text-decoration:none;transition:all .22s;border:2px solid var(--border);}
+.nav-btn.primary{background:var(--gold);color:#060F1C;border-color:var(--gold);}
+.nav-btn.primary:hover{background:var(--gold-lt);transform:translateY(-2px);}
+.nav-btn.secondary{color:var(--txt2);}
+.nav-btn.secondary:hover{border-color:var(--txt2);color:var(--txt);}
+footer{text-align:center;padding:24px 32px;font-size:13px;color:var(--txt2);border-top:1px solid var(--div);}
+footer strong{color:var(--gold);}
+@media(max-width:600px){
+  header{padding:44px 20px 44px;}
+  main{padding:44px 20px 0;}
+  .player{padding:32px 20px;}
+  .chap-header{flex-direction:column;gap:8px;}
+  .chap-num{font-size:32px;}
+  .key-row{flex-direction:column;align-items:stretch;}
+  .top-bar{padding:8px 12px;}
+  .vol-link{padding:6px 10px;font-size:12px;}
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="vol-nav">
+    <a class="vol-link" href="vol01-tracking-analogico-v4.html" data-i18n="navVol1"></a>
+    <a class="vol-link" href="vol02-mixagem-analogica.html" data-i18n="navVol2"></a>
+    <a class="vol-link" href="vol03-masterizacao.html" data-i18n="navVol3"></a>
+    <a class="vol-link active" href="#" data-i18n="navBonus"></a>
+  </div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="btnPT" onclick="setLang('pt')">PT</button>
+    <button class="lang-btn" id="btnEN" onclick="setLang('en')">EN</button>
+  </div>
+</div>
+
+<nav class="chap-nav">
+  <a class="chap-link" href="#cap1" data-i18n="cnav1"></a>
+  <a class="chap-link" href="#cap2" data-i18n="cnav2"></a>
+  <a class="chap-link" href="#cap3" data-i18n="cnav3"></a>
+  <a class="chap-link" href="#cap4" data-i18n="cnav4"></a>
+</nav>
+
+<header>
+  <div class="vu-wrap" id="vu"></div>
+  <div class="vol-badge">&#127925; <span data-i18n="volBadge"></span></div>
+  <h1 data-i18n="h1"></h1>
+  <p class="subtitle" data-i18n="subtitle"></p>
+</header>
+
+<section class="player">
+  <p class="player-title" data-i18n="playerTitle"></p>
+  <div class="key-row">
+    <div class="key-wrap">
+      <input class="key-input" id="apiKey" type="password" data-i18n-ph="keyPh" autocomplete="off" spellcheck="false"/>
+      <button class="key-eye" onclick="toggleKey()">&#128065;</button>
+    </div>
+    <a class="ai-link" href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener" data-i18n="keyLink"></a>
+  </div>
+  <p class="key-hint" data-i18n="keyHint"></p>
+  <div class="voice-row">
+    <button class="voice-btn active" id="btnM" onclick="setVoice('masc')">
+      &#128104;&#8205;&#127908; <span data-i18n="vMasc"></span> <span class="vsub">Charon</span>
+    </button>
+    <button class="voice-btn" id="btnF" onclick="setVoice('fem')">
+      &#128105;&#8205;&#127908; <span data-i18n="vFem"></span> <span class="vsub">Kore</span>
+    </button>
+  </div>
+  <div class="ctrl-row">
+    <button class="btn-play" id="btnPlayAll" onclick="playSequence([1,2,3,4])" data-i18n="btnPlayAll"></button>
+    <button class="btn-pause" id="btnPauseResume" onclick="togglePause()" disabled></button>
+    <button class="btn-stop" onclick="stopAudio()" data-i18n="btnStop"></button>
+  </div>
+  <p class="p-status" id="pStatus"></p>
+</section>
+
+<main>
+
+<!-- CAP 1 -->
+<section class="chapter" id="cap1">
+  <div class="chap-header">
+    <div class="chap-num">01</div>
+    <div>
+      <p class="chap-eyebrow" data-i18n="c1ey"></p>
+      <h2 class="chap-title" data-i18n="c1title"></h2>
+      <p class="chap-sub" data-i18n="c1sub"></p>
+    </div>
+  </div>
+
+  <div class="chap-audio-row">
+    <button class="chap-play-btn" id="chapPlayBtn1" onclick="playSequence([1])" data-i18n="chapPlay"></button>
+    <button class="chap-dl-btn" id="chapDlBtn1" onclick="downloadChapter(1)" data-i18n="chapDl"></button>
+    <span class="chap-audio-status" id="chapStatus1"></span>
+  </div>
+
+  <p class="body-p" data-i18n="c1_o1"></p>
+  <p class="body-p" data-i18n="c1_o2"></p>
+  <p class="body-p" data-i18n="c1_o3"></p>
+  <p class="body-p" data-i18n="c1_o4"></p>
+
+  <p class="subhead" data-i18n="c1sh1"></p>
+  <p class="body-p" data-i18n="c1p1"></p>
+  <ul class="body-list">
+    <li data-i18n="c1l1"></li>
+    <li data-i18n="c1l2"></li>
+  </ul>
+  <p class="body-p" data-i18n="c1p2"></p>
+
+  <p class="subhead" data-i18n="c1sh2"></p>
+  <ul class="body-list">
+    <li data-i18n="c1l3"></li>
+    <li data-i18n="c1l4"></li>
+    <li data-i18n="c1l5"></li>
+    <li data-i18n="c1l6"></li>
+    <li data-i18n="c1l7"></li>
+  </ul>
+
+  <p class="subhead" data-i18n="c1sh3"></p>
+  <p class="body-p" data-i18n="c1p3"></p>
+  <ul class="body-list">
+    <li data-i18n="c1l8"></li>
+    <li data-i18n="c1l9"></li>
+    <li data-i18n="c1l10"></li>
+  </ul>
+</section>
+
+<hr class="sdiv"/>
+
+<!-- CAP 2 -->
+<section class="chapter" id="cap2">
+  <div class="chap-header">
+    <div class="chap-num">02</div>
+    <div>
+      <p class="chap-eyebrow" data-i18n="c2ey"></p>
+      <h2 class="chap-title" data-i18n="c2title"></h2>
+      <p class="chap-sub" data-i18n="c2sub"></p>
+    </div>
+  </div>
+
+  <div class="chap-audio-row">
+    <button class="chap-play-btn" id="chapPlayBtn2" onclick="playSequence([2])" data-i18n="chapPlay"></button>
+    <button class="chap-dl-btn" id="chapDlBtn2" onclick="downloadChapter(2)" data-i18n="chapDl"></button>
+    <span class="chap-audio-status" id="chapStatus2"></span>
+  </div>
+
+  <p class="body-p" data-i18n="c2_o1"></p>
+  <p class="body-p" data-i18n="c2_o2"></p>
+
+  <p class="subhead" data-i18n="c2sh1"></p>
+  <p class="subhead2" data-i18n="c2sh1a"></p>
+  <p class="body-p" data-i18n="c2p1"></p>
+
+  <div class="diagram-wrap">
+    <p class="diagram-label" data-i18n="d1label"></p>
+    <div class="chain-list" id="chainList1"></div>
+  </div>
+
+  <p class="subhead2" data-i18n="c2sh1b"></p>
+  <p class="body-p" data-i18n="c2p2"></p>
+
+  <p class="subhead" data-i18n="c2sh2"></p>
+  <p class="body-p" data-i18n="c2p3"></p>
+  <ul class="body-list">
+    <li data-i18n="c2l1"></li>
+    <li data-i18n="c2l2"></li>
+    <li data-i18n="c2l3"></li>
+  </ul>
+
+  <p class="subhead" data-i18n="c2sh3"></p>
+  <ul class="body-list">
+    <li data-i18n="c2l4"></li>
+    <li data-i18n="c2l5"></li>
+    <li data-i18n="c2l6"></li>
+  </ul>
+
+  <p class="section-tag gear" data-i18n="tagGear"></p>
+  <div class="eq-grid">
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_mm"></p>
+      <h3 class="eq-card-name">Ortofon 2M Black</h3>
+      <p class="eq-card-spec" data-i18n="ortofon2mspec"></p>
+    </div>
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_mc"></p>
+      <h3 class="eq-card-name">Denon DL-103</h3>
+      <p class="eq-card-spec" data-i18n="denonspec"></p>
+    </div>
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_mcRef"></p>
+      <h3 class="eq-card-name">Lyra Atlas Lambda</h3>
+      <p class="eq-card-spec" data-i18n="lyraspec"></p>
+    </div>
+  </div>
+</section>
+
+<hr class="sdiv"/>
+
+<!-- CAP 3 -->
+<section class="chapter" id="cap3">
+  <div class="chap-header">
+    <div class="chap-num">03</div>
+    <div>
+      <p class="chap-eyebrow" data-i18n="c3ey"></p>
+      <h2 class="chap-title" data-i18n="c3title"></h2>
+      <p class="chap-sub" data-i18n="c3sub"></p>
+    </div>
+  </div>
+
+  <div class="chap-audio-row">
+    <button class="chap-play-btn" id="chapPlayBtn3" onclick="playSequence([3])" data-i18n="chapPlay"></button>
+    <button class="chap-dl-btn" id="chapDlBtn3" onclick="downloadChapter(3)" data-i18n="chapDl"></button>
+    <span class="chap-audio-status" id="chapStatus3"></span>
+  </div>
+
+  <p class="body-p" data-i18n="c3_o1"></p>
+  <p class="body-p" data-i18n="c3_o2"></p>
+
+  <p class="subhead" data-i18n="c3sh1"></p>
+  <p class="subhead2" data-i18n="c3sh1a"></p>
+  <p class="body-p" data-i18n="c3p1"></p>
+  <p class="subhead2" data-i18n="c3sh1b"></p>
+  <p class="body-p" data-i18n="c3p2"></p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th data-i18n="th_freq"></th><th data-i18n="th_corte"></th><th data-i18n="th_repro"></th></tr>
+      </thead>
+      <tbody>
+        <tr><td>20 Hz</td><td data-i18n="riaa20c"></td><td data-i18n="riaa20r"></td></tr>
+        <tr><td>100 Hz</td><td>-12 dB</td><td>+12 dB</td></tr>
+        <tr><td>1 kHz</td><td data-i18n="riaa1k"></td><td>0 dB</td></tr>
+        <tr><td>10 kHz</td><td data-i18n="riaa10c"></td><td>-14 dB</td></tr>
+        <tr><td>20 kHz</td><td data-i18n="riaa20kc"></td><td>-20 dB</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="subhead" data-i18n="c3sh2"></p>
+  <ul class="body-list">
+    <li data-i18n="c3l1"></li>
+    <li data-i18n="c3l2"></li>
+    <li data-i18n="c3l3"></li>
+  </ul>
+
+  <p class="subhead" data-i18n="c3sh3"></p>
+  <p class="body-p" data-i18n="c3p3"></p>
+  <ul class="body-list numbered">
+    <li data-i18n="c3l4"></li>
+    <li data-i18n="c3l5"></li>
+  </ul>
+  <p class="body-p" data-i18n="c3p4"></p>
+
+  <div class="callout gold">
+    <p class="callout-label" data-i18n="c3cl_label"></p>
+    <p data-i18n="c3cl"></p>
+  </div>
+
+  <p class="section-tag gear" data-i18n="tagGear"></p>
+  <div class="eq-grid">
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_phonopre"></p>
+      <h3 class="eq-card-name">Pass Labs XP-27</h3>
+      <p class="eq-card-spec" data-i18n="passlabsspec"></p>
+    </div>
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_phonopre"></p>
+      <h3 class="eq-card-name">Graham Slee Era Gold V</h3>
+      <p class="eq-card-spec" data-i18n="grahamspec"></p>
+    </div>
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_stepup"></p>
+      <h3 class="eq-card-name">Jensen JT-44K-DX</h3>
+      <p class="eq-card-spec" data-i18n="jensenspec"></p>
+    </div>
+  </div>
+</section>
+
+<hr class="sdiv"/>
+
+<!-- CAP 4 -->
+<section class="chapter" id="cap4">
+  <div class="chap-header">
+    <div class="chap-num">04</div>
+    <div>
+      <p class="chap-eyebrow" data-i18n="c4ey"></p>
+      <h2 class="chap-title" data-i18n="c4title"></h2>
+      <p class="chap-sub" data-i18n="c4sub"></p>
+    </div>
+  </div>
+
+  <div class="chap-audio-row">
+    <button class="chap-play-btn" id="chapPlayBtn4" onclick="playSequence([4])" data-i18n="chapPlay"></button>
+    <button class="chap-dl-btn" id="chapDlBtn4" onclick="downloadChapter(4)" data-i18n="chapDl"></button>
+    <span class="chap-audio-status" id="chapStatus4"></span>
+  </div>
+
+  <p class="body-p" data-i18n="c4_o1"></p>
+  <p class="body-p" data-i18n="c4_o2"></p>
+  <p class="body-p" data-i18n="c4_o3"></p>
+
+  <div class="diagram-wrap">
+    <p class="diagram-label" data-i18n="d2label"></p>
+    <div class="chain-list" id="chainList2"></div>
+  </div>
+
+  <p class="subhead" data-i18n="c4sh1"></p>
+  <p class="body-p" data-i18n="c4p1"></p>
+  <ul class="body-list">
+    <li data-i18n="c4l1"></li>
+    <li data-i18n="c4l2"></li>
+    <li data-i18n="c4l3"></li>
+    <li data-i18n="c4l4"></li>
+    <li data-i18n="c4l5"></li>
+    <li data-i18n="c4l6"></li>
+  </ul>
+  <p class="body-p" data-i18n="c4p2"></p>
+  <p class="body-p" data-i18n="c4p3"></p>
+  <p class="body-p" data-i18n="c4p4"></p>
+
+  <p class="subhead" data-i18n="c4sh2"></p>
+  <ul class="body-list">
+    <li data-i18n="c4l7"></li>
+    <li data-i18n="c4l8"></li>
+    <li data-i18n="c4l9"></li>
+    <li data-i18n="c4l10"></li>
+    <li data-i18n="c4l11"></li>
+  </ul>
+
+  <p class="section-tag gear" data-i18n="tagGear"></p>
+  <div class="eq-grid">
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="sysRefName"></p>
+      <h3 class="eq-card-name" data-i18n="sysRefTitle"></h3>
+      <p class="eq-card-spec" data-i18n="sysRefSpec"></p>
+    </div>
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="sysHomeName"></p>
+      <h3 class="eq-card-name" data-i18n="sysHomeTitle"></h3>
+      <p class="eq-card-spec" data-i18n="sysHomeSpec"></p>
+    </div>
+  </div>
+</section>
+
+<div class="series-end">
+  <p class="series-end-label" data-i18n="seLabel"></p>
+  <p class="series-end-text" data-i18n="seText"></p>
+</div>
+
+</main>
+
+<div class="vol-footer">
+  <h3 data-i18n="vf_title"></h3>
+  <div class="vol-nav-btns">
+    <a class="nav-btn secondary" href="vol03-masterizacao.html" data-i18n="vf_back"></a>
+  </div>
+</div>
+
+<footer>
+  <span data-i18n="ft_end"></span><br>
+  <strong>Estúdio Plá</strong> &nbsp;&middot;&nbsp; Bauru, São Paulo, Brasil<br>
+  <span style="opacity:.45;font-size:12px">&copy; 2026 Estúdio Plá &middot; Kaue Ferreira Moraes &middot; <span data-i18n="ft_rights"></span></span>
+</footer>
+
+<script>
+var CHAIN1 = {
+pt:[
+  ["Ondulação do Sulco","vibração mecânica"],
+  ["Agulha de Diamante","5–15 µm de raio · transmissão mecânica"],
+  ["Cantilever","haste de alumínio/boro · movimento do ímã"],
+  ["Micro-Ímã + Bobinas de Cobre","indução eletromagnética (Lei de Faraday)"],
+  ["Voltagem Elétrica","~5 mV por canal"]
+],
+en:[
+  ["Groove Undulation","mechanical vibration"],
+  ["Diamond Stylus","5–15 µm radius · mechanical transmission"],
+  ["Cantilever","aluminum/boron rod · magnet movement"],
+  ["Micro-Magnet + Copper Coils","electromagnetic induction (Faraday's Law)"],
+  ["Electrical Voltage","~5 mV per channel"]
+]
+};
+var CHAIN2 = {
+pt:[
+  ["MÚSICO","energia cinética"],
+  ["INSTRUMENTO","pressão acústica"],
+  ["AR DA SALA","variação de pressão"],
+  ["MICROFONE","voltagem ~1 mV"],
+  ["PRÉ-AMPLIFICADOR","voltagem +4 dBu"],
+  ["CONSOLE ANALÓGICO","voltagem processada"],
+  ["GRAVADOR MULTIPISTA (2\")","fluxo magnético na fita"],
+  ["REPRODUÇÃO DA FITA MULTIPISTA","voltagem multicanal"],
+  ["MIXAGEM NO CONSOLE","soma analógica estéreo"],
+  ["GRAVADOR MASTER (½\" a 30 IPS)","fluxo magnético — master tape"],
+  ["MASTERIZAÇÃO","voltagem processada + curva RIAA"],
+  ["TORNO DE CORTE","sulco físico no lacquer"],
+  ["GALVANOPLASTIA","matriz de níquel"],
+  ["PRENSAGEM","disco de vinil — PVC"],
+  ["DISTRIBUIÇÃO","objeto físico nas mãos do ouvinte"],
+  ["TOCA-DISCOS","agulha no sulco"],
+  ["CÁPSULA FONOGRÁFICA","voltagem ~5 mV — Lei de Faraday"],
+  ["PRÉ-AMPLIFICADOR DE PHONO","curva RIAA inversa + ganho"],
+  ["AMPLIFICADOR","corrente elétrica — Watts"],
+  ["ALTO-FALANTES","movimento do cone — pressão acústica"],
+  ["AR DA SALA DE AUDIÇÃO","variação de pressão"],
+  ["TÍMPANO DO OUVINTE","vibração mecânica"],
+  ["CÉREBRO","percepção"],
+  ["EMOÇÃO",""]
+],
+en:[
+  ["MUSICIAN","kinetic energy"],
+  ["INSTRUMENT","acoustic pressure"],
+  ["ROOM AIR","pressure variation"],
+  ["MICROPHONE","voltage ~1 mV"],
+  ["PREAMPLIFIER","voltage +4 dBu"],
+  ["ANALOG CONSOLE","processed voltage"],
+  ["MULTITRACK RECORDER (2\")","magnetic flux on tape"],
+  ["MULTITRACK TAPE PLAYBACK","multichannel voltage"],
+  ["MIXING ON THE CONSOLE","analog stereo sum"],
+  ["MASTER RECORDER (½\" at 30 IPS)","magnetic flux — master tape"],
+  ["MASTERING","processed voltage + RIAA curve"],
+  ["CUTTING LATHE","physical groove in lacquer"],
+  ["ELECTROPLATING","nickel matrix"],
+  ["PRESSING","vinyl record — PVC"],
+  ["DISTRIBUTION","physical object in the listener's hands"],
+  ["TURNTABLE","needle in the groove"],
+  ["PHONO CARTRIDGE","voltage ~5 mV — Faraday's Law"],
+  ["PHONO PREAMPLIFIER","inverse RIAA curve + gain"],
+  ["AMPLIFIER","electrical current — Watts"],
+  ["LOUDSPEAKERS","cone movement — acoustic pressure"],
+  ["LISTENING ROOM AIR","pressure variation"],
+  ["LISTENER'S EARDRUM","mechanical vibration"],
+  ["BRAIN","perception"],
+  ["EMOTION",""]
+]
+};
+
+function renderChainInto(elId, data){
+  var wrap = document.getElementById(elId);
+  wrap.innerHTML = '';
+  data.forEach(function(step, idx){
+    var el = document.createElement('div');
+    el.className = 'chain-step';
+    el.innerHTML = '<div class="stage">'+step[0]+'</div>'+(step[1] ? '<div class="detail">'+step[1]+'</div>' : '');
+    wrap.appendChild(el);
+    if(idx < data.length - 1){
+      var arrow = document.createElement('div');
+      arrow.className = 'chain-arrow';
+      arrow.textContent = '↓';
+      wrap.appendChild(arrow);
+    }
+  });
+}
+function renderChains(l){
+  renderChainInto('chainList1', CHAIN1[l]);
+  renderChainInto('chainList2', CHAIN2[l]);
+}
+
+var T = {
+pt:{
+  navVol1:"Vol. 01", navVol2:"Vol. 02", navVol3:"Vol. 03", navBonus:"Bônus Track",
+  cnav1:"01 — O Desfiladeiro", cnav2:"02 — Sistema Gerador", cnav3:"03 — Curva RIAA", cnav4:"04 — Ciclo Completo",
+  volBadge:"BÔNUS TRACK",
+  h1:"A Alquimia do Sulco<br><em>O Milagre Mecânico</em>",
+  subtitle:"Como uma pedra de diamante riscando plástico ressuscita a voz de quem já não está na sala.",
+  playerTitle:"Sistema de Áudio — Narração Completa por Gemini AI",
+  keyPh:"Cole sua chave Gemini API aqui",
+  keyLink:"&#128273; Obter chave grátis",
+  keyHint:"Sua chave permanece apenas nesta sessão do navegador — nunca é enviada aos nossos servidores.",
+  vMasc:"Voz Masculina", vFem:"Voz Feminina",
+  btnPlayAll:"&#9654; Reproduzir Volume Completo",
+  btnPauseLabel:"&#10074;&#10074; Pausar", btnResumeLabel:"&#9654; Retomar",
+  btnStop:"&#9632; Parar",
+  chapPlay:"&#9654; Ouvir este Capítulo",
+  chapDl:"&#11015; Baixar Áudio (.wav)",
+  tagGear:"Fichas de Equipamento",
+  statusInit:"Insira sua chave, escolha a voz e escolha um capítulo ou o volume completo.",
+  statusGen:"Gerando narração — Capítulo ", statusGenOf:" de ",
+  statusPlay:"&#9654; Reproduzindo — Capítulo ",
+  statusDone:"&#10004; Reprodução concluída.", statusDoneAll:"&#10004; Volume completo reproduzido.",
+  statusPaused:"&#10074;&#10074; Pausado.", statusStop:"&#9632; Parado.",
+  statusNoKey:"&#9888; Cole sua chave Gemini no campo acima.",
+  statusErr:"&#9888; Erro: ",
+  statusDownloading:"Preparando download do Capítulo ",
+  statusDownloaded:"&#10004; Áudio do Capítulo ", statusDownloadedEnd:" baixado.",
+  c1ey:"Anatomia do Sulco", c1title:"O Desfiladeiro Microscópico",
+  c1sub:"Se você pudesse encolher até o tamanho de um grão de poeira e se sentar na ponta de uma agulha.",
+  c1_o1:"Depois que a fita master de meia polegada entregou seu último sopro de voltagem e o torno de corte calou sua lâmina de diamante, o processo deixa de ser elétrico. Ele se torna <strong>escultura macrofísica</strong>.",
+  c1_o2:"O que repousa no prato do toca-discos não é um software esperando para ser lido. É um desfiladeiro microscópico de PVC onde a música foi literalmente petrificada.",
+  c1_o3:"Se você pudesse encolher até o tamanho de um grão de poeira e se sentar na ponta de uma agulha de toca-discos, você veria que o sulco do vinil não é uma linha reta. É um cânion sinuoso, cavado em ângulo perfeito de noventa graus — uma parede esquerda e uma parede direita, cada uma inclinada a quarenta e cinco graus em relação ao plano do disco.",
+  c1_o4:"E as paredes desse cânion não são lisas. Elas ondulam. Cada ondulação é uma nota. Cada curva é um instante de música congelado em plástico, esperando que uma pedra de diamante o desperte.",
+  c1sh1:"O Sistema 45/45 — Estereofonia num Único Sulco",
+  c1p1:"A genialidade do padrão estereofônico 45/45 está em como uma única linha contínua carrega duas informações espaciais completamente independentes:",
+  c1l1:"<strong>Parede interna</strong> (mais próxima do centro do disco): Canal Esquerdo (L)",
+  c1l2:"<strong>Parede externa</strong> (mais próxima da borda do disco): Canal Direito (R)",
+  c1p2:"Cada parede está inclinada a 45° em relação ao plano horizontal do disco. A agulha não corre simplesmente para frente — ela é jogada lateralmente e verticalmente ao mesmo tempo, respondendo simultaneamente às modulações das duas paredes.",
+  c1sh2:"As Dimensões do Sulco",
+  c1l3:"Largura típica do sulco: 25–300 µm (dependendo da amplitude do sinal)",
+  c1l4:"Profundidade típica: 25–100 µm",
+  c1l5:"Distância entre sulcos: 150–300 µm (pitch)",
+  c1l6:"Velocidade da agulha na borda do disco (33⅓ RPM, 30 cm de diâmetro): ~50 cm/s",
+  c1l7:"Velocidade da agulha perto do centro (33⅓ RPM, 10 cm de diâmetro): ~17 cm/s",
+  c1sh3:"A Consequência da Velocidade Decrescente",
+  c1p3:"À medida que a agulha se aproxima do centro do disco, a velocidade linear cai — e com ela, a capacidade de rastrear altas frequências com precisão. É por isso que:",
+  c1l8:"As faixas mais exigentes em termos de alta frequência ficam no início da face (borda externa)",
+  c1l9:"A última faixa de cada face é geralmente a mais tranquila ou mais simples",
+  c1l10:"O engenheiro de masterização pode precisar reduzir levemente os agudos nas faixas do centro",
+  c2ey:"A Pedra Que Canta", c2title:"O Sistema Gerador",
+  c2sub:"Como uma ponta de diamante vibrando transfere o relevo do plástico para a corrente elétrica.",
+  c2_o1:"Uma pedra riscando plástico não deveria fazer música. Em nenhum universo racional isso faz sentido. E no entanto, é exatamente isso que acontece toda vez que você coloca um disco para tocar.",
+  c2_o2:"A agulha — uma ponta lapidada de diamante ou safira com raio de apenas cinco a quinze micrômetros — percorre o cânion do sulco a velocidades absurdas. E ao percorrê-lo, ela vibra. E essa vibração, por um mecanismo de engenharia elegantíssimo, se torna corrente elétrica. O fantasma da música está vivo novamente na fiação.",
+  c2sh1:"A Cápsula Fonográfica — Dois Sistemas Principais",
+  c2sh1a:"1. Ímã Móvel (MM — Moving Magnet)",
+  c2p1:"O sistema mais comum. A agulha está fixada numa haste metálica ultrafina chamada <strong>cantilever</strong> (geralmente alumínio, boro ou berílio). Na extremidade interna do cantilever, dentro do corpo da cápsula, há um micro-ímã.",
+  d1label:"CADEIA DE TRANSDUÇÃO — SISTEMA MM",
+  c2sh1b:"2. Bobina Móvel (MC — Moving Coil)",
+  c2p2:"Em vez do ímã mover dentro de bobinas fixas, são as bobinas que se movem dentro de um campo magnético fixo. As bobinas são muito menores e mais leves que o ímã — resultado: resposta de transiente superior, menor distorção de rastreamento, sinal de saída muito mais baixo (~0,2–0,5 mV). Exige pré-amplificador de phono especializado (step-up transformer ou pré MC).",
+  c2sh2:"O Cantilever — A Física da Haste",
+  c2p3:"A haste que conecta a agulha ao sistema gerador é um dos componentes mais críticos da cápsula:",
+  c2l1:"<strong>Alumínio:</strong> econômico, leve, suave — o padrão das cápsulas de entrada e médio nível",
+  c2l2:"<strong>Boro:</strong> extremamente rígido e leve, transmite transientes com precisão cirúrgica — padrão audiófilo",
+  c2l3:"<strong>Berílio:</strong> o mais rígido e leve de todos, virtualmente sem ressonância própria — cápsulas de referência absoluta (raro e caro)",
+  c2sh3:"A Forma da Ponta da Agulha",
+  c2l4:"<strong>Esférica:</strong> raio único ~15 µm, rastreia bem até ~12 kHz, mais tolerante com sulcos desgastados",
+  c2l5:"<strong>Elíptica:</strong> dois raios diferentes (vertical menor, horizontal maior), rastreia até ~20 kHz com menos distorção",
+  c2l6:"<strong>Shibata/Line Contact:</strong> perfil complexo que imita a forma da lâmina de corte do torno, rastreia perfeitamente até 50 kHz",
+  eq_mm:"Cápsula MM", eq_mc:"Cápsula MC", eq_mcRef:"Cápsula MC de Referência",
+  ortofon2mspec:"<strong>Ponta:</strong> Diamante Shibata lapidado · <strong>Cantilever:</strong> Alumínio · <strong>Saída:</strong> 5 mV · A cápsula Moving Magnet de referência para audiófilos. Resposta de frequência: 20 Hz–50 kHz.",
+  denonspec:"<strong>Ponta:</strong> Diamante esférica · <strong>Cantilever:</strong> Alumínio · <strong>Saída:</strong> 0,3 mV · A cápsula de bobina móvel mais longeva da história — produzida desde 1963. Custo-benefício lendário.",
+  lyraspec:"<strong>Ponta:</strong> Diamante Line Contact · <strong>Cantilever:</strong> Berílio · <strong>Saída:</strong> 0,56 mV · O topo absoluto da transdução fonográfica analógica. Montagem manual por Yoshinori Mishima.",
+  c3ey:"O Espelho Invertido", c3title:"A Curva RIAA",
+  c3sub:"A equalização que viajou na fita e precisa ser desfeita no toca-discos para o som voltar ao original.",
+  c3_o1:"Existe uma conspiração elegante entre o torno de corte e o toca-discos. Uma equalização que é aplicada na gravação e desfeita na reprodução — um espelho que se completa apenas quando as duas metades se encontram.",
+  c3_o2:"Se você ligasse a saída do toca-discos diretamente num amplificador, sem o pré-amplificador de phono, o som seria irreconhecível: sem graves, com agudos insuportáveis, fino como papel. Porque a música no sulco não está no seu espectro original. Ela foi propositalmente distorcida antes de ser gravada — e o pré-amplificador de phono é o desfazer dessa distorção.",
+  c3sh1:"Por Que a Curva RIAA Existe",
+  c3sh1a:"Problema 1 — Os Graves Ocupam Espaço Demais",
+  c3p1:"Frequências graves têm comprimentos de onda longos e carregam muita energia. Gravar um bumbo com nível linear em 60 Hz produziria um sulco tão largo e profundo que um disco de trinta centímetros teria espaço para apenas dois ou três minutos de música por face. Solução: atenuar drasticamente os graves antes do corte.",
+  c3sh1b:"Problema 2 — Os Agudos Se Perdem no Ruído do Plástico",
+  c3p2:"O PVC do disco tem um ruído de superfície natural (chiado). Frequências agudas com nível linear ficam enterradas nesse ruído. Solução: amplificar drasticamente os agudos antes do corte — eles ficam bem acima do ruído.",
+  th_freq:"Frequência", th_corte:"Na Gravação (Torno)", th_repro:"Na Reprodução (Phono)",
+  riaa20c:"-17 dB (muito atenuado)", riaa20r:"+17 dB (recuperado)",
+  riaa1k:"0 dB (referência)",
+  riaa10c:"+14 dB (amplificado)",
+  riaa20kc:"+20 dB (muito amplificado)",
+  c3sh2:"As Frequências de Quebra da Curva RIAA",
+  c3l1:"50 Hz (3.180 µs) — início da atenuação de graves",
+  c3l2:"500 Hz (318 µs) — região de transição",
+  c3l3:"2.122 Hz (75 µs) — início da amplificação de agudos",
+  c3sh3:"O Pré-Amplificador de Phono",
+  c3p3:"O circuito que aplica a curva RIAA inversa na reprodução. Dois estágios:",
+  c3l4:"<strong>Ganho:</strong> amplifica o sinal fraco da cápsula (~5 mV MM ou ~0,3 mV MC) para nível de linha (+4 dBu)",
+  c3l5:"<strong>Equalização:</strong> aplica a curva RIAA inversa, reconstituindo o espectro original",
+  c3p4:"Para cápsulas MC de baixo output, adiciona-se um estágio de step-up (transformador ou amplificador de baixo ruído) antes da equalização.",
+  c3cl_label:"O Efeito Colateral Genial",
+  c3cl:"Ao atenuar os graves na gravação, o ruído de superfície do PVC é reproduzido com graves atenuados — e ao amplificá-los na reprodução, o ruído de graves é amplificado junto. Mas como o ruído de superfície é predominantemente nos agudos, e os agudos são atenuados na reprodução, o resultado líquido é um disco com ruído de superfície muito menor do que seria sem a curva RIAA.",
+  eq_phonopre:"Pré-Amplificador de Phono", eq_stepup:"Transformador Step-Up",
+  passlabsspec:"<strong>Tipo:</strong> MC e MM · <strong>Ganho MC:</strong> 76 dB · <strong>Ganho MM:</strong> 52 dB · O pré-amplificador de phono de referência absoluta. Precisão da curva RIAA: ±0,1 dB de 20 Hz a 20 kHz.",
+  grahamspec:"<strong>Tipo:</strong> MM · <strong>Ganho:</strong> 40 dB · O melhor custo-benefício em pré-amplificação de phono de alta fidelidade. Precisão RIAA dentro de ±0,5 dB.",
+  jensenspec:"<strong>Tipo:</strong> Transformador para MC · <strong>Relação:</strong> 1:10 ou 1:20 · O transformador step-up de referência para cápsulas MC de baixo output. Fabricado manualmente nos EUA.",
+  c4ey:"O Milagre Final", c4title:"O Ciclo Completo",
+  c4sub:"Da pressão acústica ao vinil e de volta à pressão acústica — a jornada da matéria que se torna música.",
+  c4_o1:"Você chegou até aqui. Atravessou os microfones, os transformadores, as fitas magnéticas, os consoles de cobre e ferro, os tornos de corte de diamante. E agora estamos no momento mais simples e mais mágico de todos.",
+  c4_o2:"Uma pessoa coloca um disco num toca-discos. Abaixa a agulha. E a música começa.",
+  c4_o3:"O que acontece nesses segundos entre a agulha tocar o vinil e o som sair dos alto-falantes é a síntese de tudo que você aprendeu neste manual. É física. É química. É engenharia. E é algo que nenhuma equação ainda explica completamente — porque no fim, a experiência de ouvir música vai além da física de qualquer cadeia de transdução.",
+  d2label:"O CICLO COMPLETO — A JORNADA DA MATÉRIA",
+  c4sh1:"O Que É Perdido — e O Que É Ganho",
+  c4p1:"Nenhuma cadeia de transdução é perfeita. Em cada etapa, algo é alterado:",
+  c4l1:"O microfone não capta exatamente o que os ouvidos humanos ouvem na sala",
+  c4l2:"O pré-amplificador adiciona sua coloração harmônica",
+  c4l3:"A fita magnética comprime e satura de formas específicas",
+  c4l4:"O sulco do vinil limita a extensão de frequência e a dinâmica",
+  c4l5:"A agulha introduz distorção de rastreamento",
+  c4l6:"O pré-amplificador de phono tem sua curva RIAA com tolerâncias reais",
+  c4p2:"E no entanto — depois de todas essas imperfeições — a experiência de ouvir música num sistema analógico bem calibrado tem uma qualidade de presença, de vida, de dimensão que sistemas digitalmente perfeitos ainda lutam para replicar.",
+  c4p3:"A explicação pode estar exatamente nessas imperfeições. A saturação harmônica da fita adiciona overtones que tornam o som mais rico. A distorção de rastreamento da agulha introduz harmônicos que o ouvido interpreta como 'air' e presença. O head bump do gravador em 15 IPS adiciona peso nos graves que o sistema nervoso humano percebe como conforto físico.",
+  c4p4:"A cadeia analógica não é transparente. Ela é musical. E essa distinção é a essência de tudo que você aprendeu neste manual.",
+  c4sh2:"O Legado",
+  c4l7:"Os discos de vinil mais antigos ainda em circulação têm mais de noventa anos",
+  c4l8:"Um disco de vinil bem armazenado pode durar séculos sem degradação perceptível",
+  c4l9:"As fitas magnéticas têm vida útil de cinquenta a cem anos com armazenamento adequado",
+  c4l10:"Os arquivos digitais dependem de mídias que se tornam obsoletas em décadas",
+  c4l11:"A física do sulco e da agulha é a mesma desde 1877 (Thomas Edison) e 1925 (eletrificação)",
+  sysRefName:"Sistema de Referência — Estúdio de Masterização",
+  sysRefTitle:"Sistema de Reprodução de Referência",
+  sysRefSpec:"<strong>Toca-discos:</strong> Technics SP-10 Mk III (acionamento direto)<br><strong>Braço:</strong> SME 3012 Series II (12&quot;)<br><strong>Cápsula:</strong> Ortofon MC Anna (ponta Replicant 100)<br><strong>Phono Preamp:</strong> Connoisseur 4.2 SE<br><strong>Amplificador:</strong> Krell Master Reference<br><strong>Alto-falantes:</strong> B&amp;W 801 D4",
+  sysHomeName:"Sistema Doméstico de Alta Performance",
+  sysHomeTitle:"Sistema de Reprodução Doméstico",
+  sysHomeSpec:"<strong>Toca-discos:</strong> Pro-Ject Debut Carbon Evo<br><strong>Braço:</strong> Carbon com anti-skating ajustável<br><strong>Cápsula:</strong> Ortofon 2M Bronze<br><strong>Phono Preamp:</strong> Pro-Ject Phono Box S3<br><strong>Amplificador:</strong> Cambridge Audio CXA81<br><strong>Alto-falantes:</strong> KEF LS50 Meta",
+  seLabel:"Mensagem Final",
+  seText:"Você chegou ao fim do Manual Definitivo de Gravação, Mixagem e Masterização Analógica. Do microfone ao sulco do vinil — a física completa de uma era que moldou o som do século XX.",
+  vf_title:"Fim da Série",
+  vf_back:"&#8592; Volume 03 — A Masterização",
+  ft_end:"Fim da série.",
+  ft_title:"Manual Definitivo de Gravação, Mixagem e Masterização Analógica — Bônus Track",
+  ft_rights:"Todos os direitos reservados",
+  narration:{
+    1:"Capítulo Um. O Desfiladeiro Microscópico. Depois que o torno de corte calou sua lâmina de diamante, o processo deixa de ser elétrico. Ele se torna escultura macrofísica. O sulco do vinil não é uma linha reta. É um cânion sinuoso, cavado em ângulo de noventa graus — duas paredes inclinadas a quarenta e cinco graus cada, uma para o canal esquerdo, uma para o canal direito. As paredes não são lisas. Elas ondulam. Cada ondulação é uma nota. Cada curva é um instante de música congelado em plástico. A largura do sulco varia entre vinte e cinco e trezentos micrômetros dependendo da amplitude do sinal. A agulha percorre esse desfiladeiro a cinquenta centímetros por segundo na borda do disco — e essa velocidade cai progressivamente à medida que se aproxima do centro, o que impõe limitações reais ao rastreamento de altas frequências nas últimas faixas de cada face. O vinil não armazena dados. Ele armazena o próprio movimento do som, petrificado em plástico.",
+    2:"Capítulo Dois. O Sistema Gerador. Uma pedra riscando plástico não deveria fazer música. E no entanto, é exatamente isso que acontece. A agulha — uma ponta de diamante com raio de cinco a quinze micrômetros — percorre o sulco vibrando com cada ondulação das paredes. Essa vibração é transmitida para uma haste metálica ultrafina chamada cantilever. Na extremidade interna do cantilever, num sistema de ímã móvel, há um micro-ímã oscilando entre duas bobinas de cobre. O movimento do campo magnético força os elétrons do cobre a se moverem — e surge a voltagem elétrica. É a Lei de Indução de Faraday convertendo relevo mecânico em corrente elétrica. Em sistemas de bobina móvel, são as bobinas que se movem no campo fixo — menores, mais leves, com resposta de transiente superior e sinal de saída muito mais baixo, exigindo pré-amplificação especializada. A forma da ponta define o que ela consegue ler: esférica para uso geral, elíptica para alta fidelidade, Shibata para rastrear os sulcos mais exigentes do analógico moderno. O fantasma da música está vivo novamente na fiação.",
+    3:"Capítulo Três. A Curva RIAA. Existe uma conspiração elegante entre o torno de corte e o toca-discos: uma equalização aplicada na gravação e desfeita na reprodução. O vinil tem dois problemas físicos fundamentais. Os graves têm comprimentos de onda longos e carregam tanta energia que gravar um bumbo em nível linear produziria sulcos tão largos que um disco teria apenas dois ou três minutos de música por face. E os agudos em nível linear ficariam enterrados no ruído natural do PVC. A solução criada pela Recording Industry Association of America em mil novecentos e cinquenta e quatro é o espelho perfeito: atenuar os graves e amplificar os agudos no corte, e fazer exatamente o inverso na reprodução. A vinte hertz, o sinal é atenuado dezessete decibéis no corte e amplificado dezessete decibéis no toca-discos. A vinte mil hertz, o sinal é amplificado vinte decibéis no corte e atenuado vinte decibéis na reprodução. O efeito líquido é um disco com sulcos compactos, agudos acima do ruído de superfície, e um espectro perfeitamente reconstituído pelo pré-amplificador de phono. É a física completando seu próprio ciclo.",
+    4:"Capítulo Quatro. O Ciclo Completo. Uma pessoa coloca um disco num toca-discos. Abaixa a agulha. A música começa. O que acontece nesses segundos é a síntese de tudo que você aprendeu neste manual. A voltagem de cinco milivolts gerada pela cápsula fonográfica atravessa o pré-amplificador de phono, que aplica a curva RIAA inversa e amplifica o sinal ao nível de linha. O amplificador converte essa voltagem em corrente elétrica com potência suficiente para mover o cone do alto-falante. O cone move o ar. E o ar, vibrando na frequência exata que foi gravada décadas atrás, bate no tímpano do ouvinte. A energia que saiu dos pulmões de um cantor, atravessou microfones e transformadores, se tornou fluxo magnético numa fita de rolo, foi esculpida num sulco de PVC, e agora é pressão acústica novamente — exatamente como começou. Nenhuma cadeia de transdução é perfeita. A fita satura. A agulha distorce o rastreamento. O vinil limita a dinâmica. E no entanto, depois de todas essas imperfeições, a experiência de ouvir música num sistema analógico bem calibrado tem uma qualidade de presença e de vida que sistemas digitalmente perfeitos ainda lutam para replicar. Talvez exatamente porque essas imperfeições são musicais. Porque a saturação harmônica da fita adiciona riqueza. Porque o head bump nos graves adiciona peso físico. Porque a cadeia analógica não é transparente. Ela é musical. E essa é a essência de tudo."
+  }
+},
+en:{
+  navVol1:"Vol. 01", navVol2:"Vol. 02", navVol3:"Vol. 03", navBonus:"Bonus Track",
+  cnav1:"01 — The Canyon", cnav2:"02 — Generator System", cnav3:"03 — RIAA Curve", cnav4:"04 — Complete Cycle",
+  volBadge:"BONUS TRACK",
+  h1:"The Groove Alchemy<br><em>The Mechanical Miracle</em>",
+  subtitle:"How a diamond stone scratching plastic resurrects the voice of someone no longer in the room.",
+  playerTitle:"Audio System — Full Narration by Gemini AI",
+  keyPh:"Paste your Gemini API key here",
+  keyLink:"&#128273; Get free key",
+  keyHint:"Your key stays in this browser session only — it is never sent to our servers.",
+  vMasc:"Male Voice", vFem:"Female Voice",
+  btnPlayAll:"&#9654; Play Full Volume",
+  btnPauseLabel:"&#10074;&#10074; Pause", btnResumeLabel:"&#9654; Resume",
+  btnStop:"&#9632; Stop",
+  chapPlay:"&#9654; Listen to this Chapter",
+  chapDl:"&#11015; Download Audio (.wav)",
+  tagGear:"Equipment Spec Sheets",
+  statusInit:"Enter your Gemini key, choose a voice, and pick a chapter or the full volume.",
+  statusGen:"Generating narration — Chapter ", statusGenOf:" of ",
+  statusPlay:"&#9654; Playing — Chapter ",
+  statusDone:"&#10004; Playback complete.", statusDoneAll:"&#10004; Full volume playback complete.",
+  statusPaused:"&#10074;&#10074; Paused.", statusStop:"&#9632; Stopped.",
+  statusNoKey:"&#9888; Paste your Gemini key in the field above.",
+  statusErr:"&#9888; Error: ",
+  statusDownloading:"Preparing download for Chapter ",
+  statusDownloaded:"&#10004; Chapter ", statusDownloadedEnd:" audio downloaded.",
+  c1ey:"Anatomy of the Groove", c1title:"The Microscopic Canyon",
+  c1sub:"If you could shrink down to the size of a dust particle and sit on the tip of a needle.",
+  c1_o1:"After the half-inch master tape delivered its last breath of voltage and the cutting lathe silenced its diamond blade, the process stops being electrical. It becomes <strong>macrophysical sculpture</strong>.",
+  c1_o2:"What rests on the turntable platter is not software waiting to be read. It is a microscopic canyon of PVC where the music has been literally petrified.",
+  c1_o3:"If you could shrink down to the size of a dust particle and sit on the tip of a turntable needle, you'd see that the vinyl groove isn't a straight line. It's a sinuous canyon, cut at a perfect ninety-degree angle — a left wall and a right wall, each inclined forty-five degrees relative to the plane of the record.",
+  c1_o4:"And the walls of that canyon aren't smooth. They undulate. Each undulation is a note. Each curve is an instant of music frozen in plastic, waiting for a diamond stone to awaken it.",
+  c1sh1:"The 45/45 System — Stereo in a Single Groove",
+  c1p1:"The genius of the 45/45 stereophonic standard lies in how a single continuous line carries two completely independent spatial pieces of information:",
+  c1l1:"<strong>Inner wall</strong> (closer to the center of the record): Left Channel (L)",
+  c1l2:"<strong>Outer wall</strong> (closer to the edge of the record): Right Channel (R)",
+  c1p2:"Each wall is inclined at 45° relative to the horizontal plane of the record. The needle doesn't simply run forward — it's thrown sideways and vertically at the same time, responding simultaneously to the modulations of both walls.",
+  c1sh2:"The Dimensions of the Groove",
+  c1l3:"Typical groove width: 25–300 µm (depending on signal amplitude)",
+  c1l4:"Typical depth: 25–100 µm",
+  c1l5:"Distance between grooves: 150–300 µm (pitch)",
+  c1l6:"Needle speed at the edge of the record (33⅓ RPM, 30 cm diameter): ~50 cm/s",
+  c1l7:"Needle speed near the center (33⅓ RPM, 10 cm diameter): ~17 cm/s",
+  c1sh3:"The Consequence of Decreasing Speed",
+  c1p3:"As the needle approaches the center of the record, linear speed drops — and with it, the ability to track high frequencies with precision. That's why:",
+  c1l8:"The tracks most demanding in high frequency tend to be placed at the beginning of the side (outer edge)",
+  c1l9:"The last track on each side is usually the calmest or simplest",
+  c1l10:"The mastering engineer may need to slightly reduce the highs on tracks near the center",
+  c2ey:"The Singing Stone", c2title:"The Generator System",
+  c2sub:"How a vibrating diamond tip transfers the relief of plastic into electrical current.",
+  c2_o1:"A stone scratching plastic shouldn't make music. In no rational universe does that make sense. And yet, that's exactly what happens every time you put on a record.",
+  c2_o2:"The needle — a lapped diamond or sapphire tip with a radius of only five to fifteen micrometers — travels the canyon of the groove at absurd speeds. And as it travels, it vibrates. And that vibration, through an exceptionally elegant piece of engineering, becomes electrical current. The ghost of the music is alive again in the wiring.",
+  c2sh1:"The Phono Cartridge — Two Main Systems",
+  c2sh1a:"1. Moving Magnet (MM)",
+  c2p1:"The most common system. The needle is fixed to an ultrathin metal rod called a <strong>cantilever</strong> (usually aluminum, boron, or beryllium). At the inner end of the cantilever, inside the cartridge body, there's a tiny magnet.",
+  d1label:"TRANSDUCTION CHAIN — MM SYSTEM",
+  c2sh1b:"2. Moving Coil (MC)",
+  c2p2:"Instead of the magnet moving within fixed coils, it's the coils that move within a fixed magnetic field. The coils are much smaller and lighter than the magnet — the result: superior transient response, lower tracking distortion, much lower output signal (~0.2–0.5 mV). Requires a specialized phono preamplifier (step-up transformer or MC preamp).",
+  c2sh2:"The Cantilever — The Physics of the Rod",
+  c2p3:"The rod connecting the needle to the generator system is one of the cartridge's most critical components:",
+  c2l1:"<strong>Aluminum:</strong> economical, light, smooth — the standard for entry-level and mid-tier cartridges",
+  c2l2:"<strong>Boron:</strong> extremely rigid and light, transmits transients with surgical precision — the audiophile standard",
+  c2l3:"<strong>Beryllium:</strong> the stiffest and lightest of all, virtually free of self-resonance — absolute reference cartridges (rare and expensive)",
+  c2sh3:"The Shape of the Stylus Tip",
+  c2l4:"<strong>Spherical:</strong> single radius ~15 µm, tracks well up to ~12 kHz, more tolerant of worn grooves",
+  c2l5:"<strong>Elliptical:</strong> two different radii (smaller vertical, larger horizontal), tracks up to ~20 kHz with less distortion",
+  c2l6:"<strong>Shibata/Line Contact:</strong> a complex profile that mimics the shape of the lathe's cutting blade, tracks perfectly up to 50 kHz",
+  eq_mm:"MM Cartridge", eq_mc:"MC Cartridge", eq_mcRef:"Reference MC Cartridge",
+  ortofon2mspec:"<strong>Stylus:</strong> Lapped Shibata diamond · <strong>Cantilever:</strong> Aluminum · <strong>Output:</strong> 5 mV · The reference Moving Magnet cartridge for audiophiles. Frequency response: 20 Hz–50 kHz.",
+  denonspec:"<strong>Stylus:</strong> Spherical diamond · <strong>Cantilever:</strong> Aluminum · <strong>Output:</strong> 0.3 mV · The longest-running moving coil cartridge in history — produced since 1963. Legendary value for money.",
+  lyraspec:"<strong>Stylus:</strong> Line Contact diamond · <strong>Cantilever:</strong> Beryllium · <strong>Output:</strong> 0.56 mV · The absolute pinnacle of analog phonographic transduction. Hand-assembled by Yoshinori Mishima.",
+  c3ey:"The Inverted Mirror", c3title:"The RIAA Curve",
+  c3sub:"The equalization that traveled on tape and must be undone on the turntable for the sound to return to its original form.",
+  c3_o1:"There's an elegant conspiracy between the cutting lathe and the turntable. An equalization that's applied during recording and undone during playback — a mirror that only completes itself when the two halves meet.",
+  c3_o2:"If you connected the turntable's output directly to an amplifier, without the phono preamplifier, the sound would be unrecognizable: no bass, unbearable highs, thin as paper. Because the music in the groove isn't in its original spectrum. It was deliberately distorted before being recorded — and the phono preamplifier is the undoing of that distortion.",
+  c3sh1:"Why the RIAA Curve Exists",
+  c3sh1a:"Problem 1 — Bass Takes Up Too Much Space",
+  c3p1:"Low frequencies have long wavelengths and carry a lot of energy. Recording a kick drum at linear level at 60 Hz would produce a groove so wide and deep that a twelve-inch record would only have room for two or three minutes of music per side. Solution: drastically attenuate the bass before cutting.",
+  c3sh1b:"Problem 2 — Highs Get Lost in the Plastic's Noise",
+  c3p2:"The record's PVC has a natural surface noise (hiss). High frequencies at linear level get buried in that noise. Solution: drastically boost the highs before cutting — they end up well above the noise.",
+  th_freq:"Frequency", th_corte:"At the Cut (Lathe)", th_repro:"At Playback (Phono)",
+  riaa20c:"-17 dB (heavily attenuated)", riaa20r:"+17 dB (restored)",
+  riaa1k:"0 dB (reference)",
+  riaa10c:"+14 dB (boosted)",
+  riaa20kc:"+20 dB (heavily boosted)",
+  c3sh2:"The Break Frequencies of the RIAA Curve",
+  c3l1:"50 Hz (3,180 µs) — start of bass attenuation",
+  c3l2:"500 Hz (318 µs) — transition region",
+  c3l3:"2,122 Hz (75 µs) — start of treble boost",
+  c3sh3:"The Phono Preamplifier",
+  c3p3:"The circuit that applies the inverse RIAA curve on playback. Two stages:",
+  c3l4:"<strong>Gain:</strong> amplifies the cartridge's weak signal (~5 mV MM or ~0.3 mV MC) to line level (+4 dBu)",
+  c3l5:"<strong>Equalization:</strong> applies the inverse RIAA curve, reconstituting the original spectrum",
+  c3p4:"For low-output MC cartridges, a step-up stage (transformer or low-noise amplifier) is added before equalization.",
+  c3cl_label:"The Brilliant Side Effect",
+  c3cl:"By attenuating the bass during recording, the PVC's surface noise is captured with attenuated bass — and when it's boosted on playback, the bass-region noise gets boosted along with it. But since surface noise is predominantly in the treble, and the treble is attenuated on playback, the net result is a record with far less surface noise than it would have without the RIAA curve.",
+  eq_phonopre:"Phono Preamplifier", eq_stepup:"Step-Up Transformer",
+  passlabsspec:"<strong>Type:</strong> MC and MM · <strong>MC Gain:</strong> 76 dB · <strong>MM Gain:</strong> 52 dB · The absolute reference phono preamplifier. RIAA curve accuracy: ±0.1 dB from 20 Hz to 20 kHz.",
+  grahamspec:"<strong>Type:</strong> MM · <strong>Gain:</strong> 40 dB · The best value in high-fidelity phono preamplification. RIAA accuracy within ±0.5 dB.",
+  jensenspec:"<strong>Type:</strong> Transformer for MC · <strong>Ratio:</strong> 1:10 or 1:20 · The reference step-up transformer for low-output MC cartridges. Hand-built in the USA.",
+  c4ey:"The Final Miracle", c4title:"The Complete Cycle",
+  c4sub:"From acoustic pressure to vinyl and back to acoustic pressure — the journey of matter becoming music.",
+  c4_o1:"You made it this far. You crossed through microphones, transformers, magnetic tapes, consoles of copper and iron, diamond cutting lathes. And now we're at the simplest and most magical moment of all.",
+  c4_o2:"A person places a record on a turntable. Lowers the needle. And the music begins.",
+  c4_o3:"What happens in those seconds between the needle touching the vinyl and the sound coming out of the speakers is the synthesis of everything you've learned in this manual. It's physics. It's chemistry. It's engineering. And it's something no equation has fully explained yet — because in the end, the experience of listening to music goes beyond the physics of any transduction chain.",
+  d2label:"THE COMPLETE CYCLE — THE JOURNEY OF MATTER",
+  c4sh1:"What Is Lost — and What Is Gained",
+  c4p1:"No transduction chain is perfect. At every stage, something is altered:",
+  c4l1:"The microphone doesn't capture exactly what human ears hear in the room",
+  c4l2:"The preamplifier adds its own harmonic coloration",
+  c4l3:"Magnetic tape compresses and saturates in specific ways",
+  c4l4:"The vinyl groove limits frequency extension and dynamic range",
+  c4l5:"The needle introduces tracking distortion",
+  c4l6:"The phono preamplifier's RIAA curve has real-world tolerances",
+  c4p2:"And yet — after all these imperfections — the experience of listening to music on a well-calibrated analog system has a quality of presence, of life, of dimension that digitally perfect systems still struggle to replicate.",
+  c4p3:"The explanation may lie exactly in those imperfections. The tape's harmonic saturation adds overtones that make the sound richer. The needle's tracking distortion introduces harmonics that the ear interprets as 'air' and presence. The recorder's head bump at 15 IPS adds low-end weight that the human nervous system perceives as physical comfort.",
+  c4p4:"The analog chain is not transparent. It is musical. And that distinction is the essence of everything you've learned in this manual.",
+  c4sh2:"The Legacy",
+  c4l7:"The oldest vinyl records still in circulation are over ninety years old",
+  c4l8:"A well-stored vinyl record can last centuries without perceptible degradation",
+  c4l9:"Magnetic tapes have a lifespan of fifty to one hundred years with proper storage",
+  c4l10:"Digital files depend on media that become obsolete within decades",
+  c4l11:"The physics of the groove and the needle has remained the same since 1877 (Thomas Edison) and 1925 (electrification)",
+  sysRefName:"Reference System — Mastering Studio",
+  sysRefTitle:"Reference Playback System",
+  sysRefSpec:"<strong>Turntable:</strong> Technics SP-10 Mk III (direct drive)<br><strong>Tonearm:</strong> SME 3012 Series II (12&quot;)<br><strong>Cartridge:</strong> Ortofon MC Anna (Replicant 100 stylus)<br><strong>Phono Preamp:</strong> Connoisseur 4.2 SE<br><strong>Amplifier:</strong> Krell Master Reference<br><strong>Loudspeakers:</strong> B&amp;W 801 D4",
+  sysHomeName:"High-Performance Home System",
+  sysHomeTitle:"Home Playback System",
+  sysHomeSpec:"<strong>Turntable:</strong> Pro-Ject Debut Carbon Evo<br><strong>Tonearm:</strong> Carbon with adjustable anti-skating<br><strong>Cartridge:</strong> Ortofon 2M Bronze<br><strong>Phono Preamp:</strong> Pro-Ject Phono Box S3<br><strong>Amplifier:</strong> Cambridge Audio CXA81<br><strong>Loudspeakers:</strong> KEF LS50 Meta",
+  seLabel:"Final Message",
+  seText:"You have reached the end of the Definitive Manual of Analog Recording, Mixing and Mastering. From microphone to vinyl groove — the complete physics of an era that shaped the sound of the twentieth century.",
+  vf_title:"End of the Series",
+  vf_back:"&#8592; Volume 03 — Mastering",
+  ft_end:"End of the series.",
+  ft_title:"Definitive Manual of Analog Recording, Mixing and Mastering — Bonus Track",
+  ft_rights:"All rights reserved",
+  narration:{
+    1:"Chapter One. The Microscopic Canyon. After the cutting lathe silenced its diamond stylus, the process ceases to be electrical. It becomes macroscopic sculpture. The vinyl groove is not a straight line. It is a sinuous canyon, cut at a ninety-degree angle — two walls inclined at forty-five degrees each, one for the left channel, one for the right. The walls are not smooth. They undulate. Each undulation is a note. Each curve is an instant of music frozen in plastic. The groove width varies between twenty-five and three hundred micrometers depending on the amplitude of the signal. The needle travels this canyon at fifty centimeters per second at the edge of the record — and that speed decreases progressively toward the center, imposing real limitations on high-frequency tracking in the last tracks of each side. Vinyl does not store data. It stores the very movement of sound, petrified in plastic.",
+    2:"Chapter Two. The Generator System. A stone scratching plastic should not make music. And yet, this is exactly what happens. The needle — a diamond tip with a radius of five to fifteen micrometers — travels the groove vibrating with every undulation of the walls. That vibration is transmitted to an ultrathin metal rod called a cantilever. At the inner end of the cantilever, in a moving magnet system, a tiny magnet oscillates between two copper coils. The movement of the magnetic field forces the electrons in the copper to move — and electrical voltage appears. This is Faraday's Law of Induction converting mechanical relief into electrical current. In moving coil systems, it is the coils that move in a fixed field — smaller, lighter, with superior transient response and much lower output signal, requiring specialized preamplification. The shape of the stylus tip defines what it can read: spherical for general use, elliptical for high fidelity, Shibata for tracking the most demanding grooves of modern analog. The ghost of the music is alive again in the wiring.",
+    3:"Chapter Three. The RIAA Curve. There is an elegant conspiracy between the cutting lathe and the turntable: an equalization applied in recording and undone in playback. Vinyl has two fundamental physical problems. Low frequencies have long wavelengths and carry so much energy that recording a kick drum at linear level would produce grooves so wide that a record would have only two or three minutes of music per side. And high frequencies at linear level would be buried in the natural noise of the PVC. The solution created by the Recording Industry Association of America in 1954 is the perfect mirror: attenuate the lows and amplify the highs in the cut, and do exactly the reverse in playback. At twenty hertz, the signal is attenuated seventeen decibels in the cut and amplified seventeen decibels in the turntable. At twenty thousand hertz, the signal is amplified twenty decibels in the cut and attenuated twenty decibels in playback. The net effect is a record with compact grooves, highs above the surface noise, and a spectrum perfectly reconstituted by the phono preamplifier. It is physics completing its own cycle.",
+    4:"Chapter Four. The Complete Cycle. A person places a record on a turntable. Lowers the needle. The music begins. What happens in those seconds is the synthesis of everything you have learned in this manual. The five-millivolt voltage generated by the phono cartridge passes through the phono preamplifier, which applies the inverse RIAA curve and amplifies the signal to line level. The amplifier converts that voltage into electrical current with enough power to move the speaker cone. The cone moves the air. And the air, vibrating at the exact frequency that was recorded decades ago, strikes the listener's eardrum. The energy that left a singer's lungs, crossed microphones and transformers, became magnetic flux in a reel of tape, was sculpted into a groove of PVC, and is now acoustic pressure again — exactly as it began. No transduction chain is perfect. The tape saturates. The needle introduces tracking distortion. The vinyl limits dynamics. And yet, after all these imperfections, the experience of hearing music in a well-calibrated analog system has a quality of presence and life that digitally perfect systems still struggle to replicate. Perhaps precisely because these imperfections are musical. Because the harmonic saturation of the tape adds richness. Because the head bump in the bass adds physical weight. Because the analog chain is not transparent. It is musical. And that is the essence of everything."
+  }
+}
+};
+
+var lang = 'pt';
+var voiceName = 'Charon';
+
+function setLang(l){
+  lang = l;
+  document.getElementById('htmlRoot').lang = l === 'pt' ? 'pt-BR' : 'en-US';
+  document.getElementById('btnPT').classList.toggle('active', l === 'pt');
+  document.getElementById('btnEN').classList.toggle('active', l === 'en');
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var k = el.getAttribute('data-i18n');
+    if(T[l][k] !== undefined) el.innerHTML = T[l][k];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(function(el){
+    var k = el.getAttribute('data-i18n-ph');
+    if(T[l][k] !== undefined) el.placeholder = T[l][k];
+  });
+  renderChains(l);
+  if(!isPlaying){ setStatus(T[lang].statusInit); }
+  updatePauseBtn();
+}
+
+function toggleKey(){ var i = document.getElementById('apiKey'); i.type = i.type==='password'?'text':'password'; }
+function setVoice(t){
+  voiceName = t==='masc'?'Charon':'Kore';
+  document.getElementById('btnM').classList.toggle('active',t==='masc');
+  document.getElementById('btnF').classList.toggle('active',t==='fem');
+  if(isPlaying) stopAudio();
+}
+
+(function(){
+  var vu = document.getElementById('vu');
+  var bars = [
+    {mn:'10px',mx:'46px',d:'.55s',c:'#3A9FEF'},{mn:'18px',mx:'44px',d:'.70s',c:'#D4A83A'},
+    {mn:'8px',mx:'48px',d:'.45s',c:'#3A9FEF'},{mn:'22px',mx:'40px',d:'.85s',c:'#D4A83A'},
+    {mn:'12px',mx:'48px',d:'.60s',c:'#3A9FEF'},{mn:'16px',mx:'36px',d:'.50s',c:'#D4A83A'},
+    {mn:'6px',mx:'46px',d:'.40s',c:'#3A9FEF'},{mn:'20px',mx:'42px',d:'.75s',c:'#3A9FEF'},
+    {mn:'14px',mx:'46px',d:'.65s',c:'#D4A83A'},{mn:'10px',mx:'38px',d:'.55s',c:'#3A9FEF'},
+    {mn:'24px',mx:'48px',d:'.80s',c:'#D4A83A'},{mn:'8px',mx:'44px',d:'.48s',c:'#3A9FEF'}
+  ];
+  bars.forEach(function(b){
+    var el = document.createElement('div');
+    el.className = 'vu-bar';
+    el.style.setProperty('--mn',b.mn);
+    el.style.setProperty('--mx',b.mx);
+    el.style.setProperty('--d',b.d);
+    el.style.background = b.c;
+    el.style.height = b.mn;
+    vu.appendChild(el);
+  });
+})();
+
+var sessionId = 0;
+var stopSignal = null;
+var pauseGate = null;
+var audioCtx = null;
+var currentSource = null;
+var isPlaying = false;
+var isPaused = false;
+var audioCache = {};
+
+function setStatus(msg, spin){
+  var el = document.getElementById('pStatus');
+  el.innerHTML = spin ? '<span class="spinner"></span>' + msg : msg;
+}
+function setChapStatus(ch, msg){
+  var el = document.getElementById('chapStatus'+ch);
+  if(el) el.textContent = msg;
+}
+function clearChapStatuses(){
+  for(var i=1;i<=4;i++) setChapStatus(i,'');
+}
+function highlightChapter(ch){
+  for(var i=1;i<=4;i++){
+    var btn = document.getElementById('chapPlayBtn'+i);
+    if(btn) btn.classList.toggle('playing', i===ch);
+  }
+}
+function updatePauseBtn(){
+  var btn = document.getElementById('btnPauseResume');
+  btn.disabled = !isPlaying;
+  btn.innerHTML = isPaused ? T[lang].btnResumeLabel : T[lang].btnPauseLabel;
+}
+function setPlayingUI(playing){
+  isPlaying = playing;
+  document.getElementById('btnPlayAll').disabled = playing;
+  for(var i=1;i<=4;i++){
+    var pb = document.getElementById('chapPlayBtn'+i);
+    var db = document.getElementById('chapDlBtn'+i);
+    if(pb) pb.disabled = playing;
+    if(db) db.disabled = playing;
+  }
+  updatePauseBtn();
+  if(!playing) highlightChapter(null);
+}
+
+function makeDeferred(){
+  var resolveFn, rejectFn;
+  var p = new Promise(function(resolve, reject){ resolveFn = resolve; rejectFn = reject; });
+  p.catch(function(){});
+  return { promise:p, resolve:resolveFn, reject:rejectFn };
+}
+
+function resetPlaybackState(){
+  sessionId++;
+  if(stopSignal){ try{ stopSignal.reject(new Error('stopped')); }catch(e){} }
+  if(pauseGate){ try{ pauseGate.resolve(); }catch(e){} }
+  if(currentSource){ try{ currentSource.stop(); }catch(e){} }
+  if(audioCtx){ try{ audioCtx.close(); }catch(e){} }
+  audioCtx = null; currentSource = null;
+  stopSignal = null; pauseGate = null;
+  isPaused = false;
+  setPlayingUI(false);
+}
+
+function stopAudio(){
+  resetPlaybackState();
+  setStatus(T[lang].statusStop);
+  clearChapStatuses();
+}
+
+function togglePause(){
+  if(!isPlaying) return;
+  if(!isPaused){
+    isPaused = true;
+    if(audioCtx) audioCtx.suspend();
+    pauseGate = makeDeferred();
+    setStatus(T[lang].statusPaused);
+  } else {
+    isPaused = false;
+    if(audioCtx) audioCtx.resume();
+    if(pauseGate){ pauseGate.resolve(); pauseGate = null; }
+  }
+  updatePauseBtn();
+}
+
+function fetchChapterAudio(ch, key){
+  var text = T[lang].narration[ch];
+  return fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key='+encodeURIComponent(key),{
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      contents:[{parts:[{text:text}]}],
+      generationConfig:{responseModalities:['AUDIO'],speechConfig:{voiceConfig:{prebuiltVoiceConfig:{voiceName:voiceName}}}}
+    })
+  }).then(function(r){ return r.json(); }).then(function(d){
+    if(d.error) throw new Error(d.error.message);
+    var part = d.candidates[0].content.parts[0];
+    var mime = part.inlineData.mimeType || 'audio/L16;rate=24000';
+    var rm = mime.match(/rate=(\d+)/);
+    var rate = rm ? parseInt(rm[1],10) : 24000;
+    return { b64: part.inlineData.data, rate: rate, voice: voiceName };
+  });
+}
+
+function playBuffer(bufData, mySession, ch){
+  return new Promise(function(resolve, reject){
+    try{
+      var bin = atob(bufData.b64), raw = new Uint8Array(bin.length);
+      for(var i=0;i<bin.length;i++) raw[i] = bin.charCodeAt(i);
+      if(audioCtx){ try{ audioCtx.close(); }catch(e){} }
+      audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+      var i16 = new Int16Array(raw.buffer), f32 = new Float32Array(i16.length);
+      for(var j=0;j<i16.length;j++) f32[j] = i16[j]/32768;
+      var ab = audioCtx.createBuffer(1, f32.length, bufData.rate);
+      ab.getChannelData(0).set(f32);
+      currentSource = audioCtx.createBufferSource();
+      currentSource.buffer = ab;
+      currentSource.connect(audioCtx.destination);
+      currentSource.onended = function(){ if(mySession === sessionId) resolve(); };
+      highlightChapter(ch);
+      currentSource.start();
+    }catch(e){ reject(e); }
+  });
+}
+
+async function playSequence(chapters){
+  var key = document.getElementById('apiKey').value.trim();
+  if(!key){ setStatus(T[lang].statusNoKey); return; }
+  resetPlaybackState();
+  var mySession = sessionId;
+  stopSignal = makeDeferred();
+  setPlayingUI(true);
+  clearChapStatuses();
+  try{
+    for(var i=0;i<chapters.length;i++){
+      if(mySession !== sessionId) return;
+      if(isPaused && pauseGate) await Promise.race([pauseGate.promise, stopSignal.promise]);
+      if(mySession !== sessionId) return;
+
+      var ch = chapters[i];
+      setStatus(T[lang].statusGen + ch + T[lang].statusGenOf + '4 — ' + voiceName + '...', true);
+      setChapStatus(ch, T[lang].statusGen + ch + '...');
+
+      var buf = await Promise.race([fetchChapterAudio(ch, key), stopSignal.promise]);
+      if(mySession !== sessionId) return;
+      audioCache[ch] = buf;
+
+      setStatus(T[lang].statusPlay + ch + ' · ' + voiceName);
+      setChapStatus(ch, T[lang].statusPlay + ch);
+
+      await Promise.race([playBuffer(buf, mySession, ch), stopSignal.promise]);
+      if(mySession !== sessionId) return;
+      setChapStatus(ch, T[lang].statusDone);
+    }
+    if(mySession === sessionId){
+      setStatus(chapters.length > 1 ? T[lang].statusDoneAll : T[lang].statusDone);
+    }
+  }catch(e){
+    if(mySession === sessionId){ setStatus(T[lang].statusErr + e.message); }
+  }finally{
+    if(mySession === sessionId) setPlayingUI(false);
+  }
+}
+
+function pcmBase64ToWavBlob(b64, sampleRate){
+  var bin = atob(b64), len = bin.length;
+  var pcm = new Uint8Array(len);
+  for(var i=0;i<len;i++) pcm[i] = bin.charCodeAt(i);
+  var blockAlign = 2, byteRate = sampleRate*blockAlign;
+  var buffer = new ArrayBuffer(44 + pcm.length);
+  var view = new DataView(buffer);
+  function writeStr(offset,str){ for(var i=0;i<str.length;i++) view.setUint8(offset+i, str.charCodeAt(i)); }
+  writeStr(0,'RIFF'); view.setUint32(4, 36+pcm.length, true); writeStr(8,'WAVE');
+  writeStr(12,'fmt '); view.setUint32(16,16,true); view.setUint16(20,1,true); view.setUint16(22,1,true);
+  view.setUint32(24,sampleRate,true); view.setUint32(28,byteRate,true); view.setUint16(32,blockAlign,true); view.setUint16(34,16,true);
+  writeStr(36,'data'); view.setUint32(40,pcm.length,true);
+  new Uint8Array(buffer,44).set(pcm);
+  return new Blob([buffer], {type:'audio/wav'});
+}
+
+function triggerDownload(blob, filename){
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+}
+
+async function downloadChapter(ch){
+  var key = document.getElementById('apiKey').value.trim();
+  if(!key){ setStatus(T[lang].statusNoKey); return; }
+  var dlBtn = document.getElementById('chapDlBtn'+ch);
+  try{
+    var buf = audioCache[ch];
+    if(!buf || buf.voice !== voiceName){
+      dlBtn.disabled = true;
+      setChapStatus(ch, T[lang].statusDownloading + ch + '...');
+      setStatus(T[lang].statusDownloading + ch + '...', true);
+      buf = await fetchChapterAudio(ch, key);
+      audioCache[ch] = buf;
+    }
+    var blob = pcmBase64ToWavBlob(buf.b64, buf.rate);
+    triggerDownload(blob, 'bonus-capitulo0'+ch+'-'+buf.voice.toLowerCase()+'.wav');
+    setChapStatus(ch, T[lang].statusDownloaded + ch + T[lang].statusDownloadedEnd);
+    setStatus(T[lang].statusDownloaded + ch + T[lang].statusDownloadedEnd);
+  }catch(e){
+    setStatus(T[lang].statusErr + e.message);
+    setChapStatus(ch, '');
+  }finally{
+    dlBtn.disabled = isPlaying;
+  }
+}
+
+setLang('pt');
+</script>
+</body>
+</html>

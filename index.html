@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="pt-BR" id="htmlRoot">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manual Definitivo — Gravação, Mixagem & Masterização Analógica · PLA v0.1 · Estúdio Plá</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+
+    :root {
+      --bg:        #060F1C;
+      --bg-card:   #0C1D31;
+      --bg-card2:  #0F2440;
+      --blue:      #1A6FBF;
+      --blue-lt:   #3A9FEF;
+      --blue-glow: rgba(58,159,239,0.18);
+      --gold:      #D4A83A;
+      --gold-lt:   #F0C84A;
+      --txt:       #EAF2FF;
+      --txt2:      #7EADD4;
+      --border:    #1C3A58;
+      --div:       rgba(58,159,239,0.22);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--txt);
+      font-family: 'Manrope', system-ui, sans-serif;
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    /* ── LANG TOGGLE ───────────────────────── */
+    .lang-toggle {
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      z-index: 999;
+      display: flex;
+      gap: 0;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    .lang-btn {
+      background: var(--bg-card);
+      border: none;
+      color: var(--txt2);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 9px 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .lang-btn.active {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .lang-btn:hover:not(.active) {
+      background: var(--bg-card2);
+      color: var(--txt);
+    }
+
+    /* ── VU HEADER ─────────────────────────── */
+    header {
+      position: relative;
+      overflow: hidden;
+      padding: 64px 40px 52px;
+      text-align: center;
+      border-bottom: 1px solid var(--div);
+      background: linear-gradient(180deg, #071828 0%, var(--bg) 100%);
+    }
+
+    /* ── Rolos v3.1 ── */
+    .vu-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 32px;
+      filter: drop-shadow(0 0 28px rgba(58,159,239,0.12));
+    }
+    #spool-L {
+      transform-origin: 100px 100px;
+      animation: ccw 2.8s linear infinite;
+      animation-play-state: running;
+    }
+    #spool-R {
+      transform-origin: 300px 100px;
+      animation: ccw 2.1s linear infinite;
+      animation-play-state: running;
+    }
+    @keyframes ccw {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(-360deg); }
+    }
+    .ebtn { cursor: pointer; }
+    .ebtn:hover rect, .ebtn:hover circle, .ebtn:hover polygon {
+      filter: brightness(2.2);
+    }
+    @keyframes vu-idle {
+      0%,100% { transform: rotate(-36deg); }
+      50%      { transform: rotate(-28deg); }
+    }
+    .needle-idle {
+      animation: vu-idle 1.8s ease-in-out infinite;
+      transform-origin: 50px 43px;
+    }
+
+    /* ── TIPOGRAFIA ─────────────────────────────────── */
+    .eyebrow {
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-family: 'Lora', Georgia, serif;
+      font-size: clamp(30px, 5vw, 62px);
+      font-weight: 700;
+      line-height: 1.15;
+      color: #FFF;
+      margin-bottom: 18px;
+    }
+
+    h1 em { color: var(--blue-lt); font-style: normal; }
+
+    .subtitle {
+      font-family: 'Manrope', sans-serif;
+      font-size: clamp(15px, 1.8vw, 19px);
+      font-weight: 400;
+      color: var(--txt2);
+      max-width: 620px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+
+    .badges {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .badge {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 8px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--txt2);
+    }
+
+    /* ── PLAYER ────────────────────────────── */
+    .player {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--div);
+      padding: 44px 40px;
+      text-align: center;
+    }
+
+    .player-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+    }
+
+    .key-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .key-input-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .key-input {
+      width: 100%;
+      background: var(--bg);
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 13px 50px 13px 18px;
+      font-size: 16px;
+      color: var(--txt);
+      outline: none;
+      font-family: monospace;
+      letter-spacing: 1px;
+      transition: border-color 0.2s;
+    }
+
+    .key-input:focus { border-color: var(--blue-lt); }
+    .key-input::placeholder { color: var(--txt2); font-family: 'Inter', sans-serif; letter-spacing: 0; }
+
+    .key-toggle {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--txt2);
+      cursor: pointer;
+      font-size: 18px;
+      padding: 0;
+      line-height: 1;
+    }
+
+    .ai-studio-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--blue-lt);
+      font-size: 14px;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 10px 18px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .ai-studio-link:hover { border-color: var(--blue-lt); background: var(--blue-glow); }
+
+    .key-hint {
+      font-size: 13px;
+      color: var(--txt2);
+      margin-bottom: 28px;
+    }
+
+    .voice-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+
+    .voice-btn {
+      background: transparent;
+      border: 2px solid var(--border);
+      border-radius: 40px;
+      padding: 12px 30px;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--txt2);
+      cursor: pointer;
+      transition: all 0.22s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .voice-btn:hover { border-color: var(--blue-lt); color: var(--txt); }
+
+    .voice-btn.active {
+      background: var(--blue);
+      border-color: var(--blue-lt);
+      color: #fff;
+      box-shadow: 0 0 22px var(--blue-glow);
+    }
+
+    .voice-sub { font-size: 12px; opacity: 0.7; font-weight: 400; }
+
+    .ctrl-row {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-play {
+      background: var(--gold);
+      color: #060F1C;
+      border: none;
+      border-radius: 40px;
+      padding: 14px 42px;
+      font-size: 17px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.22s;
+    }
+
+    .btn-play:hover { background: var(--gold-lt); transform: scale(1.03); }
+    .btn-play:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    .btn-stop {
+      background: transparent;
+      color: var(--txt2);
+      border: 2px solid var(--border);
+      border-radius: 40px;
+      padding: 14px 30px;
+      font-size: 17px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.22s;
+    }
+
+    .btn-stop:hover { border-color: var(--txt2); color: var(--txt); }
+
+    .player-status {
+      margin-top: 16px;
+      font-size: 14px;
+      color: var(--txt2);
+      min-height: 22px;
+      font-style: italic;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 14px; height: 14px;
+      border: 2px solid var(--txt2);
+      border-top-color: var(--blue-lt);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── MAIN ──────────────────────────────── */
+    main { max-width: 860px; margin: 0 auto; padding: 64px 32px 80px; }
+
+    .block { margin-bottom: 60px; }
+
+    .blk-label {
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+
+    .block h2 {
+      font-family: 'Lora', Georgia, serif;
+      font-size: clamp(26px, 3.5vw, 40px);
+      font-weight: 700;
+      color: #FFF;
+      line-height: 1.2;
+      margin-bottom: 22px;
+    }
+
+    .block p {
+      font-family: 'Manrope', sans-serif;
+      font-size: clamp(16px, 1.6vw, 18px);
+      font-weight: 400;
+      color: var(--txt);
+      line-height: 1.85;
+      margin-bottom: 18px;
+    }
+
+    /* Citação — centralizada, sem borda lateral */
+    .quote-bar {
+      text-align: center;
+      padding: 32px 40px;
+      background: var(--bg-card2);
+      border-radius: 12px;
+      border: 1px solid rgba(58,159,239,0.18);
+      margin: 36px auto;
+      max-width: 680px;
+      font-family: 'Lora', Georgia, serif;
+      font-size: clamp(18px, 2vw, 22px);
+      font-weight: 600;
+      font-style: normal;
+      color: var(--txt);
+      line-height: 1.65;
+    }
+
+    .quote-bar::before {
+      content: '\201C';
+      display: block;
+      font-size: 48px;
+      line-height: 1;
+      color: var(--blue-lt);
+      opacity: 0.5;
+      margin-bottom: 8px;
+      font-family: 'Lora', Georgia, serif;
+    }
+
+    hr.div { border: none; border-top: 1px solid var(--div); margin: 0; }
+
+    .vol-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 18px;
+      margin-top: 14px;
+    }
+
+    .vol-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--blue-lt);
+      border-radius: 0 0 12px 12px;
+      padding: 26px 22px;
+      transition: box-shadow 0.2s;
+    }
+
+    .vol-card:hover { box-shadow: 0 0 28px var(--blue-glow); }
+    .vol-card.bonus { border-top-color: var(--gold); }
+
+    .vol-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--blue-lt);
+      margin-bottom: 8px;
+    }
+
+    .vol-card.bonus .vol-num { color: var(--gold); }
+
+    .vol-card h3 {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #FFF;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .vol-card p {
+      font-size: 15px !important;
+      color: var(--txt2) !important;
+      line-height: 1.6 !important;
+      margin: 0 !important;
+    }
+
+    .feat-list { list-style: none; display: grid; gap: 14px; margin-top: 14px; }
+
+    .feat-list li {
+      display: flex;
+      gap: 16px;
+      font-family: 'Manrope', sans-serif;
+      font-size: clamp(15px, 1.5vw, 17px);
+      font-weight: 400;
+      line-height: 1.55;
+    }
+
+    .feat-ico { color: var(--blue-lt); font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+
+    .cta-block {
+      background: linear-gradient(135deg, var(--bg-card2), #091E3A);
+      border: 1px solid var(--blue);
+      border-radius: 16px;
+      padding: 52px 40px;
+      text-align: center;
+      box-shadow: 0 0 56px rgba(26,111,191,0.14);
+    }
+
+    .cta-block h2 {
+      font-family: 'Lora', Georgia, serif;
+      font-size: clamp(24px, 3.5vw, 40px);
+      font-weight: 700;
+      color: #FFF;
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+
+    .cta-block p {
+      font-family: 'Manrope', sans-serif;
+      font-size: clamp(15px, 1.5vw, 18px);
+      font-weight: 400;
+      color: var(--txt2);
+      max-width: 520px;
+      margin: 0 auto 34px;
+      line-height: 1.75;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: var(--blue-lt);
+      color: #060F1C;
+      font-weight: 800;
+      font-size: 18px;
+      padding: 17px 50px;
+      border-radius: 48px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.22s;
+    }
+
+    .cta-btn:hover { background: #FFF; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(58,159,239,0.38); }
+
+    .cta-note { margin-top: 16px; font-size: 14px; color: var(--txt2); }
+
+    footer {
+      text-align: center;
+      padding: 28px 40px;
+      font-size: 13px;
+      color: var(--txt2);
+      border-top: 1px solid var(--div);
+    }
+
+    footer strong { color: var(--blue-lt); }
+
+    @media (max-width: 600px) {
+      header, .player { padding: 44px 20px 36px; }
+      main { padding: 44px 20px 64px; }
+      .cta-block { padding: 36px 20px; }
+      .key-row { flex-direction: column; align-items: stretch; }
+      .ai-studio-link { justify-content: center; }
+      .lang-toggle { top: 12px; right: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LANGUAGE TOGGLE -->
+<div class="lang-toggle">
+  <button class="lang-btn active" id="btnPT" onclick="setLang('pt')">PT</button>
+  <button class="lang-btn" id="btnEN" onclick="setLang('en')">EN</button>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="vu-wrap">
+<svg id="main-svg" width="400" height="240" viewBox="0 0 400 240">
+<defs>
+  <!-- Metálico hub -->
+  <radialGradient id="gHubL" cx="38%" cy="30%" r="75%">
+    <stop offset="0%"   stop-color="#d0e8f8"/>
+    <stop offset="40%"  stop-color="#5a90b8"/>
+    <stop offset="75%"  stop-color="#12283e"/>
+    <stop offset="100%" stop-color="#060f1c"/>
+  </radialGradient>
+  <radialGradient id="gHubR" cx="38%" cy="30%" r="75%">
+    <stop offset="0%"   stop-color="#d0e8f8"/>
+    <stop offset="40%"  stop-color="#5a90b8"/>
+    <stop offset="75%"  stop-color="#12283e"/>
+    <stop offset="100%" stop-color="#060f1c"/>
+  </radialGradient>
+  <!-- Aro externo -->
+  <radialGradient id="gRim" cx="34%" cy="27%" r="78%">
+    <stop offset="0%"   stop-color="#ddeefa"/>
+    <stop offset="28%"  stop-color="#7aaac8"/>
+    <stop offset="65%"  stop-color="#162840"/>
+    <stop offset="100%" stop-color="#060f1c"/>
+  </radialGradient>
+  <!-- Ouro -->
+  <radialGradient id="gGold" cx="40%" cy="33%" r="65%">
+    <stop offset="0%"   stop-color="#fff2b0"/>
+    <stop offset="48%"  stop-color="#D4A83A"/>
+    <stop offset="100%" stop-color="#5a3e08"/>
+  </radialGradient>
+  <!-- Backlit VU -->
+  <radialGradient id="gVU" cx="50%" cy="60%" r="65%">
+    <stop offset="0%"  stop-color="#fdf0c0"/>
+    <stop offset="70%" stop-color="#c4a040"/>
+    <stop offset="100%" stop-color="#6a5010"/>
+  </radialGradient>
+  <!-- Fita -->
+  <linearGradient id="gTape" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%"  stop-color="#2e1600"/>
+    <stop offset="50%" stop-color="#4a2808"/>
+    <stop offset="100%" stop-color="#201000"/>
+  </linearGradient>
+  <!-- Filtros -->
+  <filter id="fGlow" x="-40%" y="-40%" width="180%" height="180%">
+    <feGaussianBlur stdDeviation="2.5" result="b"/>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <filter id="fRed" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur stdDeviation="4" result="b"/>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+</defs>
+
+<!-- ══ FITA ENTRE OS SPOOLS ══ -->
+<path d="M 168 76 C 186 68 214 68 232 76"
+  fill="none" stroke="url(#gTape)" stroke-width="5.5" stroke-linecap="round"/>
+<path d="M 168 75 C 186 67 214 67 232 75"
+  fill="none" stroke="#6a3810" stroke-width="1.2" opacity="0.55" stroke-linecap="round"/>
+<path d="M 168 124 C 186 132 214 132 232 124"
+  fill="none" stroke="url(#gTape)" stroke-width="5.5" stroke-linecap="round"/>
+
+<!-- Guia-fita (pinch rollers) -->
+<circle cx="168" cy="76"  r="4.5" fill="#0c1c2e" stroke="#3A9FEF" stroke-width="0.9"/>
+<circle cx="232" cy="76"  r="4.5" fill="#0c1c2e" stroke="#3A9FEF" stroke-width="0.9"/>
+<circle cx="168" cy="124" r="4.5" fill="#0c1c2e" stroke="#3A9FEF" stroke-width="0.9"/>
+<circle cx="232" cy="124" r="4.5" fill="#0c1c2e" stroke="#3A9FEF" stroke-width="0.9"/>
+
+<!-- ══ CABEÇOTE + EASTER EGG ══ -->
+<g filter="url(#fGlow)">
+  <!-- Corpo -->
+  <rect x="189" y="74" width="22" height="52" rx="3.5"
+    fill="#060f1c" stroke="#1A6FBF" stroke-width="1.3"/>
+
+  <!-- BOTÃO STOP — discretíssimo -->
+  <g class="ebtn" id="btn-stop">
+    <rect x="192" y="78" width="16" height="9" rx="1.5"
+      fill="#0a1828" stroke="#1a3a5a" stroke-width="0.7"/>
+    <rect x="197" y="80.5" width="5.5" height="4" rx="0.5"
+      fill="#1a3a5a" id="i-stop"/>
+  </g>
+
+  <!-- BOTÃO PLAY — triângulo sutil -->
+  <g class="ebtn" id="btn-play">
+    <rect x="192" y="90" width="16" height="11" rx="1.5"
+      fill="#0a1828" stroke="#1a3a5a" stroke-width="0.7" id="bg-play"/>
+    <polygon points="197,92.5 197,99.5 204,96"
+      fill="#2a5880" id="i-play"/>
+  </g>
+
+  <!-- BOTÃO REC — ponto vermelho quase escondido -->
+  <g class="ebtn" id="btn-rec">
+    <rect x="192" y="104" width="16" height="9" rx="1.5"
+      fill="#0a1828" stroke="#1a3a5a" stroke-width="0.7" id="bg-rec"/>
+    <circle cx="200" cy="108.5" r="2.2"
+      fill="#5a1010" id="i-rec"/>
+  </g>
+</g>
+
+<!-- LED de gravação — entre os VUs, apagado por padrão -->
+<circle cx="200" cy="160" r="3.5"
+  fill="#180404" stroke="#300808" stroke-width="0.8" id="rec-led"/>
+
+<!-- ══ SPOOL ESQUERDO ══
+     Furação estilo símbolo de radioatividade:
+     3 pás simétricas (arcos de coroa) com espaços abertos.
+     r_inner=20, r_outer=60, pás de 60° centradas em 270°, 30°, 150°.
+     O arco interno vai no sentido CW (sweep=1),
+     o externo CCW (sweep=0).
+-->
+<g id="spool-L">
+  <!-- Aro externo metalizado -->
+  <circle cx="100" cy="100" r="68" fill="url(#gRim)"/>
+  <!-- Anel de fita (zona escura onde a fita se enrola) -->
+  <circle cx="100" cy="100" r="62" fill="#030a14"/>
+  <!-- Brilho aro -->
+  <circle cx="100" cy="100" r="66" fill="none"
+    stroke="#7aaac8" stroke-width="1" opacity="0.35"/>
+
+  <!-- ── 3 PÁS DE RADIOATIVIDADE (spool L, cx=100 cy=100) ──
+       Pá 1: 240°→300° (aponta para cima)
+         A=240°: (100+20cos240, 100+20sin240) = (90, 82.68)
+         B=300°: (100+20cos300, 100+20sin300) = (110, 82.68)
+         C=300°: (100+60cos300, 100+60sin300) = (130, 48.04)
+         D=240°: (100+60cos240, 100+60sin240) = (70, 48.04)
+       Pá 2: 0°→60° (aponta baixo-direita)
+         A=0°:  (120, 100)   B=60°:  (110, 117.32)
+         C=60°: (130, 151.96) D=0°:  (160, 100)
+       Pá 3: 120°→180° (aponta baixo-esquerda)
+         A=120°: (90, 117.32)  B=180°: (80, 100)
+         C=180°: (40, 100)     D=120°: (70, 151.96)
+  -->
+  <path d="M 90 82.68
+           A 20 20 0 0 1 110 82.68
+           L 130 48.04
+           A 60 60 0 0 0 70 48.04 Z"
+    fill="#0d1e32" stroke="#1a3a5a" stroke-width="0.8"/>
+
+  <path d="M 120 100
+           A 20 20 0 0 1 110 117.32
+           L 130 151.96
+           A 60 60 0 0 0 160 100 Z"
+    fill="#0d1e32" stroke="#1a3a5a" stroke-width="0.8"/>
+
+  <path d="M 90 117.32
+           A 20 20 0 0 1 80 100
+           L 40 100
+           A 60 60 0 0 0 70 151.96 Z"
+    fill="#0d1e32" stroke="#1a3a5a" stroke-width="0.8"/>
+
+  <!-- Brilho sutil nas bordas das pás -->
+  <path d="M 90 82.68 A 20 20 0 0 1 110 82.68"
+    fill="none" stroke="#3a6898" stroke-width="1" opacity="0.5"/>
+  <path d="M 120 100 A 20 20 0 0 1 110 117.32"
+    fill="none" stroke="#3a6898" stroke-width="1" opacity="0.5"/>
+  <path d="M 90 117.32 A 20 20 0 0 1 80 100"
+    fill="none" stroke="#3a6898" stroke-width="1" opacity="0.5"/>
+
+  <!-- Hub central metálico -->
+  <circle cx="100" cy="100" r="22" fill="url(#gHubL)"/>
+  <circle cx="100" cy="100" r="20" fill="none" stroke="#5a90b8" stroke-width="1" opacity="0.5"/>
+  <circle cx="100" cy="100" r="15" fill="#060f1c" opacity="0.85"/>
+  <circle cx="100" cy="100" r="13" fill="url(#gHubL)" opacity="0.6"/>
+
+  <!-- 3 marcas do trava-eixo (triangulinho dourado) -->
+  <polygon points="100,83 103,89 97,89" fill="#D4A83A" opacity="0.9"/>
+  <polygon points="113.5,108 107.5,105 110.5,99" fill="#D4A83A" opacity="0.9"/>
+  <polygon points="86.5,108 92.5,105 89.5,99" fill="#D4A83A" opacity="0.9"/>
+
+  <!-- Centro dourado -->
+  <circle cx="100" cy="100" r="8" fill="url(#gGold)" filter="url(#fGlow)"/>
+  <circle cx="100" cy="100" r="3.5" fill="#030a14"/>
+</g>
+
+<!-- ══ SPOOL DIREITO (cx=300 cy=100, mesma geometria) ══ -->
+<g id="spool-R">
+  <circle cx="300" cy="100" r="68" fill="url(#gRim)"/>
+  <!-- Fita acumulada no takeup -->
+  <circle cx="300" cy="100" r="62" fill="#1c0900"/>
+  <circle cx="300" cy="100" r="52" fill="#150700"/>
+  <circle cx="300" cy="100" r="42" fill="#0e0400"/>
+  <circle cx="300" cy="100" r="66" fill="none"
+    stroke="#7aaac8" stroke-width="1" opacity="0.3"/>
+
+  <!-- Pás de radioatividade (cx=300) -->
+  <path d="M 290 82.68
+           A 20 20 0 0 1 310 82.68
+           L 330 48.04
+           A 60 60 0 0 0 270 48.04 Z"
+    fill="#0d1e32" stroke="#1a3a5a" stroke-width="0.8"/>
+
+  <path d="M 320 100
+           A 20 20 0 0 1 310 117.32
+           L 330 151.96
+           A 60 60 0 0 0 360 100 Z"
+    fill="#0d1e32" stroke="#1a3a5a" stroke-width="0.8"/>
+
+  <path d="M 290 117.32
+           A 20 20 0 0 1 280 100
+           L 240 100
+           A 60 60 0 0 0 270 151.96 Z"
+    fill="#0d1e32" stroke="#1a3a5a" stroke-width="0.8"/>
+
+  <path d="M 290 82.68 A 20 20 0 0 1 310 82.68"
+    fill="none" stroke="#3a6898" stroke-width="1" opacity="0.5"/>
+  <path d="M 320 100 A 20 20 0 0 1 310 117.32"
+    fill="none" stroke="#3a6898" stroke-width="1" opacity="0.5"/>
+  <path d="M 290 117.32 A 20 20 0 0 1 280 100"
+    fill="none" stroke="#3a6898" stroke-width="1" opacity="0.5"/>
+
+  <!-- Hub -->
+  <circle cx="300" cy="100" r="22" fill="url(#gHubR)"/>
+  <circle cx="300" cy="100" r="20" fill="none" stroke="#5a90b8" stroke-width="1" opacity="0.5"/>
+  <circle cx="300" cy="100" r="15" fill="#060f1c" opacity="0.85"/>
+  <circle cx="300" cy="100" r="13" fill="url(#gHubR)" opacity="0.6"/>
+
+  <polygon points="300,83 303,89 297,89" fill="#D4A83A" opacity="0.9"/>
+  <polygon points="313.5,108 307.5,105 310.5,99" fill="#D4A83A" opacity="0.9"/>
+  <polygon points="286.5,108 292.5,105 289.5,99" fill="#D4A83A" opacity="0.9"/>
+
+  <circle cx="300" cy="100" r="8" fill="url(#gGold)" filter="url(#fGlow)"/>
+  <circle cx="300" cy="100" r="3.5" fill="#030a14"/>
+</g>
+
+<!-- ══ VU METERS DUPLEX ══ -->
+<!-- VU L -->
+<g transform="translate(85,170)">
+  <rect x="0" y="0" width="100" height="50" rx="3" fill="url(#gVU)"/>
+  <path d="M 12 43 A 38 38 0 0 1 88 43"
+    fill="none" stroke="#333" stroke-width="1.2"/>
+  <path d="M 83 24 A 38 38 0 0 1 88 43"
+    fill="none" stroke="#bb1111" stroke-width="2"/>
+  <text x="50" y="44" font-family="sans-serif" font-size="5.5"
+    font-weight="700" fill="#2a1800" text-anchor="middle">CH 1</text>
+  <g id="vn-L" class="needle-idle" style="transform-origin:50px 43px">
+    <line x1="50" y1="43" x2="50" y2="9" stroke="#111" stroke-width="1.1"/>
+    <circle cx="50" cy="43" r="2.5" fill="#111"/>
+  </g>
+</g>
+
+<!-- VU R -->
+<g transform="translate(215,170)">
+  <rect x="0" y="0" width="100" height="50" rx="3" fill="url(#gVU)"/>
+  <path d="M 12 43 A 38 38 0 0 1 88 43"
+    fill="none" stroke="#333" stroke-width="1.2"/>
+  <path d="M 83 24 A 38 38 0 0 1 88 43"
+    fill="none" stroke="#bb1111" stroke-width="2"/>
+  <text x="50" y="44" font-family="sans-serif" font-size="5.5"
+    font-weight="700" fill="#2a1800" text-anchor="middle">CH 2</text>
+  <g id="vn-R" class="needle-idle" style="transform-origin:50px 43px">
+    <line x1="50" y1="43" x2="50" y2="9" stroke="#111" stroke-width="1.1"/>
+    <circle cx="50" cy="43" r="2.5" fill="#111"/>
+  </g>
+</g>
+
+</svg>
+  </div>
+  <p class="eyebrow" data-i18n="eyebrow"></p>
+  <h1 data-i18n="h1"></h1>
+  <p class="subtitle" data-i18n="subtitle"></p>
+  <div class="badges" id="badgeRow"></div>
+</header>
+
+<!-- PLAYER -->
+<section class="player">
+  <p class="player-title" data-i18n="playerTitle"></p>
+
+  <div class="key-row">
+    <div class="key-input-wrap">
+      <input class="key-input" id="apiKey" type="password"
+        data-i18n-placeholder="keyPlaceholder"
+        autocomplete="off" spellcheck="false" />
+      <button class="key-toggle" onclick="toggleKey()" title="Show/hide key">👁</button>
+    </div>
+    <a class="ai-studio-link" href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener" data-i18n="keyLink"></a>
+  </div>
+  <p class="key-hint" data-i18n="keyHint"></p>
+
+  <div class="voice-row">
+    <button class="voice-btn active" id="btnM" onclick="setVoice('masc')">
+      👨‍🎙 <span data-i18n="voiceMasc"></span>
+      <span class="voice-sub">Charon · Gemini</span>
+    </button>
+    <button class="voice-btn" id="btnF" onclick="setVoice('fem')">
+      👩‍🎙 <span data-i18n="voiceFem"></span>
+      <span class="voice-sub">Kore · Gemini</span>
+    </button>
+  </div>
+
+  <div class="ctrl-row">
+    <button class="btn-play" id="btnPlay" onclick="playRelease()" data-i18n="btnPlay"></button>
+    <button class="btn-stop" onclick="stopRelease()" data-i18n="btnStop"></button>
+  </div>
+
+  <p class="player-status" id="status"></p>
+</section>
+
+<!-- MAIN -->
+<main>
+
+  <div class="block">
+    <p class="blk-label" data-i18n="lbl1"></p>
+    <h2 data-i18n="h2_1"></h2>
+    <p data-i18n="p1_1"></p>
+    <p data-i18n="p1_2"></p>
+    <div class="quote-bar" data-i18n="quote1"></div>
+    <p data-i18n="p1_3"></p>
+  </div>
+
+  <hr class="div" />
+
+  <div class="block" style="margin-top:60px">
+    <p class="blk-label" data-i18n="lbl2"></p>
+    <h2 data-i18n="h2_2"></h2>
+    <div class="vol-grid">
+      <div class="vol-card">
+        <p class="vol-num" data-i18n="v1num"></p>
+        <h3 data-i18n="v1title"></h3>
+        <p data-i18n="v1desc"></p>
+      </div>
+      <div class="vol-card">
+        <p class="vol-num" data-i18n="v2num"></p>
+        <h3 data-i18n="v2title"></h3>
+        <p data-i18n="v2desc"></p>
+      </div>
+      <div class="vol-card">
+        <p class="vol-num" data-i18n="v3num"></p>
+        <h3 data-i18n="v3title"></h3>
+        <p data-i18n="v3desc"></p>
+      </div>
+      <div class="vol-card bonus">
+        <p class="vol-num" data-i18n="v4num"></p>
+        <h3 data-i18n="v4title"></h3>
+        <p data-i18n="v4desc"></p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div" />
+
+  <div class="block" style="margin-top:60px">
+    <p class="blk-label" data-i18n="lbl3"></p>
+    <h2 data-i18n="h2_3"></h2>
+    <ul class="feat-list" id="featList"></ul>
+  </div>
+
+  <hr class="div" />
+
+  <div class="block" style="margin-top:60px">
+    <div class="cta-block">
+      <h2 data-i18n="ctaH"></h2>
+      <p data-i18n="ctaP"></p>
+      <button class="cta-btn" data-i18n="ctaBtn"></button>
+      <p class="cta-note" data-i18n="ctaNote"></p>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <strong>Estúdio Plá</strong> &nbsp;·&nbsp; Bauru, São Paulo, Brasil<br>
+  <span data-i18n="footerTitle"></span><br>
+  <span style="opacity:0.45;font-size:12px">© 2026 Estúdio Plá · Kaue Ferreira Moraes · <span data-i18n="footerRights"></span></span>
+</footer>
+
+<script>
+/* ── TRANSLATIONS ─────────────────────────────── */
+var T = {
+  pt: {
+    htmlLang:     'pt-BR',
+    eyebrow:      'Est\u00fadio Pl\u00e1 \u2014 PLA v0.1 \u00b7 Publica\u00e7\u00e3o Fundadora',
+    h1:           'Manual Definitivo de<br><em>Grava\u00e7\u00e3o, Mixagem &amp;<br>Masteriza\u00e7\u00e3o Anal\u00f3gica</em>',
+    subtitle:     'A f\u00edsica completa do som anal\u00f3gico \u2014 do diafragma do microfone ao sulco do vinil. O mapa que ningu\u00e9m escreveu.',
+    badges:       ['\u2399 PLA v0.1','\uD83C\uDEFA 4 Volumes + B\u00f4nus','\uD83C\uDF99 Narra\u00e7\u00e3o Gemini AI','\uD83D\uDCD0 Diagramas T\u00e9cnicos','\uD83C\uDF10 Edi\u00e7\u00e3o Bil\u00edngue'],
+    playerTitle:  '\uD83C\uDF99 Ou\u00e7a o Release \u2014 Narra\u00e7\u00e3o por Gemini AI',
+    keyPlaceholder:'Cole sua chave Gemini API aqui',
+    keyLink:      '\uD83D\uDD11 Obter chave gr\u00e1tis',
+    keyHint:      'Sua chave permanece apenas nesta sess\u00e3o do navegador \u2014 n\u00e3o \u00e9 enviada a nenhum servidor nosso.',
+    voiceMasc:    'Voz Masculina',
+    voiceFem:     'Voz Feminina',
+    btnPlay:      '\u25B6 Reproduzir',
+    btnStop:      '\u25A0 Parar',
+    statusInit:   'Insira sua chave Gemini, escolha a voz e pressione Reproduzir.',
+    statusGen:    'Gerando narra\u00e7\u00e3o com ',
+    statusPlay:   '\u25B6 Reproduzindo \u2014 ',
+    statusDone:   '\u2714 Reprodu\u00e7\u00e3o conclu\u00edda.',
+    statusStop:   '\u25A0 Reprodu\u00e7\u00e3o parada.',
+    statusNoKey:  '\u26A0 Cole sua chave Gemini API no campo acima para continuar.',
+    statusErr:    '\u26A0 Erro: ',
+    lbl1:         'O Manifesto',
+    h2_1:         'A Fita N\u00e3o Esquece.<br>O Conhecimento Ficou.<br><em>O Mapa Tamb\u00e9m.</em>',
+    p1_1:         'A fita magn\u00e9tica n\u00e3o esquece \u2014 \u00e9 f\u00edsica. As part\u00edculas de \u00f3xido de ferro ret\u00eam o campo magn\u00e9tico que o sinal de \u00e1udio imprimiu nelas. O que foi gravado ficou: as decis\u00f5es de ganho, de equaliza\u00e7\u00e3o, de compress\u00e3o. Por d\u00e9cadas, esse conhecimento viveu apenas nas m\u00e3os de engenheiros que moldaram o som do s\u00e9culo XX. Passado de sess\u00e3o em sess\u00e3o, de console em console. Nunca completamente escrito.',
+    p1_2:         'Este trabalho percorre o mesmo caminho que o som percorre dentro de um est\u00fadio anal\u00f3gico: do ar que sai de um instrumento at\u00e9 o sulco gravado num disco de vinil. Com duas camadas em cada cap\u00edtulo \u2014 uma porta de entrada acess\u00edvel para quem est\u00e1 descobrindo, e uma imers\u00e3o t\u00e9cnica completa para quem j\u00e1 vive disso. A f\u00edsica do magnetismo, a arquitetura dos grandes consoles, a alquimia precisa do sulco no acetato. Reunidas pela primeira vez.',
+    quote1:       'O som anal\u00f3gico n\u00e3o \u00e9 um c\u00f3digo aguardando leitura. \u00c9 energia deixando um rastro f\u00edsico de sua exist\u00eancia \u2014 atrav\u00e9s de ferro, cobre e \u00f3xido magn\u00e9tico.',
+    p1_3:         'O som anal\u00f3gico tem uma linguagem que o digital est\u00e1 aprendendo a falar. Este manual \u00e9 o dicion\u00e1rio \u2014 n\u00e3o por nostalgia, mas por f\u00edsica. O <strong>Manual Definitivo de Grava\u00e7\u00e3o, Mixagem e Masteriza\u00e7\u00e3o Anal\u00f3gica</strong> \u00e9 a funda\u00e7\u00e3o do PLA \u2014 Processamento Linear Ambi\u00f4nico. O ecossistema come\u00e7a aqui.',
+    lbl2:         'O Que Est\u00e1 Dentro',
+    h2_2:         'Quatro Volumes.<br>Uma Funda\u00e7\u00e3o Completa.',
+    v1num:'Volume 01', v1title:'Capta\u00e7\u00e3o e Grava\u00e7\u00e3o \u2014 The Tracking',
+    v1desc:'Microfones, pr\u00e9-amplificadores, transformadores, calibra\u00e7\u00e3o de bias, velocidades de fita e alinhamento da m\u00e1quina anal\u00f3gica.',
+    v2num:'Volume 02', v2title:'A Mixagem Anal\u00f3gica \u2014 The Mixdown',
+    v2desc:'A arquitetura dos grandes consoles, f\u00edsica dos equalizadores indutivos, compressores VCA, FET, \u00f3pticos e Vari-Mu.',
+    v3num:'Volume 03', v3title:'A Masteriza\u00e7\u00e3o \u2014 The Pre-Mastering',
+    v3desc:'A fita master de \u00bd\u201d, processamento de linha, limita\u00e7\u00e3o anal\u00f3gica e prepara\u00e7\u00e3o f\u00edsica para a prensagem do vinil.',
+    v4num:'B\u00f4nus Track', v4title:'A Alquimia do Sulco \u2014 O Vinil',
+    v4desc:'A jornada da agulha: como o relevo microsc\u00f3pico do PVC reconstitui a magia sonora. Curva RIAA. Cantilever. Lei de Faraday.',
+    lbl3:  'Recursos da Obra',
+    h2_3:  'Muito Al\u00e9m de Palavras.',
+    feats: [
+      ['\uD83D\uDCD0','<strong>Diagramas de Fluxo de Sinal</strong> \u2014 O caminho exato do sinal, do microfone \u00e0 fita, do console ao torno de corte.'],
+      ['\uD83D\uDD23','<strong>F\u00f3rmulas de Engenharia Reais</strong> \u2014 Comprimentos de onda magn\u00e9ticos, calibra\u00e7\u00e3o de bias, rela\u00e7\u00e3o sinal/ru\u00eddo. A matem\u00e1tica que governa o som.'],
+      ['\uD83C\uDF99','<strong>Narra\u00e7\u00e3o Integrada por IA</strong> \u2014 Cada cap\u00edtulo dispon\u00edvel em voz masculina e feminina via Gemini AI.'],
+      ['\uD83C\uDF10','<strong>Edi\u00e7\u00e3o Bil\u00edngue</strong> \u2014 Portugu\u00eas e Ingl\u00eas. O conhecimento anal\u00f3gico sem fronteira de idioma.'],
+      ['\uD83C\uDFDB','<strong>Fichas T\u00e9cnicas de Equipamentos</strong> \u2014 SSL 4000, Neve 8078, Urei 1176, LA-2A, Fairchild 670, EMT 140 e muito mais.'],
+      ['\u2399','<strong>Funda\u00e7\u00e3o PLA</strong> \u2014 Este manual \u00e9 a base de conhecimento do Processamento Linear Ambi\u00f4nico. O ecossistema come\u00e7a aqui.']
+    ],
+    ctaH:   'A Jornada Come\u00e7a<br>Com a F\u00edsica.',
+    ctaP:   'Do diafragma do microfone ao sulco do vinil \u2014 a jornada completa, com rigor t\u00e9cnico e linguagem acess\u00edvel. Para engenheiros experientes e para quem est\u00e1 descobrindo por que o anal\u00f3gico soa diferente.',
+    ctaBtn: 'Quero Acesso Agora',
+    ctaNote:'Funda\u00e7\u00e3o do PLA \u00b7 Est\u00fadio Pl\u00e1 \u00b7 Edi\u00e7\u00e3o limitada',
+    footerTitle:'Manual Definitivo de Grava\u00e7\u00e3o, Mixagem e Masteriza\u00e7\u00e3o Anal\u00f3gica \u2014 PLA v0.1',
+    footerRights:'Todos os direitos reservados',
+    audioText: 'A fita magn\u00e9tica n\u00e3o esquece. \u00c9 f\u00edsica: as part\u00edculas de \u00f3xido de ferro ret\u00eam o campo magn\u00e9tico que o sinal de \u00e1udio imprimiu nelas. Por d\u00e9cadas, esse conhecimento viveu apenas nas m\u00e3os de engenheiros que moldaram o som do s\u00e9culo XX. Nunca completamente escrito. Agora foi. O Manual Definitivo de Grava\u00e7\u00e3o, Mixagem e Masteriza\u00e7\u00e3o Anal\u00f3gica. Quatro volumes. A f\u00edsica completa do caminho anal\u00f3gico \u2014 do diafragma do microfone ao sulco do vinil \u2014 com linguagem acess\u00edvel e rigor t\u00e9cnico. O som anal\u00f3gico tem uma linguagem que o digital est\u00e1 aprendendo a falar. Este manual \u00e9 o dicion\u00e1rio. A funda\u00e7\u00e3o do PLA. Est\u00fadio Pl\u00e1. Bauru, Brasil.'
+  },
+  en: {
+    htmlLang:     'en-US',
+    eyebrow:      'Est\u00fadio Pl\u00e1 \u2014 PLA v0.1 \u00b7 Founding Publication',
+    h1:           'Definitive Manual of<br><em>Analog Recording,<br>Mixing &amp; Mastering</em>',
+    subtitle:     'The complete physics of analog sound \u2014 from microphone diaphragm to vinyl groove. The map that was never written.',
+    badges:       ['\u2399 PLA v0.1','\uD83C\uDEFA 4 Volumes + Bonus','\uD83C\uDF99 Gemini AI Narration','\uD83D\uDCD0 Technical Diagrams','\uD83C\uDF10 Bilingual Edition'],
+    playerTitle:  '\uD83C\uDF99 Listen to the Release \u2014 Narrated by Gemini AI',
+    keyPlaceholder:'Paste your Gemini API key here',
+    keyLink:      '\uD83D\uDD11 Get free key',
+    keyHint:      'Your key stays in this browser session only \u2014 never sent to our servers.',
+    voiceMasc:    'Male Voice',
+    voiceFem:     'Female Voice',
+    btnPlay:      '\u25B6 Play',
+    btnStop:      '\u25A0 Stop',
+    statusInit:   'Enter your Gemini key, choose a voice, and press Play.',
+    statusGen:    'Generating narration with ',
+    statusPlay:   '\u25B6 Playing \u2014 ',
+    statusDone:   '\u2714 Playback complete.',
+    statusStop:   '\u25A0 Playback stopped.',
+    statusNoKey:  '\u26A0 Paste your Gemini API key in the field above to continue.',
+    statusErr:    '\u26A0 Error: ',
+    lbl1:         'The Manifesto',
+    h2_1:         'Tape Never Forgets.<br>The Knowledge Remained.<br><em>So Did the Map.</em>',
+    p1_1:         'Magnetic tape never forgets \u2014 that is physics. Iron oxide particles retain the magnetic field imprinted by the audio signal. What was recorded, remained: every gain decision, every equalization choice, every compression move. For decades, that knowledge lived only in the hands of engineers who shaped the sound of the twentieth century. Passed from session to session, from console to console. Never fully written down.',
+    p1_2:         'This work follows the same path the sound travels inside an analog studio: from the air leaving an instrument to the groove cut into a vinyl record. With two layers in every chapter \u2014 an accessible entry point for those discovering, and a complete technical deep-dive for those who already live it. The physics of magnetism, the architecture of legendary consoles, the precise alchemy of the groove on the lacquer. Brought together for the first time.',
+    quote1:       'Analog sound is not a code waiting to be read. It is energy leaving a physical trace of its existence \u2014 through iron, copper, and magnetic oxide.',
+    p1_3:         'Analog sound has a language that digital is learning to speak. This manual is the dictionary \u2014 not out of nostalgia, but out of physics. The <strong>Definitive Manual of Analog Recording, Mixing and Mastering</strong> is the foundation of PLA \u2014 Linear Ambisonic Processing. The ecosystem starts here.',
+    lbl2:         "What's Inside",
+    h2_2:         'Four Volumes.<br>One Complete Foundation.',
+    v1num:'Volume 01', v1title:'Tracking \u2014 Capture & Recording',
+    v1desc:'Microphones, preamps, transformers, bias calibration, tape speeds, and analog machine alignment.',
+    v2num:'Volume 02', v2title:'The Mixdown \u2014 Analog Mixing',
+    v2desc:'The architecture of classic consoles, physics of inductive equalizers, VCA, FET, optical and Vari-Mu compressors.',
+    v3num:'Volume 03', v3title:'The Pre-Mastering \u2014 Analog Mastering',
+    v3desc:'The half-inch master tape, line processing, analog limiting, and physical preparation for vinyl pressing.',
+    v4num:'Bonus Track', v4title:'The Groove Alchemy \u2014 Vinyl',
+    v4desc:"The needle's journey: how the microscopic relief of PVC reconstitutes the sonic magic. RIAA Curve. Cantilever. Faraday's Law.",
+    lbl3:  'Features',
+    h2_3:  'Far Beyond Words.',
+    feats: [
+      ['\uD83D\uDCD0','<strong>Signal Flow Diagrams</strong> \u2014 The exact path of the signal, from microphone to tape, from console to cutting lathe.'],
+      ['\uD83D\uDD23','<strong>Real Engineering Formulas</strong> \u2014 Magnetic wavelengths, bias calibration, signal-to-noise ratio. The mathematics that governs sound.'],
+      ['\uD83C\uDF99','<strong>AI-Integrated Narration</strong> \u2014 Every chapter available in male and female voice via Gemini AI.'],
+      ['\uD83C\uDF10','<strong>Bilingual Edition</strong> \u2014 Portuguese and English. Analog knowledge without language borders.'],
+      ['\uD83C\uDFDB','<strong>Equipment Specification Sheets</strong> \u2014 SSL 4000, Neve 8078, Urei 1176, LA-2A, Fairchild 670, EMT 140 and more.'],
+      ['\u2399','<strong>PLA Foundation</strong> \u2014 This manual is the knowledge base of Linear Ambisonic Processing. The ecosystem starts here.']
+    ],
+    ctaH:   'The Journey Begins<br>With the Physics.',
+    ctaP:   'From microphone diaphragm to vinyl groove \u2014 the complete journey, with technical rigor and accessible language. For seasoned engineers and for those discovering why analog sounds different.',
+    ctaBtn: 'I Want Access Now',
+    ctaNote:'PLA Foundation \u00b7 Est\u00fadio Pl\u00e1 \u00b7 Limited edition',
+    footerTitle:'Definitive Manual of Analog Recording, Mixing and Mastering \u2014 PLA v0.1',
+    footerRights:'All rights reserved',
+    audioText: 'Magnetic tape never forgets. That is physics: iron oxide particles retain the magnetic field imprinted by the audio signal. For decades, this knowledge lived only in the hands of engineers who shaped the sound of the twentieth century. Never fully written down. Until now. The Definitive Manual of Analog Recording, Mixing and Mastering. Four volumes. The complete physics of the analog path \u2014 from microphone diaphragm to vinyl groove \u2014 with accessible language and real technical depth. Analog sound has a language that digital is learning to speak. This manual is the dictionary. The foundation of PLA. Estudio Pla. Bauru, Brazil.'
+  }
+};
+/* ── CURRENT LANG ─────────────────────────────── */
+var lang = 'pt';
+
+function setLang(l) {
+  lang = l;
+  document.getElementById('htmlRoot').lang = T[l].htmlLang;
+  document.getElementById('btnPT').classList.toggle('active', l === 'pt');
+  document.getElementById('btnEN').classList.toggle('active', l === 'en');
+
+  /* update all data-i18n elements */
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var key = el.getAttribute('data-i18n');
+    if (T[l][key] !== undefined) el.innerHTML = T[l][key];
+  });
+
+  /* placeholders */
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){
+    var key = el.getAttribute('data-i18n-placeholder');
+    if (T[l][key] !== undefined) el.placeholder = T[l][key];
+  });
+
+  /* badges */
+  var br = document.getElementById('badgeRow');
+  br.innerHTML = '';
+  T[l].badges.forEach(function(b){
+    var s = document.createElement('span');
+    s.className = 'badge';
+    s.textContent = b;
+    br.appendChild(s);
+  });
+
+  /* features */
+  var fl = document.getElementById('featList');
+  fl.innerHTML = '';
+  T[l].feats.forEach(function(f){
+    var li = document.createElement('li');
+    li.innerHTML = '<span class="feat-ico">' + f[0] + '</span><span>' + f[1] + '</span>';
+    fl.appendChild(li);
+  });
+
+  /* status reset */
+  setStatus(T[l].statusInit);
+}
+
+/* ── Rolos v3.1 ── */
+(function(){
+'use strict';
+
+const spL  = document.getElementById('spool-L');
+const spR  = document.getElementById('spool-R');
+const led  = document.getElementById('rec-led');
+
+const btnStop = document.getElementById('btn-stop');
+const btnPlay = document.getElementById('btn-play');
+const btnRec  = document.getElementById('btn-rec');
+
+const bgPlay = document.getElementById('bg-play');
+const iPlay  = document.getElementById('i-play');
+const bgRec  = document.getElementById('bg-rec');
+const iRec   = document.getElementById('i-rec');
+const iStop  = document.getElementById('i-stop');
+
+const vnL = document.getElementById('vn-L');
+const vnR = document.getElementById('vn-R');
+
+let mode = 'PLAY'; // já inicia em PLAY
+let vuTargL = -30, vuTargR = -30;
+let vuCurL  = -36, vuCurR  = -36;
+
+// ── Atualiza visual dos botões ──
+function applyMode(m) {
+  mode = m;
+
+  // Stop
+  iStop.setAttribute('fill', m === 'STOP' ? '#3A9FEF' : '#1a3a5a');
+
+  // Play
+  bgPlay.setAttribute('fill', m !== 'STOP' ? '#0d2040' : '#0a1828');
+  iPlay.setAttribute('fill',  m !== 'STOP' ? '#3A9FEF' : '#2a5880');
+
+  // Rec
+  bgRec.setAttribute('fill',   m === 'REC' ? '#2a0808' : '#0a1828');
+  bgRec.setAttribute('stroke', m === 'REC' ? '#cc2222' : '#1a3a5a');
+  iRec.setAttribute('fill',    m === 'REC' ? '#ff2222' : '#5a1010');
+  if (m === 'REC') {
+    iRec.setAttribute('filter', 'url(#fRed)');
+    led.setAttribute('fill',   '#ff1111');
+    led.setAttribute('stroke', '#ff5555');
+    led.setAttribute('filter', 'url(#fRed)');
+  } else {
+    iRec.removeAttribute('filter');
+    led.setAttribute('fill',   '#180404');
+    led.setAttribute('stroke', '#300808');
+    led.removeAttribute('filter');
+  }
+
+  // ── Carretéis: pause/play da animação CSS — sem pulo ──
+  if (m === 'STOP') {
+    spL.style.animationPlayState = 'paused';
+    spR.style.animationPlayState = 'paused';
+    vnL.classList.add('needle-idle');
+    vnR.classList.add('needle-idle');
+  } else {
+    spL.style.animationPlayState = 'running';
+    spR.style.animationPlayState = 'running';
+    vnL.classList.remove('needle-idle');
+    vnR.classList.remove('needle-idle');
+  }
+}
+
+btnStop.addEventListener('click', () => applyMode('STOP'));
+btnPlay.addEventListener('click', () => applyMode('PLAY'));
+btnRec.addEventListener('click',  () => applyMode('REC'));
+
+// Inicia em PLAY imediatamente
+applyMode('PLAY');
+
+// ── VU ballistics ──
+function vuLoop() {
+  if (mode !== 'STOP') {
+    const t = Date.now() * 0.001;
+    const base = mode === 'REC'
+      ? Math.sin(t * 1.3) * 16 + 8
+      : Math.sin(t * 1.1) * 12 + 2;
+    vuTargL = base + Math.random() * (mode === 'REC' ? 14 : 10);
+    vuTargR = base + Math.random() * (mode === 'REC' ? 14 : 10);
+  } else {
+    vuTargL = -36;
+    vuTargR = -36;
+  }
+
+  // Ballistics suave (inércia da agulha mecânica)
+  const spd = mode === 'STOP' ? 0.05 : 0.25;
+  vuCurL += (vuTargL - vuCurL) * spd;
+  vuCurR += (vuTargR - vuCurR) * spd;
+
+  const angleL = Math.max(-38, Math.min(32, vuCurL));
+  const angleR = Math.max(-38, Math.min(32, vuCurR));
+
+  vnL.style.transform = `rotate(${angleL}deg)`;
+  vnR.style.transform = `rotate(${angleR}deg)`;
+
+  requestAnimationFrame(vuLoop);
+}
+
+vuLoop();
+})();
+
+/* ── AUDIO STATE ──────────────────────────────── */
+var voiceName = 'Charon';
+var audioCtx  = null;
+var audioSrc  = null;
+var isPlaying = false;
+
+function setStatus(msg, spinner) {
+  var el = document.getElementById('status');
+  if (spinner) {
+    el.innerHTML = '<span class="spinner"></span>' + msg;
+  } else {
+    el.textContent = msg;
+  }
+}
+
+function setLoading(on) {
+  document.getElementById('btnPlay').disabled = on;
+}
+
+function toggleKey() {
+  var inp = document.getElementById('apiKey');
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+}
+
+function setVoice(type) {
+  voiceName = type === 'masc' ? 'Charon' : 'Kore';
+  document.getElementById('btnM').classList.toggle('active', type === 'masc');
+  document.getElementById('btnF').classList.toggle('active', type === 'fem');
+  if (isPlaying) stopRelease();
+}
+
+/* ── GEMINI TTS ───────────────────────────────── */
+async function playRelease() {
+  var key = document.getElementById('apiKey').value.trim();
+  if (!key) { setStatus(T[lang].statusNoKey); return; }
+
+  stopRelease();
+  setLoading(true);
+  setStatus(T[lang].statusGen + voiceName + '...', true);
+
+  try {
+    var url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=' + key;
+
+    var resp = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: T[lang].audioText }] }],
+        generationConfig: {
+          responseModalities: ['AUDIO'],
+          speechConfig: {
+            voiceConfig: {
+              prebuiltVoiceConfig: { voiceName: voiceName }
+            }
+          }
+        }
+      })
+    });
+
+    var data = await resp.json();
+
+    if (data.error) {
+      setStatus('⚠ Gemini: ' + data.error.message);
+      setLoading(false);
+      return;
+    }
+
+    var part = data.candidates[0].content.parts[0];
+    var b64  = part.inlineData.data;
+    var mime = part.inlineData.mimeType || 'audio/L16;rate=24000';
+
+    await playBuffer(b64, mime);
+
+  } catch(e) {
+    setStatus(T[lang].statusErr + e.message);
+    setLoading(false);
+  }
+}
+
+async function playBuffer(b64, mime) {
+  var bin = atob(b64);
+  var buf = new Uint8Array(bin.length);
+  for (var i = 0; i < bin.length; i++) buf[i] = bin.charCodeAt(i);
+
+  if (audioCtx) { try { audioCtx.close(); } catch(e){} }
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+  var audioBuffer;
+
+  if (mime.indexOf('L16') !== -1 || mime.indexOf('pcm') !== -1) {
+    var rm = mime.match(/rate=(\d+)/);
+    var sr = rm ? parseInt(rm[1]) : 24000;
+    var i16 = new Int16Array(buf.buffer);
+    var f32 = new Float32Array(i16.length);
+    for (var j = 0; j < i16.length; j++) f32[j] = i16[j] / 32768.0;
+    audioBuffer = audioCtx.createBuffer(1, f32.length, sr);
+    audioBuffer.getChannelData(0).set(f32);
+  } else {
+    audioBuffer = await audioCtx.decodeAudioData(buf.buffer.slice(0));
+  }
+
+  audioSrc = audioCtx.createBufferSource();
+  audioSrc.buffer = audioBuffer;
+  audioSrc.connect(audioCtx.destination);
+  audioSrc.onended = function() {
+    isPlaying = false;
+    setLoading(false);
+    setStatus(T[lang].statusDone);
+  };
+  audioSrc.start();
+  isPlaying = true;
+  setLoading(false);
+  setStatus(T[lang].statusPlay + voiceName + ' · Gemini AI');
+}
+
+function stopRelease() {
+  if (audioSrc) { try { audioSrc.stop(); } catch(e){} audioSrc = null; }
+  if (audioCtx) { try { audioCtx.close(); } catch(e){} audioCtx = null; }
+  isPlaying = false;
+  setLoading(false);
+  setStatus(T[lang].statusStop);
+}
+
+/* ── INIT ─────────────────────────────────────── */
+setLang('pt');
+</script>
+
+</body>
+</html>

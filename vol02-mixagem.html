@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="pt-BR" id="htmlRoot">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Volume 02 — A Mixagem Analógica | Estúdio Plá</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+:root{
+  --bg:#060F1C;--bg-card:#0C1D31;--bg-card2:#0F2440;
+  --blue:#1A6FBF;--blue-lt:#3A9FEF;--blue-glow:rgba(58,159,239,0.18);
+  --gold:#D4A83A;--gold-lt:#F0C84A;
+  --txt:#EAF2FF;--txt2:#7EADD4;--border:#1C3A58;--div:rgba(58,159,239,0.22);
+  --green:#2ECC71;--amber:#E67E22;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--txt);font-family:'Inter',system-ui,sans-serif;font-size:18px;line-height:1.7;}
+.top-bar{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:52px;background:rgba(6,15,28,0.96);border-bottom:1px solid var(--border);backdrop-filter:blur(8px);flex-wrap:wrap;gap:8px;}
+.vol-nav{display:flex;gap:6px;flex-wrap:wrap;}
+.vol-link{background:transparent;border:1px solid var(--border);border-radius:6px;padding:6px 14px;font-size:13px;font-weight:600;color:var(--txt2);cursor:pointer;text-decoration:none;transition:all .2s;}
+.vol-link.active{background:var(--blue);border-color:var(--blue-lt);color:#fff;}
+.vol-link:hover:not(.active){border-color:var(--blue-lt);color:var(--txt);}
+.lang-toggle{display:flex;border:1.5px solid var(--border);border-radius:7px;overflow:hidden;}
+.lang-btn{background:var(--bg-card);border:none;color:var(--txt2);font-size:13px;font-weight:700;letter-spacing:1px;padding:8px 15px;cursor:pointer;transition:all .2s;}
+.lang-btn.active{background:var(--blue);color:#fff;}
+.lang-btn:hover:not(.active){background:var(--bg-card2);color:var(--txt);}
+.chap-nav{display:flex;justify-content:center;gap:8px;padding:16px 24px;flex-wrap:wrap;border-bottom:1px solid var(--div);background:var(--bg-card);margin-top:52px;}
+.chap-link{background:transparent;border:1px solid var(--border);border-radius:20px;padding:7px 18px;font-size:13px;font-weight:600;color:var(--txt2);cursor:pointer;text-decoration:none;transition:all .2s;}
+.chap-link:hover{border-color:var(--blue-lt);color:var(--txt);}
+header{padding:56px 40px 56px;text-align:center;border-bottom:1px solid var(--div);background:linear-gradient(180deg,#071828 0%,var(--bg) 100%);}
+.vu-wrap{display:flex;justify-content:center;align-items:flex-end;gap:5px;height:48px;margin-bottom:32px;}
+.vu-bar{width:7px;border-radius:3px 3px 0 0;animation:vup var(--d) ease-in-out infinite alternate;}
+@keyframes vup{from{height:var(--mn);opacity:.45}to{height:var(--mx);opacity:1}}
+.vol-badge{display:inline-flex;align-items:center;gap:8px;background:var(--bg-card);border:1px solid var(--blue);border-radius:24px;padding:8px 20px;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--blue-lt);margin-bottom:24px;}
+h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(28px,5vw,60px);font-weight:900;line-height:1.1;color:#fff;margin-bottom:16px;}
+h1 em{color:var(--blue-lt);font-style:italic;}
+.subtitle{font-size:clamp(15px,2vw,20px);color:var(--txt2);max-width:620px;margin:0 auto;font-style:italic;}
+.player{background:var(--bg-card);border-bottom:1px solid var(--div);padding:40px;text-align:center;}
+.player-title{font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;}
+.key-row{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
+.key-wrap{position:relative;width:100%;max-width:460px;}
+.key-input{width:100%;background:var(--bg);border:2px solid var(--border);border-radius:10px;padding:13px 50px 13px 18px;font-size:16px;color:var(--txt);outline:none;font-family:monospace;letter-spacing:1px;transition:border-color .2s;}
+.key-input:focus{border-color:var(--blue-lt);}
+.key-input::placeholder{color:var(--txt2);font-family:'Inter',sans-serif;letter-spacing:0;}
+.key-eye{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--txt2);cursor:pointer;font-size:18px;}
+.ai-link{display:inline-flex;align-items:center;gap:6px;color:var(--blue-lt);font-size:14px;text-decoration:none;font-weight:600;padding:10px 18px;border:1px solid var(--border);border-radius:8px;transition:all .2s;white-space:nowrap;}
+.ai-link:hover{border-color:var(--blue-lt);background:var(--blue-glow);}
+.key-hint{font-size:13px;color:var(--txt2);margin-bottom:24px;}
+.voice-row{display:flex;justify-content:center;gap:12px;margin-bottom:20px;flex-wrap:wrap;}
+.voice-btn{background:transparent;border:2px solid var(--border);border-radius:40px;padding:11px 28px;font-size:15px;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .22s;display:flex;align-items:center;gap:8px;}
+.voice-btn:hover{border-color:var(--blue-lt);color:var(--txt);}
+.voice-btn.active{background:var(--blue);border-color:var(--blue-lt);color:#fff;box-shadow:0 0 20px var(--blue-glow);}
+.vsub{font-size:11px;opacity:.7;font-weight:400;}
+.ctrl-row{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;}
+.btn-play{background:var(--gold);color:#060F1C;border:none;border-radius:40px;padding:13px 36px;font-size:16px;font-weight:800;cursor:pointer;transition:all .22s;}
+.btn-play:hover{background:var(--gold-lt);transform:scale(1.03);}
+.btn-play:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+.btn-pause{background:transparent;color:var(--txt2);border:2px solid var(--border);border-radius:40px;padding:13px 28px;font-size:16px;font-weight:600;cursor:pointer;transition:all .22s;}
+.btn-pause:hover:not(:disabled){border-color:var(--blue-lt);color:var(--txt);}
+.btn-pause:disabled{opacity:.4;cursor:not-allowed;}
+.btn-stop{background:transparent;color:var(--txt2);border:2px solid var(--border);border-radius:40px;padding:13px 28px;font-size:16px;font-weight:600;cursor:pointer;transition:all .22s;}
+.btn-stop:hover{border-color:var(--txt2);color:var(--txt);}
+.p-status{margin-top:14px;font-size:14px;color:var(--txt2);min-height:22px;font-style:italic;}
+.spinner{display:inline-block;width:13px;height:13px;border:2px solid var(--txt2);border-top-color:var(--blue-lt);border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:6px;}
+@keyframes spin{to{transform:rotate(360deg)}}
+main{max-width:900px;margin:0 auto;padding:64px 32px 80px;}
+.chapter{margin-bottom:80px;scroll-margin-top:80px;}
+.chap-header{display:flex;align-items:flex-start;gap:20px;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--div);}
+.chap-num{font-family:'JetBrains Mono',monospace;font-size:48px;font-weight:600;color:var(--blue);opacity:.35;line-height:1;flex-shrink:0;margin-top:4px;}
+.chap-eyebrow{font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.chap-title{font-family:'Playfair Display',Georgia,serif;font-size:clamp(24px,3.5vw,38px);font-weight:700;color:#fff;line-height:1.2;}
+.chap-sub{font-size:16px;color:var(--txt2);margin-top:8px;font-style:italic;}
+.body-p{font-size:clamp(16px,1.6vw,18px);color:var(--txt);line-height:1.85;margin-bottom:20px;}
+.body-p strong{color:var(--blue-lt);}
+.subhead{font-family:'Playfair Display',Georgia,serif;font-size:20px;color:#fff;margin:32px 0 12px;}
+.body-list{margin:0 0 20px 0;padding-left:0;list-style:none;}
+.body-list li{font-size:clamp(16px,1.6vw,18px);color:var(--txt);line-height:1.85;margin-bottom:10px;padding-left:22px;position:relative;}
+.body-list li:before{content:"—";position:absolute;left:0;color:var(--blue-lt);}
+.body-list li strong{color:var(--blue-lt);}
+.chap-audio-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:32px;}
+.chap-play-btn{background:var(--blue);color:#fff;border:none;border-radius:24px;padding:11px 22px;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:6px;}
+.chap-play-btn:hover:not(:disabled){background:var(--blue-lt);}
+.chap-play-btn.playing{background:var(--gold);color:#060F1C;}
+.chap-dl-btn{background:transparent;border:1.5px solid var(--border);color:var(--txt2);border-radius:24px;padding:11px 22px;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:6px;}
+.chap-dl-btn:hover:not(:disabled){border-color:var(--gold);color:var(--gold);}
+.chap-play-btn:disabled,.chap-dl-btn:disabled{opacity:.5;cursor:not-allowed;}
+.chap-audio-status{font-size:13px;color:var(--txt2);font-style:italic;}
+.section-tag{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin:0 0 14px;}
+.section-tag.tech{color:var(--blue-lt);margin-top:40px;}
+.section-tag.gear{color:var(--gold);margin-top:40px;}
+.callout{background:var(--bg-card2);border-left:4px solid var(--blue-lt);border-radius:0 10px 10px 0;padding:20px 24px;margin:28px 0;}
+.callout.gold{border-left-color:var(--gold);}
+.callout.green{border-left-color:var(--green);}
+.callout p{font-size:clamp(15px,1.5vw,17px);color:var(--txt);line-height:1.7;margin:0;}
+.callout-label{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--blue-lt);margin-bottom:8px;}
+.callout.gold .callout-label{color:var(--gold);}
+.callout.green .callout-label{color:var(--green);}
+.tbl-wrap{overflow-x:auto;margin:24px 0;}
+table{width:100%;border-collapse:collapse;font-size:clamp(14px,1.4vw,16px);}
+thead tr{background:var(--bg-card2);}
+thead th{padding:14px 18px;text-align:left;font-weight:700;color:var(--blue-lt);font-size:12px;letter-spacing:2px;text-transform:uppercase;border-bottom:2px solid var(--blue);}
+tbody tr{border-bottom:1px solid var(--border);transition:background .15s;}
+tbody tr:hover{background:var(--bg-card);}
+tbody td{padding:14px 18px;color:var(--txt);line-height:1.5;vertical-align:top;}
+tbody td:first-child{color:#fff;font-weight:600;}
+.tag{display:inline-block;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600;}
+.tag-blue{background:rgba(58,159,239,.15);color:var(--blue-lt);}
+.tag-gold{background:rgba(212,168,58,.15);color:var(--gold);}
+.tag-green{background:rgba(46,204,113,.15);color:var(--green);}
+.diagram-wrap{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:32px 24px;margin:28px 0;overflow-x:auto;}
+.diagram-label{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;text-align:center;}
+svg text{font-family:'Inter',system-ui,sans-serif;}
+.eq-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:24px 0;}
+.eq-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:22px 20px;transition:box-shadow .2s;}
+.eq-card:hover{box-shadow:0 0 24px var(--blue-glow);}
+.eq-card-type{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.eq-card-name{font-family:'Playfair Display',Georgia,serif;font-size:20px;color:#fff;margin-bottom:12px;}
+.eq-card-spec{font-size:14px;color:var(--txt2);line-height:1.65;}
+.eq-card-spec strong{color:var(--txt);}
+hr.sdiv{border:none;border-top:1px solid var(--div);margin:60px 0;}
+.vol-footer{background:var(--bg-card2);border-top:1px solid var(--div);padding:48px 32px;text-align:center;}
+.vol-footer h3{font-family:'Playfair Display',Georgia,serif;font-size:clamp(22px,3vw,34px);color:#fff;margin-bottom:16px;}
+.vol-footer p{font-size:16px;color:var(--txt2);max-width:580px;margin:0 auto 28px;}
+.vol-nav-btns{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+.nav-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 30px;border-radius:40px;font-size:15px;font-weight:700;cursor:pointer;text-decoration:none;transition:all .22s;border:2px solid var(--border);}
+.nav-btn.primary{background:var(--blue-lt);color:#060F1C;border-color:var(--blue-lt);}
+.nav-btn.primary:hover{background:#fff;transform:translateY(-2px);}
+.nav-btn.secondary{color:var(--txt2);}
+.nav-btn.secondary:hover{border-color:var(--txt2);color:var(--txt);}
+footer{text-align:center;padding:24px 32px;font-size:13px;color:var(--txt2);border-top:1px solid var(--div);}
+footer strong{color:var(--blue-lt);}
+@media(max-width:600px){
+  header{padding:44px 20px 44px;}
+  main{padding:44px 20px 64px;}
+  .player{padding:32px 20px;}
+  .chap-header{flex-direction:column;gap:8px;}
+  .chap-num{font-size:32px;}
+  .key-row{flex-direction:column;align-items:stretch;}
+  .top-bar{padding:8px 12px;}
+  .vol-link{padding:6px 10px;font-size:12px;}
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="vol-nav">
+    <a class="vol-link" href="vol01-tracking-analogico-v4.html" data-i18n="navVol1"></a>
+    <a class="vol-link active" href="#" data-i18n="navVol2"></a>
+    <a class="vol-link" href="vol03-masterizacao.html" data-i18n="navVol3"></a>
+    <a class="vol-link" href="bonus-alquimia-do-sulco.html" data-i18n="navBonus"></a>
+  </div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="btnPT" onclick="setLang('pt')">PT</button>
+    <button class="lang-btn" id="btnEN" onclick="setLang('en')">EN</button>
+  </div>
+</div>
+
+<nav class="chap-nav">
+  <a class="chap-link" href="#cap1" data-i18n="cnav1"></a>
+  <a class="chap-link" href="#cap2" data-i18n="cnav2"></a>
+  <a class="chap-link" href="#cap3" data-i18n="cnav3"></a>
+  <a class="chap-link" href="#cap4" data-i18n="cnav4"></a>
+</nav>
+
+<header>
+  <div class="vu-wrap" id="vu"></div>
+  <div class="vol-badge">&#127926; <span data-i18n="volBadge"></span></div>
+  <h1 data-i18n="h1"></h1>
+  <p class="subtitle" data-i18n="subtitle"></p>
+</header>
+
+<section class="player">
+  <p class="player-title" data-i18n="playerTitle"></p>
+  <div class="key-row">
+    <div class="key-wrap">
+      <input class="key-input" id="apiKey" type="password" data-i18n-ph="keyPh" autocomplete="off" spellcheck="false"/>
+      <button class="key-eye" onclick="toggleKey()">&#128065;</button>
+    </div>
+    <a class="ai-link" href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener" data-i18n="keyLink"></a>
+  </div>
+  <p class="key-hint" data-i18n="keyHint"></p>
+  <div class="voice-row">
+    <button class="voice-btn active" id="btnM" onclick="setVoice('masc')">
+      &#128104;&#8205;&#127908; <span data-i18n="vMasc"></span> <span class="vsub">Charon</span>
+    </button>
+    <button class="voice-btn" id="btnF" onclick="setVoice('fem')">
+      &#128105;&#8205;&#127908; <span data-i18n="vFem"></span> <span class="vsub">Kore</span>
+    </button>
+  </div>
+  <div class="ctrl-row">
+    <button class="btn-play" id="btnPlayAll" onclick="playSequence([1,2,3,4])" data-i18n="btnPlayAll"></button>
+    <button class="btn-pause" id="btnPauseResume" onclick="togglePause()" disabled></button>
+    <button class="btn-stop" onclick="stopAudio()" data-i18n="btnStop"></button>
+  </div>
+  <p class="p-status" id="pStatus"></p>
+</section>
+
+<main>
+
+<!-- CAP 1 -->
+<section class="chapter" id="cap1">
+  <div class="chap-header">
+    <div class="chap-num">01</div>
+    <div>
+      <p class="chap-eyebrow" data-i18n="c1ey"></p>
+      <h2 class="chap-title" data-i18n="c1title"></h2>
+      <p class="chap-sub" data-i18n="c1sub"></p>
+    </div>
+  </div>
+
+  <div class="chap-audio-row">
+    <button class="chap-play-btn" id="chapPlayBtn1" onclick="playSequence([1])" data-i18n="chapPlay"></button>
+    <button class="chap-dl-btn" id="chapDlBtn1" onclick="downloadChapter(1)" data-i18n="chapDl"></button>
+    <span class="chap-audio-status" id="chapStatus1"></span>
+  </div>
+
+  <p class="section-tag" data-i18n="tagAll"></p>
+  <p class="body-p" data-i18n="c1_o1"></p>
+  <p class="body-p" data-i18n="c1_o2"></p>
+
+  <p class="section-tag tech" data-i18n="tagTech"></p>
+
+  <div class="diagram-wrap">
+    <p class="diagram-label" data-i18n="d1label"></p>
+    <svg viewBox="0 0 820 120" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="35" width="100" height="50" rx="8" fill="#0C1D31" stroke="#1C3A58" stroke-width="1.5"/>
+      <rect x="150" y="35" width="100" height="50" rx="8" fill="#0C1D31" stroke="#1C3A58" stroke-width="1.5"/>
+      <rect x="290" y="35" width="110" height="50" rx="8" fill="#0C1D31" stroke="#1A6FBF" stroke-width="1.5"/>
+      <rect x="440" y="35" width="110" height="50" rx="8" fill="#0C1D31" stroke="#1A6FBF" stroke-width="1.5"/>
+      <rect x="590" y="35" width="100" height="50" rx="8" fill="#0C1D31" stroke="#D4A83A" stroke-width="1.5"/>
+      <rect x="710" y="35" width="100" height="50" rx="8" fill="#0C1D31" stroke="#D4A83A" stroke-width="1.5"/>
+      <line x1="110" y1="60" x2="147" y2="60" stroke="#1C3A58" stroke-width="2"/>
+      <polygon points="147,55 155,60 147,65" fill="#3A9FEF"/>
+      <line x1="250" y1="60" x2="287" y2="60" stroke="#1C3A58" stroke-width="2"/>
+      <polygon points="287,55 295,60 287,65" fill="#3A9FEF"/>
+      <line x1="400" y1="60" x2="437" y2="60" stroke="#1C3A58" stroke-width="2"/>
+      <polygon points="437,55 445,60 437,65" fill="#3A9FEF"/>
+      <line x1="550" y1="60" x2="587" y2="60" stroke="#1C3A58" stroke-width="2"/>
+      <polygon points="587,55 595,60 587,65" fill="#D4A83A"/>
+      <line x1="690" y1="60" x2="707" y2="60" stroke="#1C3A58" stroke-width="2"/>
+      <polygon points="707,55 715,60 707,65" fill="#D4A83A"/>
+      <text x="60" y="27" text-anchor="middle" font-size="10" fill="#7EADD4" font-weight="600">TAPE</text>
+      <text x="200" y="27" text-anchor="middle" font-size="10" fill="#7EADD4" font-weight="600">LINE IN</text>
+      <text x="345" y="27" text-anchor="middle" font-size="10" fill="#3A9FEF" font-weight="600">OUTBOARD</text>
+      <text x="495" y="27" text-anchor="middle" font-size="10" fill="#3A9FEF" font-weight="600">EQ SECTION</text>
+      <text x="640" y="27" text-anchor="middle" font-size="10" fill="#D4A83A" font-weight="600">CHANNEL</text>
+      <text x="760" y="27" text-anchor="middle" font-size="10" fill="#D4A83A" font-weight="600">SUMMING</text>
+      <text x="60" y="64" text-anchor="middle" font-size="13" fill="#EAF2FF" font-weight="700">FITA</text>
+      <text x="200" y="57" text-anchor="middle" font-size="12" fill="#EAF2FF" font-weight="700">LINE IN</text>
+      <text x="200" y="74" text-anchor="middle" font-size="11" fill="#7EADD4">Canal</text>
+      <text x="345" y="57" text-anchor="middle" font-size="12" fill="#EAF2FF" font-weight="700">INSERT</text>
+      <text x="345" y="74" text-anchor="middle" font-size="11" fill="#7EADD4">Outboard</text>
+      <text x="495" y="57" text-anchor="middle" font-size="12" fill="#EAF2FF" font-weight="700">EQ</text>
+      <text x="495" y="74" text-anchor="middle" font-size="11" fill="#7EADD4">+ Aux Sends</text>
+      <text x="640" y="57" text-anchor="middle" font-size="12" fill="#EAF2FF" font-weight="700">FADER</text>
+      <text x="640" y="74" text-anchor="middle" font-size="11" fill="#7EADD4">+ Pan Pot</text>
+      <text x="760" y="57" text-anchor="middle" font-size="12" fill="#EAF2FF" font-weight="700">BUS</text>
+      <text x="760" y="74" text-anchor="middle" font-size="11" fill="#7EADD4">Mix Bus</text>
+      <text x="410" y="112" text-anchor="middle" font-size="11" fill="#3A6088" font-style="italic" data-i18n="d1note"></text>
+    </svg>
+  </div>
+
+  <p class="body-p" data-i18n="c1p1"></p>
+  <p class="subhead" data-i18n="c1sh1"></p>
+  <ul class="body-list">
+    <li data-i18n="c1l1"></li>
+    <li data-i18n="c1l2"></li>
+    <li data-i18n="c1l3"></li>
+    <li data-i18n="c1l4"></li>
+    <li data-i18n="c1l5"></li>
+    <li data-i18n="c1l6"></li>
+    <li data-i18n="c1l7"></li>
+    <li data-i18n="c1l8"></li>
+  </ul>
+  <p class="body-p" data-i18n="c1p2"></p>
+
+  <p class="section-tag gear" data-i18n="tagGear"></p>
+  <div class="eq-grid">
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_console"></p>
+      <h3 class="eq-card-name">SSL 4000 G</h3>
+      <p class="eq-card-spec" data-i18n="ssl4000gspec"></p>
+    </div>
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_console"></p>
+      <h3 class="eq-card-name">Neve 8078</h3>
+      <p class="eq-card-spec" data-i18n="neve8078spec"></p>
+    </div>
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_console"></p>
+      <h3 class="eq-card-name">API 2488</h3>
+      <p class="eq-card-spec" data-i18n="api2488spec"></p>
+    </div>
+  </div>
+</section>
+
+<hr class="sdiv"/>
+
+<!-- CAP 2 -->
+<section class="chapter" id="cap2">
+  <div class="chap-header">
+    <div class="chap-num">02</div>
+    <div>
+      <p class="chap-eyebrow" data-i18n="c2ey"></p>
+      <h2 class="chap-title" data-i18n="c2title"></h2>
+      <p class="chap-sub" data-i18n="c2sub"></p>
+    </div>
+  </div>
+
+  <div class="chap-audio-row">
+    <button class="chap-play-btn" id="chapPlayBtn2" onclick="playSequence([2])" data-i18n="chapPlay"></button>
+    <button class="chap-dl-btn" id="chapDlBtn2" onclick="downloadChapter(2)" data-i18n="chapDl"></button>
+    <span class="chap-audio-status" id="chapStatus2"></span>
+  </div>
+
+  <p class="section-tag" data-i18n="tagAll"></p>
+  <p class="body-p" data-i18n="c2_o1"></p>
+  <p class="body-p" data-i18n="c2_o2"></p>
+
+  <p class="section-tag tech" data-i18n="tagTech"></p>
+
+  <p class="subhead" data-i18n="c2sh1"></p>
+  <p class="body-p" data-i18n="c2p1"></p>
+  <ul class="body-list">
+    <li data-i18n="c2l1"></li>
+    <li data-i18n="c2l2"></li>
+    <li data-i18n="c2l3"></li>
+  </ul>
+
+  <p class="subhead" data-i18n="c2sh2"></p>
+  <p class="body-p" data-i18n="c2p2"></p>
+  <ul class="body-list">
+    <li data-i18n="c2l4"></li>
+    <li data-i18n="c2l5"></li>
+    <li data-i18n="c2l6"></li>
+    <li data-i18n="c2l7"></li>
+  </ul>
+
+  <p class="subhead" data-i18n="c2sh3"></p>
+  <p class="body-p" data-i18n="c2p3"></p>
+
+  <div class="callout">
+    <p class="callout-label" data-i18n="c2cl_label"></p>
+    <p data-i18n="c2cl"></p>
+  </div>
+
+  <p class="section-tag gear" data-i18n="tagGear"></p>
+  <div class="eq-grid">
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_passivo"></p>
+      <h3 class="eq-card-name">Pultec EQP-1A</h3>
+      <p class="eq-card-spec" data-i18n="pultecspec"></p>
+    </div>
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_parametrico"></p>
+      <h3 class="eq-card-name">Neve 1073</h3>
+      <p class="eq-card-spec" data-i18n="neve1073eqspec"></p>
+    </div>
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_parametrico"></p>
+      <h3 class="eq-card-name">SSL 4000 E</h3>
+      <p class="eq-card-spec" data-i18n="ssl4000espec"></p>
+    </div>
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_mastering"></p>
+      <h3 class="eq-card-name">GML 8200</h3>
+      <p class="eq-card-spec" data-i18n="gml8200spec"></p>
+    </div>
+  </div>
+</section>
+
+<hr class="sdiv"/>
+
+<!-- CAP 3 -->
+<section class="chapter" id="cap3">
+  <div class="chap-header">
+    <div class="chap-num">03</div>
+    <div>
+      <p class="chap-eyebrow" data-i18n="c3ey"></p>
+      <h2 class="chap-title" data-i18n="c3title"></h2>
+      <p class="chap-sub" data-i18n="c3sub"></p>
+    </div>
+  </div>
+
+  <div class="chap-audio-row">
+    <button class="chap-play-btn" id="chapPlayBtn3" onclick="playSequence([3])" data-i18n="chapPlay"></button>
+    <button class="chap-dl-btn" id="chapDlBtn3" onclick="downloadChapter(3)" data-i18n="chapDl"></button>
+    <span class="chap-audio-status" id="chapStatus3"></span>
+  </div>
+
+  <p class="section-tag" data-i18n="tagAll"></p>
+  <p class="body-p" data-i18n="c3_o1"></p>
+  <p class="body-p" data-i18n="c3_o2"></p>
+
+  <p class="section-tag tech" data-i18n="tagTech"></p>
+
+  <p class="subhead" data-i18n="c3sh1"></p>
+  <p class="body-p" data-i18n="c3p1"></p>
+  <ul class="body-list"><li data-i18n="c3l1"></li></ul>
+
+  <p class="subhead" data-i18n="c3sh2"></p>
+  <p class="body-p" data-i18n="c3p2"></p>
+  <ul class="body-list">
+    <li data-i18n="c3l2"></li>
+    <li data-i18n="c3l3"></li>
+  </ul>
+
+  <p class="subhead" data-i18n="c3sh3"></p>
+  <p class="body-p" data-i18n="c3p3"></p>
+  <ul class="body-list">
+    <li data-i18n="c3l4"></li>
+    <li data-i18n="c3l5"></li>
+    <li data-i18n="c3l6"></li>
+  </ul>
+
+  <p class="subhead" data-i18n="c3sh4"></p>
+  <p class="body-p" data-i18n="c3p4"></p>
+  <ul class="body-list">
+    <li data-i18n="c3l7"></li>
+    <li data-i18n="c3l8"></li>
+    <li data-i18n="c3l9"></li>
+  </ul>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th data-i18n="th_tipo2"></th>
+          <th data-i18n="th_comp"></th>
+          <th data-i18n="th_ataque"></th>
+          <th data-i18n="th_carater"></th>
+          <th data-i18n="th_app2"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td data-i18n="tb_vca_name"></td><td data-i18n="tb_vca_comp"></td><td data-i18n="tb_vca_atk"></td><td data-i18n="tb_vca_car"></td><td data-i18n="tb_vca_app"></td></tr>
+        <tr><td data-i18n="tb_fet_name"></td><td data-i18n="tb_fet_comp"></td><td data-i18n="tb_fet_atk"></td><td data-i18n="tb_fet_car"></td><td data-i18n="tb_fet_app"></td></tr>
+        <tr><td data-i18n="tb_opt_name"></td><td data-i18n="tb_opt_comp"></td><td data-i18n="tb_opt_atk"></td><td data-i18n="tb_opt_car"></td><td data-i18n="tb_opt_app"></td></tr>
+        <tr><td data-i18n="tb_vm_name"></td><td data-i18n="tb_vm_comp"></td><td data-i18n="tb_vm_atk"></td><td data-i18n="tb_vm_car"></td><td data-i18n="tb_vm_app"></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="section-tag gear" data-i18n="tagGear"></p>
+  <div class="eq-grid">
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_vca"></p>
+      <h3 class="eq-card-name">SSL G-Bus Compressor</h3>
+      <p class="eq-card-spec" data-i18n="sslgbusspec"></p>
+    </div>
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_fet"></p>
+      <h3 class="eq-card-name">Urei 1176 LN</h3>
+      <p class="eq-card-spec" data-i18n="urei1176spec"></p>
+    </div>
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_optico"></p>
+      <h3 class="eq-card-name">Teletronix LA-2A</h3>
+      <p class="eq-card-spec" data-i18n="la2aspec"></p>
+    </div>
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_varimu"></p>
+      <h3 class="eq-card-name">Fairchild 670</h3>
+      <p class="eq-card-spec" data-i18n="fairchildspec"></p>
+    </div>
+  </div>
+</section>
+
+<hr class="sdiv"/>
+
+<!-- CAP 4 -->
+<section class="chapter" id="cap4">
+  <div class="chap-header">
+    <div class="chap-num">04</div>
+    <div>
+      <p class="chap-eyebrow" data-i18n="c4ey"></p>
+      <h2 class="chap-title" data-i18n="c4title"></h2>
+      <p class="chap-sub" data-i18n="c4sub"></p>
+    </div>
+  </div>
+
+  <div class="chap-audio-row">
+    <button class="chap-play-btn" id="chapPlayBtn4" onclick="playSequence([4])" data-i18n="chapPlay"></button>
+    <button class="chap-dl-btn" id="chapDlBtn4" onclick="downloadChapter(4)" data-i18n="chapDl"></button>
+    <span class="chap-audio-status" id="chapStatus4"></span>
+  </div>
+
+  <p class="section-tag" data-i18n="tagAll"></p>
+  <p class="body-p" data-i18n="c4_o1"></p>
+  <p class="body-p" data-i18n="c4_o2"></p>
+
+  <p class="section-tag tech" data-i18n="tagTech"></p>
+
+  <p class="subhead" data-i18n="c4sh1"></p>
+  <p class="body-p" data-i18n="c4p1"></p>
+  <ul class="body-list">
+    <li data-i18n="c4l1"></li>
+    <li data-i18n="c4l2"></li>
+    <li data-i18n="c4l3"></li>
+  </ul>
+
+  <p class="subhead" data-i18n="c4sh2"></p>
+  <p class="body-p" data-i18n="c4p2"></p>
+  <ul class="body-list">
+    <li data-i18n="c4l4"></li>
+    <li data-i18n="c4l5"></li>
+    <li data-i18n="c4l6"></li>
+    <li data-i18n="c4l7"></li>
+  </ul>
+
+  <p class="subhead" data-i18n="c4sh3"></p>
+  <p class="body-p" data-i18n="c4p3"></p>
+  <ul class="body-list">
+    <li data-i18n="c4l8"></li>
+    <li data-i18n="c4l9"></li>
+    <li data-i18n="c4l10"></li>
+    <li data-i18n="c4l11"></li>
+  </ul>
+
+  <div class="callout green">
+    <p class="callout-label" data-i18n="c4cl_label"></p>
+    <p data-i18n="c4cl"></p>
+  </div>
+
+  <p class="section-tag gear" data-i18n="tagGear"></p>
+  <div class="eq-grid">
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_plate"></p>
+      <h3 class="eq-card-name">EMT 140</h3>
+      <p class="eq-card-spec" data-i18n="emt140spec"></p>
+    </div>
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_delay"></p>
+      <h3 class="eq-card-name">Echoplex EP-3</h3>
+      <p class="eq-card-spec" data-i18n="echoplexspec"></p>
+    </div>
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_delay"></p>
+      <h3 class="eq-card-name">Roland RE-201</h3>
+      <p class="eq-card-spec" data-i18n="re201spec"></p>
+    </div>
+    <div class="eq-card">
+      <p class="eq-card-type" data-i18n="eq_chamber"></p>
+      <h3 class="eq-card-name" data-i18n="capitolname"></h3>
+      <p class="eq-card-spec" data-i18n="capitolspec"></p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="vol-footer">
+  <h3 data-i18n="vf_title"></h3>
+  <p data-i18n="vf_desc"></p>
+  <div class="vol-nav-btns">
+    <a class="nav-btn secondary" href="vol01-tracking-analogico-v4.html" data-i18n="vf_back"></a>
+    <a class="nav-btn primary" href="vol03-masterizacao.html" data-i18n="vf_next"></a>
+  </div>
+</div>
+
+<footer>
+  <strong>Estúdio Plá</strong> &nbsp;&middot;&nbsp; Bauru, São Paulo, Brasil<br>
+  <span data-i18n="ft_title"></span><br>
+  <span style="opacity:.45;font-size:12px">&copy; 2026 Estúdio Plá &middot; Kaue Ferreira Moraes &middot; <span data-i18n="ft_rights"></span></span>
+</footer>
+
+<script>
+var T = {
+pt:{
+  navVol1:"Vol. 01", navVol2:"Vol. 02", navVol3:"Vol. 03", navBonus:"Bônus Track",
+  cnav1:"01 — Console", cnav2:"02 — Equalizadores", cnav3:"03 — Compressores", cnav4:"04 — Espaço",
+  volBadge:"VOLUME 02 DE 03",
+  h1:"A Mixagem Analógica<br><em>The Mixdown</em>",
+  subtitle:"Da soma de voltagens no barramento ao espaço tridimensional do som.",
+  playerTitle:"Sistema de Áudio — Narração Completa por Gemini AI",
+  keyPh:"Cole sua chave Gemini API aqui",
+  keyLink:"&#128273; Obter chave grátis",
+  keyHint:"Sua chave permanece apenas nesta sessão do navegador — nunca é enviada aos nossos servidores.",
+  vMasc:"Voz Masculina", vFem:"Voz Feminina",
+  btnPlayAll:"&#9654; Reproduzir Volume Completo",
+  btnPauseLabel:"&#10074;&#10074; Pausar", btnResumeLabel:"&#9654; Retomar",
+  btnStop:"&#9632; Parar",
+  chapPlay:"&#9654; Ouvir este Capítulo",
+  chapDl:"&#11015; Baixar Áudio (.wav)",
+  tagAll:"Para Todos", tagTech:"Nível Técnico", tagGear:"Fichas de Equipamento",
+  statusInit:"Insira sua chave, escolha a voz e escolha um capítulo ou o volume completo.",
+  statusGen:"Gerando narração — Capítulo ", statusGenOf:" de ",
+  statusPlay:"&#9654; Reproduzindo — Capítulo ",
+  statusDone:"&#10004; Reprodução concluída.", statusDoneAll:"&#10004; Volume completo reproduzido.",
+  statusPaused:"&#10074;&#10074; Pausado.", statusStop:"&#9632; Parado.",
+  statusNoKey:"&#9888; Cole sua chave Gemini no campo acima.",
+  statusErr:"&#9888; Erro: ",
+  statusDownloading:"Preparando download do Capítulo ",
+  statusDownloaded:"&#10004; Áudio do Capítulo ", statusDownloadedEnd:" baixado.",
+  // Chapter 1
+  c1ey:"Estrutura", c1title:"A Arquitetura do Console",
+  c1sub:"Como 24 canais de voltagem se fundem em uma música — a física da soma analógica.",
+  c1_o1:"Imagine que você tem vinte e quatro músicos tocando ao mesmo tempo em salas separadas. Cada um chega ao console pelo seu próprio canal — um fio de energia elétrica representando aquela voz, aquela guitarra, aquele bumbo. O console é a sala onde todas essas energias se encontram, se misturam e viram uma coisa só.",
+  c1_o2:"Mas não é uma mistura digital, onde um computador soma números. É uma mistura física — correntes elétricas reais se fundindo num único ponto de cobre chamado barramento. E quando isso acontece, algo mágico ocorre: os circuitos de ferro e transistores interagem entre si de um jeito que nenhum algoritmo consegue prever completamente. O resultado tem uma coesão, uma 'cola', uma sensação de que todos os instrumentos pertencem ao mesmo espaço. Engenheiros chamam isso de 'cola analógica'.",
+  d1label:"CAMINHO DO SINAL NA MIXAGEM",
+  d1note:"Saída da Fita → Line In → Insert (Outboard) → EQ + Aux Sends → Fader + Pan → Barramento de Soma",
+  c1p1:"Quando 24 ou 48 canais de voltagem convergem no barramento, ocorre uma sutil intermodulação nos circuitos de soma. Os transformadores e amplificadores de linha do bloco master seguram essa carga gerando:",
+  c1sh1:"O Fenômeno da Soma Analógica",
+  c1l1:"Compressão suave de barramento",
+  c1l2:"Harmônicos de intermodulação musicais",
+  c1l3:"Coesão espectral entre os elementos da mixagem",
+  c1l4:"<strong>Transformador de entrada de linha:</strong> casamento de impedância, coloração",
+  c1l5:"<strong>Insert:</strong> ponto de envio/retorno pré-fader para processamento externo",
+  c1l6:"<strong>EQ de canal:</strong> equalização inline integrada",
+  c1l7:"<strong>Aux Sends:</strong> envios pré-fader (foldback, efeitos fixos) e pós-fader (reverbs, delays)",
+  c1l8:"<strong>Fader, Pan e Subgrupos:</strong> controle de volume, posicionamento estéreo e agrupamento de canais",
+  c1p2:"Esse fenômeno é o 'som' das grandes mesas — e é o que plug-ins de 'console emulation' tentam replicar. Na soma digital, os sinais são multiplicados por coeficientes e somados matematicamente — resultado perfeito mas sem o comportamento não-linear dos circuitos analógicos. Na soma analógica, correntes reais se cruzam em cobre — e é exatamente essa impureza controlada que gera o 'som'.",
+  eq_console:"Console Analógico",
+  ssl4000gspec:"<strong>Canais:</strong> 24 a 96 · <strong>Arquitetura:</strong> VCA com G-Bus Compressor integrado · O console que definiu o som do pop e rock dos anos 80 e 90. Presente em Abbey Road, Air Studios, Record Plant. O G-Bus Compressor de barramento é uma das ferramentas mais copiadas da história do áudio.",
+  neve8078spec:"<strong>Canais:</strong> 24 a 48 · <strong>Arquitetura:</strong> Transistorizada discreta com transformadores Marinair · O console mais cobiçado da história. Cada canal é um módulo 1073 completo. Usado por Led Zeppelin, David Bowie, CSNY e centenas de clássicos do rock britânico.",
+  api2488spec:"<strong>Canais:</strong> 24 · <strong>Arquitetura:</strong> Transistor discreto API 2520 · O console do som americano de Nashville e Los Angeles. Resposta de transiente agressiva e médios presentes que definiram o country e o rock americano dos anos 70–80.",
+  // Chapter 2
+  c2ey:"Escultura do Som", c2title:"Equalizadores Analógicos",
+  c2sub:"A física dos filtros passivos, indutivos e paramétricos — esculpir frequências com ferro e cobre.",
+  c2_o1:"Pense no equalizador como o controle de brilho e graves do seu aparelho de som — só que incrivelmente mais preciso e com personalidade própria. Enquanto o controle do seu rádio simplesmente levanta ou corta frequências de forma genérica, o equalizador analógico de estúdio faz isso usando bobinas de cobre enroladas em núcleos de ferro, capacitores e resistores que foram projetados décadas atrás e ainda não foram superados.",
+  c2_o2:"O mais fascinante é que equalizar no analógico não é só uma questão de mais ou menos. É uma questão de como o circuito soa ao fazer isso. Um equalizador Pultec dos anos cinquenta adiciona um peso nos graves que nenhum plug-in consegue replicar perfeitamente — porque não é apenas uma questão de nível, mas de como os indutores interagem com a música ao redor daquela frequência.",
+  c2sh1:"1. Equalizadores Passivos/Indutivos (Pultec EQP-1A)",
+  c2p1:"Utilizam <strong>indutores</strong> (bobinas de fio enroladas em núcleos magnéticos) como elemento primário de filtragem. Não possuem amplificadores ativos no estágio de equalização — apenas um estágio de makeup gain (valvulado ou transistorizado) para recuperar a perda de nível.",
+  c2l1:"Curvas suaves e musicais — impossível de soar agressivo",
+  c2l2:"Phase shift pronunciado mas musicalmente coerente",
+  c2l3:"O famoso 'Pultec trick': boostar e cortar a mesma frequência de graves simultaneamente cria um ganho massivo com um corte logo acima — peso sem lama",
+  c2sh2:"2. Equalizadores Paramétricos Ativos (Neve 1073 EQ, SSL 4000 E)",
+  c2p2:"Utilizam amplificadores operacionais (op-amps) ou transistores para boost/cut ativo. Oferecem controle de três variáveis: <strong>Frequência</strong>, <strong>Ganho</strong> e <strong>Q</strong> (largura de banda).",
+  c2l4:"Maior precisão cirúrgica",
+  c2l5:"Resposta mais rápida e controlada",
+  c2l6:"O EQ do SSL 4000 E (botões pretos e marrons): poucos dBs já causam impacto audível imediato",
+  c2l7:"O EQ do Neve 1073: três bandas simples com coloração harmônica intrínseca",
+  c2sh3:"3. Shelf Equalizers e Filtros de Alta/Baixa",
+  c2p3:"Filtros de prateleira para trabalho em extremos do espectro. High-pass filters (HPF) para eliminar sub-frequências inúteis abaixo de 80–100 Hz. Low-pass filters (LPF) para controle de brilho excessivo.",
+  c2cl_label:"Phase Shift na Equalização Analógica",
+  c2cl:"Toda equalização analógica introduz deslocamento de fase (phase shift) — o sinal de áudio é levemente atrasado em certas frequências. Esse comportamento, visto como problema no digital, é parte integral do som analógico. Múltiplos equalizadores em série criam assinaturas de fase únicas que contribuem para a coesão da mixagem.",
+  eq_passivo:"Equalizador Passivo/Indutivo", eq_parametrico:"Equalizador Paramétrico", eq_mastering:"Equalizador de Masterização",
+  pultecspec:"<strong>Tipo:</strong> Passivo com indutor · <strong>Banda Baixa:</strong> 20–100 Hz · <strong>Banda Alta:</strong> 3–16 kHz · O equalizador mais musical já construído. Circuito passivo original dos anos 1950. Cada unidade tem personalidade ligeiramente diferente devido à variação dos indutores.",
+  neve1073eqspec:"<strong>Bandas:</strong> 3 (High shelf, Mid paramétrico, Low shelf) + HPF · Coloração harmônica intrínseca — equalizar com o 1073 é sempre adicionar caráter além de frequência. O EQ mais gravado na história da música gravada.",
+  ssl4000espec:"<strong>Bandas:</strong> 4 totalmente paramétricas + HPF/LPF · Precisão cirúrgica com caráter agressivo. O 'black knob' EQ dos discos de Michael Jackson, Phil Collins, e praticamente todo pop e rock dos anos 80.",
+  gml8200spec:"<strong>Bandas:</strong> 5 paramétricas com stepped attenuators de precisão militar · O padrão de ouro para equalização de masterização. Ajustes mínimos de 0,5 dB com reprodutibilidade perfeita.",
+  // Chapter 3
+  c3ey:"Dinâmica e Tensão", c3title:"Compressores Analógicos",
+  c3sub:"O controle do fluxo de voltagem — quatro tecnologias, quatro personalidades.",
+  c3_o1:"Imagine que a voz de um cantor é um rio. Em alguns momentos ela vem forte como uma enxurrada; em outros, fraca como um fio d'água. O compressor é a comporta que controla esse fluxo — ele reduz automaticamente o volume quando o sinal fica forte demais, mantendo tudo num nível mais equilibrado.",
+  c3_o2:"Mas o que torna os compressores analógicos fascinantes não é só o que eles fazem, é como fazem. Existem quatro tecnologias completamente diferentes para reduzir esse volume, e cada uma deixa uma impressão sonora única na música. Um compressor óptico faz isso usando luz. Um VCA usa eletricidade pura. Um FET usa transistores de resposta ultrarápida. E um Vari-Mu usa válvulas aquecidas que respondem de forma orgânica e imprevisível.",
+  c3sh1:"1. VCA — Amplificador Controlado por Voltagem (SSL G-Bus, dbx 160)",
+  c3p1:"O sinal de controle (detector) gera uma voltagem que controla diretamente o ganho de um VCA no caminho do áudio. Resposta extremamente rápida e precisa — ataque mensurável em microssegundos. Transparente quando usado com moderação; agressivo quando forçado.",
+  c3l1:"<strong>Uso:</strong> Mix bus, bateria, qualquer fonte que precise de controle rápido e firme",
+  c3sh2:"2. FET — Transistor de Efeito de Campo (Urei 1176)",
+  c3p2:"O sinal de controle polariza um FET que opera no caminho do áudio. Ataque absurdamente rápido (20 µs mínimo). Distorção harmônica característica quando forçado — harmônicos ímpares que adicionam presença e atitude.",
+  c3l2:"<strong>Modo All-Buttons-In:</strong> todos os botões de ratio pressionados simultaneamente criam compressão extremamente agressiva com coloração harmônica rica",
+  c3l3:"<strong>Uso:</strong> Vocais com atitude, caixas de bateria, guitarras elétricas",
+  c3sh3:"3. Óptico (Teletronix LA-2A, LA-3A)",
+  c3p3:"O sinal acende um painel eletroluminescente interno. Quanto mais brilhante a luz, mais a célula T4 fotocondutora reduz a resistência — e o volume cai. O tempo de resposta depende da intensidade luminosa, que depende do programa — compressão 'program-dependent'.",
+  c3l4:"Release naturalmente variável: rápido nos ataques curtos, lento nas sustentações longas",
+  c3l5:"Impossível de soar agressivo — a luz não responde rápido o suficiente",
+  c3l6:"<strong>Uso:</strong> Vocais principais, baixo, qualquer instrumento que exija compressão invisível",
+  c3sh4:"4. Vari-Mu (Fairchild 670, Manley Variable Mu)",
+  c3p4:"A própria válvula (tubo) altera o ganho à medida que a voltagem de entrada aumenta. O ponto de operação da válvula muda continuamente com o sinal — comportamento orgânico e não-linear.",
+  c3l7:"Compressão suave e cremosa com assinatura harmônica valvulada rica",
+  c3l8:"Release extremamente lento e musical",
+  c3l9:"<strong>Uso:</strong> Barramento estéreo master, subgrupos, masterização",
+  th_tipo2:"Tipo", th_comp:"Componente", th_ataque:"Ataque", th_carater:"Caráter", th_app2:"Aplicação Clássica",
+  tb_vca_name:"VCA (SSL G-Bus)", tb_vca_comp:"Amp controlado por voltagem", tb_vca_atk:"Muito rápido", tb_vca_car:"Transparente a agressivo", tb_vca_app:"Mix bus, bateria",
+  tb_fet_name:"FET (Urei 1176)", tb_fet_comp:"Transistor de efeito de campo", tb_fet_atk:"Ultrarrápido (20 µs)", tb_fet_car:"Agressivo, com atitude", tb_fet_app:"Vocais, caixa, guitarra",
+  tb_opt_name:"Óptico (LA-2A)", tb_opt_comp:"Célula fotoelétrica T4", tb_opt_atk:"Médio, program-dep.", tb_opt_car:"Suave, invisível", tb_opt_app:"Vocais principais, baixo",
+  tb_vm_name:"Vari-Mu (Fairchild)", tb_vm_comp:"Válvula em modo variável", tb_vm_atk:"Lento, orgânico", tb_vm_car:"Cremoso, valvulado", tb_vm_app:"Master bus, masterização",
+  eq_vca:"Compressor VCA", eq_fet:"Compressor FET", eq_optico:"Compressor Óptico", eq_varimu:"Compressor Vari-Mu",
+  sslgbusspec:"<strong>Ratio:</strong> 2:1 a 10:1 · <strong>Ataque:</strong> 0,1 ms a 30 ms · <strong>Release:</strong> 0,1 s a 1,2 s · O compressor de barramento mais usado da história. Cola a mixagem com uma consistência que os engenheiros descrevem como 'fazer tudo soar como um álbum'.",
+  urei1176spec:"<strong>Ratio:</strong> 4:1, 8:1, 12:1, 20:1, All-buttons · <strong>Ataque:</strong> 20 µs a 800 µs · <strong>Release:</strong> 50 ms a 1,1 s · O compressor mais gravado da história. Presente em virtualmente todos os clássicos do rock, pop e R&B desde os anos 60.",
+  la2aspec:"<strong>Ratio:</strong> Fixo (~3:1 a 10:1 program-dependent) · <strong>Ataque:</strong> ~10 ms · <strong>Release:</strong> ~60 ms (program-dep.) · O compressor de vocal por excelência. Sua célula T4 fotocondutora responde organicamente à música.",
+  fairchildspec:"<strong>Ratio:</strong> Variável · <strong>Ataque:</strong> Program-dependent · <strong>Release:</strong> 6 tempos selecionáveis · O compressor mais raro e mais cobiçado da história do áudio. Unidades originais valem entre 30 e 50 mil dólares.",
+  // Chapter 4
+  c4ey:"Dimensão", c4title:"Espaço e Profundidade",
+  c4sub:"Câmaras de eco reais, placas de reverberação e delays de fita — o espaço antes do digital.",
+  c4_o1:"Antes dos plug-ins de reverb, criar a sensação de espaço numa gravação exigia engenharia física real. Os estúdios construíam salas inteiras de concreto no subsolo só para capturar o eco. Fabricavam placas de aço do tamanho de uma porta suspensas por molas dentro de caixas de madeira. E usavam máquinas de fita auxiliares apenas para criar ecos controlados.",
+  c4_o2:"Esses dispositivos não simulavam espaço. Eles eram espaço. O reverb de uma câmara de eco real é o som das reflexões físicas do ar batendo em paredes de concreto. O reverb de uma placa EMT 140 é o som de uma folha de aço vibrando com a música. Essas assinaturas sonoras têm uma complexidade que ainda hoje inspira os melhores plug-ins do mercado.",
+  c4sh1:"Câmaras de Eco (Echo Chambers)",
+  c4p1:"Salas dedicadas construídas com paredes de concreto altamente reflexivas (frequentemente revestidas de azulejo). Um alto-falante envia o sinal do console para dentro da sala. Microfones posicionados em pontos específicos captam as reflexões. O resultado é um reverb completamente natural, com densidade e complexidade impossíveis de replicar algoritmicamente.",
+  c4l1:"Tempo de decaimento (RT60) fixo pela acústica da sala — nenhum controle de parâmetros",
+  c4l2:"Reflexões primárias com caráter único baseado nas dimensões físicas",
+  c4l3:"O som das câmaras de eco de Abbey Road, Capitol Studios e Gold Star Studio é parte integral da história do rock e pop",
+  c4sh2:"Placas de Reverberação (Plate Reverbs — EMT 140)",
+  c4p2:"Uma folha de aço de 2 m × 1,2 m suspensa por molas dentro de uma caixa de madeira isolada. Um transdutor fixado no centro faz o metal vibrar com o sinal de áudio. Captadores nas bordas da placa colhem as vibrações metálicas.",
+  c4l4:"Reverb denso e brilhante com ataque rápido e decaimento suave",
+  c4l5:"Tempo de decaimento ajustável por um amortecedor físico (damper)",
+  c4l6:"Assenta perfeitamente atrás de vozes e caixas de bateria",
+  c4l7:"Ainda hoje considerado o padrão de referência para vocais de estúdio",
+  c4sh3:"Delays de Fita (Tape Delays — Echoplex, Roland RE-201)",
+  c4p3:"O sinal é gravado pelo cabeçote de gravação de uma máquina auxiliar e reproduzido pelo cabeçote de reprodução milissegundos depois. A distância física entre os cabeçotes e a velocidade da fita determinam o tempo do delay. Alimentando a saída de volta para a entrada, cria-se o feedback — ecos que se degradam e saturam a cada repetição.",
+  c4l8:"Cada repetição fica levemente mais escura e mais saturada — degradação musical",
+  c4l9:"Variação de tempo por mudança de velocidade da fita (wow and flutter intencional)",
+  c4l10:"O 'slap delay' de 60–120 ms que define o rockabilly e o early rock and roll",
+  c4l11:"Feedback controlado cria efeitos de eco infinito e caos organizado",
+  c4cl_label:"Aux Sends e o Roteamento de Efeitos",
+  c4cl:"<strong>Pre-Fader:</strong> sinal enviado antes do fader de volume — independente do nível do canal. Ideal para foldback ou efeitos de nível fixo. <strong>Post-Fader:</strong> sinal proporcional ao fader — acompanha os ajustes de volume. Padrão para reverbs e delays de mixagem.",
+  eq_plate:"Placa de Reverberação", eq_delay:"Tape Delay", eq_chamber:"Câmara de Eco",
+  emt140spec:"<strong>Dimensões:</strong> 244 × 122 cm · <strong>Peso:</strong> ~270 kg · <strong>RT60:</strong> 0,5 s a 5 s (ajustável) · A placa de reverberação mais usada na história do áudio. Presente em Abbey Road, AIR Studios, Hansa Studios.",
+  echoplexspec:"<strong>Velocidades:</strong> Variável (20–800 ms) · <strong>Feedback:</strong> Regeneração ajustável · O tape delay mais famoso da história. Usado por Jimmy Page, Eddie Van Halen, Brian May.",
+  re201spec:"<strong>Velocidades:</strong> 11 combinações de cabeçotes · Spring reverb integrado · Presente em reggae, dub, krautrock e música eletrônica pioneira. Bob Marley, Can, Tangerine Dream.",
+  capitolname:"Câmara de Eco — Capitol Studios",
+  capitolspec:"Oito câmaras de eco subterrâneas construídas em 1956. Cada câmara tem dimensões e tempos de decaimento únicos. O som de Frank Sinatra, Nat King Cole, Beach Boys e centenas de clássicos americanos.",
+  vf_title:"Próximo: Volume 03 — A Masterização",
+  vf_desc:"Com a mixagem finalizada no console, o próximo passo é a masterização — o processo que prepara o som para o meio de reprodução final: o disco de vinil.",
+  vf_back:"&#8592; Volume 01 — Captação e Gravação",
+  vf_next:"Volume 03 — Masterização &#8594;",
+  ft_title:"Manual Definitivo de Gravação, Mixagem e Masterização Analógica — Volume 02",
+  ft_rights:"Todos os direitos reservados",
+  narration:{
+    1:"Capítulo Um. A Arquitetura do Console. Na mixagem analógica, vinte e quatro ou mais canais de voltagem elétrica convergem fisicamente em um único ponto de cobre — o barramento de soma. Não é uma soma matemática. É uma fusão real de correntes elétricas, onde os transformadores e amplificadores de linha interagem de forma não-linear, gerando uma coesão harmônica que engenheiros chamam de cola analógica. Cada canal segue um caminho preciso: da saída da fita, passa pelo insert para processamento externo, pela seção de EQ, pelos envios auxiliares, pelo fader e pelo pan, até chegar ao barramento. O SSL quatro mil G definiu o som do pop e rock dos anos oitenta e noventa com seu compressor de barramento integrado. O Neve oito mil e setenta e oito, com seus módulos mil e setenta e três em cada canal, foi o console dos clássicos do rock britânico. E o API dois mil quatrocentos e oitenta e oito carrega o DNA agressivo do som americano de Nashville e Los Angeles.",
+    2:"Capítulo Dois. Equalizadores Analógicos. Equalizar no domínio analógico é modificar a fase do sinal através de circuitos de resistores, capacitores e indutores. O equalizador passivo, como o Pultec EQP-1A, usa bobinas de cobre enroladas em núcleos magnéticos como elemento primário de filtragem. Ele não amplifica — apenas molda. E o resultado é uma curva tão suave e musical que parece impossível de soar errada. O famoso truque do Pultec consiste em boostar e cortar a mesma frequência grave simultaneamente: as curvas não se cancelam perfeitamente, criando um ganho massivo com um corte natural logo acima — peso sem lama. O equalizador paramétrico ativo, como o SSL quatro mil E ou o Neve mil e setenta e três, usa amplificadores para boost e cut precisos, com controle de frequência, ganho e largura de banda. E toda equalização analógica introduz deslocamento de fase — um comportamento visto como problema no digital, mas que no analógico é parte integral do som, contribuindo para a coesão e o caráter da mixagem.",
+    3:"Capítulo Três. Compressores Analógicos. O compressor controla a dinâmica do sinal — reduz o volume quando ele ultrapassa um limiar, mantendo tudo num nível coerente. Mas o que diferencia as tecnologias analógicas de compressão é o componente físico usado para realizar essa atenuação, e esse componente define completamente o caráter sonoro. O VCA, como o SSL G-Bus, usa um amplificador controlado por voltagem — resposta rápida, precisa, transparente ou agressiva dependendo do ajuste. O FET, como o Urei mil cento e setenta e seis, usa um transistor de efeito de campo com ataque mínimo de vinte microssegundos — ultrarrápido, com distorção harmônica característica que adiciona presença e atitude. O óptico, como o LA-2A da Teletronix, usa uma célula fotocondutora iluminada por um painel interno — quanto mais forte o sinal, mais brilhante a luz, mais a resistência cai. O resultado é uma compressão dependente do programa que nenhuma outra tecnologia replica. E o Vari-Mu, como o Fairchild seiscentos e setenta, usa a própria válvula para variar o ganho de forma orgânica e não-linear — cremoso, musical, valvulado. Cada tecnologia é uma personalidade distinta. Escolher o compressor certo é escolher como a música vai respirar.",
+    4:"Capítulo Quatro. Espaço e Profundidade. Antes dos plug-ins, criar a sensação de espaço numa mixagem exigia física real. As câmaras de eco eram salas de concreto construídas no subsolo dos estúdios — um alto-falante enviava o som para dentro, microfones captavam as reflexões das paredes. O resultado era o espaço mais real possível, com uma complexidade de reflexões que nenhum algoritmo ainda replicou completamente. A placa de reverberação EMT cento e quarenta era uma folha de aço com mais de dois metros de largura, suspensa por molas dentro de uma caixa de madeira. Um transdutor no centro fazia o metal vibrar com a música. Os captadores nas bordas colhiam esse tremor metálico — denso, brilhante, com um ataque rápido e um decaimento suave que assentava perfeitamente atrás de qualquer voz. E o delay de fita usava uma máquina auxiliar para gravar e reproduzir o sinal com um atraso determinado pela distância física entre os cabeçotes. Cada repetição ficava levemente mais escura e saturada — uma degradação musical que plug-ins passam décadas tentando capturar. Esses dispositivos não simulavam espaço. Eles eram espaço."
+  }
+},
+en:{
+  navVol1:"Vol. 01", navVol2:"Vol. 02", navVol3:"Vol. 03", navBonus:"Bonus Track",
+  cnav1:"01 — Console", cnav2:"02 — Equalizers", cnav3:"03 — Compressors", cnav4:"04 — Space",
+  volBadge:"VOLUME 02 OF 03",
+  h1:"Analog Mixing<br><em>The Mixdown</em>",
+  subtitle:"From voltage summation on the bus to the three-dimensional space of sound.",
+  playerTitle:"Audio System — Full Narration by Gemini AI",
+  keyPh:"Paste your Gemini API key here",
+  keyLink:"&#128273; Get free key",
+  keyHint:"Your key stays in this browser session only — it is never sent to our servers.",
+  vMasc:"Male Voice", vFem:"Female Voice",
+  btnPlayAll:"&#9654; Play Full Volume",
+  btnPauseLabel:"&#10074;&#10074; Pause", btnResumeLabel:"&#9654; Resume",
+  btnStop:"&#9632; Stop",
+  chapPlay:"&#9654; Listen to this Chapter",
+  chapDl:"&#11015; Download Audio (.wav)",
+  tagAll:"For Everyone", tagTech:"Technical Level", tagGear:"Equipment Spec Sheets",
+  statusInit:"Enter your Gemini key, choose a voice, and pick a chapter or the full volume.",
+  statusGen:"Generating narration — Chapter ", statusGenOf:" of ",
+  statusPlay:"&#9654; Playing — Chapter ",
+  statusDone:"&#10004; Playback complete.", statusDoneAll:"&#10004; Full volume playback complete.",
+  statusPaused:"&#10074;&#10074; Paused.", statusStop:"&#9632; Stopped.",
+  statusNoKey:"&#9888; Paste your Gemini key in the field above.",
+  statusErr:"&#9888; Error: ",
+  statusDownloading:"Preparing download for Chapter ",
+  statusDownloaded:"&#10004; Chapter ", statusDownloadedEnd:" audio downloaded.",
+  c1ey:"Structure", c1title:"The Architecture of the Console",
+  c1sub:"How 24 channels of voltage merge into one piece of music — the physics of analog summing.",
+  c1_o1:"Imagine you have twenty-four musicians playing at the same time in separate rooms. Each one arrives at the console through its own channel — a wire of electrical energy representing that voice, that guitar, that kick drum. The console is the room where all of that energy meets, blends, and becomes one single thing.",
+  c1_o2:"But it isn't a digital mix, where a computer adds up numbers. It's a physical mix — real electrical currents fusing together at a single point of copper called the bus. And when that happens, something magical occurs: the iron circuits and transistors interact with each other in ways no algorithm can fully predict. The result has a cohesion, a 'glue,' a sense that every instrument belongs to the same space. Engineers call this 'analog glue.'",
+  d1label:"SIGNAL PATH IN THE MIX",
+  d1note:"Tape Output → Line In → Insert (Outboard) → EQ + Aux Sends → Fader + Pan → Mix Bus",
+  c1p1:"When 24 or 48 channels of voltage converge at the bus, subtle intermodulation occurs in the summing circuits. The transformers and line amplifiers in the master section carry that load, generating:",
+  c1sh1:"The Phenomenon of Analog Summing",
+  c1l1:"Gentle bus compression",
+  c1l2:"Musical intermodulation harmonics",
+  c1l3:"Spectral cohesion between the elements of the mix",
+  c1l4:"<strong>Input line transformer:</strong> impedance matching, coloration",
+  c1l5:"<strong>Insert:</strong> pre-fader send/return point for external processing",
+  c1l6:"<strong>Channel EQ:</strong> integrated inline equalization",
+  c1l7:"<strong>Aux Sends:</strong> pre-fader sends (foldback, fixed effects) and post-fader sends (reverbs, delays)",
+  c1l8:"<strong>Fader, Pan and Subgroups:</strong> volume control, stereo positioning, and channel grouping",
+  c1p2:"This phenomenon is the 'sound' of the great consoles — and it's what 'console emulation' plug-ins try to replicate. In digital summing, signals are multiplied by coefficients and added mathematically — a perfect result but without the nonlinear behavior of analog circuits. In analog summing, real currents cross paths in copper — and it is exactly that controlled impurity that generates the 'sound.'",
+  eq_console:"Analog Console",
+  ssl4000gspec:"<strong>Channels:</strong> 24 to 96 · <strong>Architecture:</strong> VCA with integrated G-Bus Compressor · The console that defined the sound of 80s and 90s pop and rock. Found at Abbey Road, Air Studios, Record Plant. The G-Bus bus compressor is one of the most copied tools in audio history.",
+  neve8078spec:"<strong>Channels:</strong> 24 to 48 · <strong>Architecture:</strong> Discrete transistorized with Marinair transformers · The most coveted console in history. Every channel is a complete 1073 module. Used by Led Zeppelin, David Bowie, CSNY, and hundreds of British rock classics.",
+  api2488spec:"<strong>Channels:</strong> 24 · <strong>Architecture:</strong> Discrete API 2520 transistor · The console of the American Nashville and Los Angeles sound. Aggressive transient response and present midrange that defined American country and rock in the 70s–80s.",
+  c2ey:"Sound Sculpture", c2title:"Analog Equalizers",
+  c2sub:"The physics of passive, inductive, and parametric filters — sculpting frequency with iron and copper.",
+  c2_o1:"Think of the equalizer as the treble and bass control on your stereo — except incredibly more precise and with a personality of its own. While the knob on your radio simply boosts or cuts frequencies in a generic way, the analog studio equalizer does it using copper coils wound around iron cores, capacitors, and resistors that were designed decades ago and still haven't been surpassed.",
+  c2_o2:"The most fascinating part is that equalizing in analog isn't just a matter of more or less. It's a matter of how the circuit sounds while doing it. A 1950s Pultec equalizer adds a weight to the low end that no plug-in can perfectly replicate — because it isn't just about level, it's about how the inductors interact with the music around that frequency.",
+  c2sh1:"1. Passive/Inductive Equalizers (Pultec EQP-1A)",
+  c2p1:"They use <strong>inductors</strong> (wire coils wound around magnetic cores) as the primary filtering element. They have no active amplifiers at the equalization stage — only a makeup gain stage (tube or transistor) to recover the level loss.",
+  c2l1:"Smooth, musical curves — impossible to sound aggressive",
+  c2l2:"Pronounced phase shift but musically coherent",
+  c2l3:"The famous 'Pultec trick': boosting and cutting the same low frequency simultaneously creates a massive gain with a natural cut just above it — weight without mud",
+  c2sh2:"2. Active Parametric Equalizers (Neve 1073 EQ, SSL 4000 E)",
+  c2p2:"They use operational amplifiers (op-amps) or transistors for active boost/cut. They offer control over three variables: <strong>Frequency</strong>, <strong>Gain</strong>, and <strong>Q</strong> (bandwidth).",
+  c2l4:"Greater surgical precision",
+  c2l5:"Faster, more controlled response",
+  c2l6:"The SSL 4000 E EQ (black and brown knobs): a few dB already causes an immediate, audible impact",
+  c2l7:"The Neve 1073 EQ: three simple bands with intrinsic harmonic coloration",
+  c2sh3:"3. Shelf Equalizers and High/Low Filters",
+  c2p3:"Shelving filters for work at the extremes of the spectrum. High-pass filters (HPF) to eliminate useless sub-frequencies below 80–100 Hz. Low-pass filters (LPF) to control excessive brightness.",
+  c2cl_label:"Phase Shift in Analog Equalization",
+  c2cl:"All analog equalization introduces phase shift — the audio signal is slightly delayed at certain frequencies. This behavior, seen as a problem in the digital world, is an integral part of the analog sound. Multiple equalizers in series create unique phase signatures that contribute to the cohesion of the mix.",
+  eq_passivo:"Passive/Inductive Equalizer", eq_parametrico:"Parametric Equalizer", eq_mastering:"Mastering Equalizer",
+  pultecspec:"<strong>Type:</strong> Passive with inductor · <strong>Low Band:</strong> 20–100 Hz · <strong>High Band:</strong> 3–16 kHz · The most musical equalizer ever built. Original passive circuit from the 1950s. Each unit has a slightly different personality due to inductor variation.",
+  neve1073eqspec:"<strong>Bands:</strong> 3 (High shelf, Parametric mid, Low shelf) + HPF · Intrinsic harmonic coloration — equalizing with the 1073 always means adding character on top of frequency. The most-recorded EQ in the history of recorded music.",
+  ssl4000espec:"<strong>Bands:</strong> 4 fully parametric + HPF/LPF · Surgical precision with an aggressive character. The 'black knob' EQ on records by Michael Jackson, Phil Collins, and practically all 80s pop and rock.",
+  gml8200spec:"<strong>Bands:</strong> 5 parametric with military-precision stepped attenuators · The gold standard for mastering equalization. Minimum adjustments of 0.5 dB with perfect repeatability.",
+  c3ey:"Dynamics and Tension", c3title:"Analog Compressors",
+  c3sub:"Controlling the flow of voltage — four technologies, four personalities.",
+  c3_o1:"Imagine a singer's voice is a river. At times it rushes strong like a flash flood; at others, it trickles weak like a thin stream of water. The compressor is the floodgate that controls that flow — it automatically reduces the volume when the signal gets too strong, keeping everything at a more balanced level.",
+  c3_o2:"But what makes analog compressors fascinating isn't just what they do, it's how they do it. There are four completely different technologies for reducing that volume, and each one leaves a unique sonic imprint on the music. An optical compressor does it using light. A VCA uses pure electricity. A FET uses ultra-fast responding transistors. And a Vari-Mu uses heated tubes that respond in an organic, unpredictable way.",
+  c3sh1:"1. VCA — Voltage-Controlled Amplifier (SSL G-Bus, dbx 160)",
+  c3p1:"The control (detector) signal generates a voltage that directly controls the gain of a VCA in the audio path. Extremely fast and precise response — attack measurable in microseconds. Transparent when used moderately; aggressive when pushed hard.",
+  c3l1:"<strong>Use:</strong> Mix bus, drums, any source that needs fast, firm control",
+  c3sh2:"2. FET — Field-Effect Transistor (Urei 1176)",
+  c3p2:"The control signal biases a FET operating in the audio path. Absurdly fast attack (20 µs minimum). Characteristic harmonic distortion when pushed hard — odd harmonics that add presence and attitude.",
+  c3l2:"<strong>All-Buttons-In mode:</strong> pressing all the ratio buttons simultaneously creates extremely aggressive compression with rich harmonic coloration",
+  c3l3:"<strong>Use:</strong> Vocals with attitude, snare drums, electric guitars",
+  c3sh3:"3. Optical (Teletronix LA-2A, LA-3A)",
+  c3p3:"The signal lights up an internal electroluminescent panel. The brighter the light, the more the T4 photoconductive cell reduces resistance — and the volume drops. Response time depends on light intensity, which depends on the program material — 'program-dependent' compression.",
+  c3l4:"Naturally variable release: fast on short attacks, slow on long sustains",
+  c3l5:"Impossible to sound aggressive — the light doesn't respond fast enough",
+  c3l6:"<strong>Use:</strong> Lead vocals, bass, any instrument that calls for invisible compression",
+  c3sh4:"4. Vari-Mu (Fairchild 670, Manley Variable Mu)",
+  c3p4:"The tube itself changes gain as the input voltage increases. The tube's operating point shifts continuously with the signal — organic, nonlinear behavior.",
+  c3l7:"Smooth, creamy compression with a rich tube harmonic signature",
+  c3l8:"Extremely slow, musical release",
+  c3l9:"<strong>Use:</strong> Stereo master bus, subgroups, mastering",
+  th_tipo2:"Type", th_comp:"Component", th_ataque:"Attack", th_carater:"Character", th_app2:"Classic Application",
+  tb_vca_name:"VCA (SSL G-Bus)", tb_vca_comp:"Voltage-controlled amplifier", tb_vca_atk:"Very fast", tb_vca_car:"Transparent to aggressive", tb_vca_app:"Mix bus, drums",
+  tb_fet_name:"FET (Urei 1176)", tb_fet_comp:"Field-effect transistor", tb_fet_atk:"Ultrafast (20 µs)", tb_fet_car:"Aggressive, with attitude", tb_fet_app:"Vocals, snare, guitar",
+  tb_opt_name:"Optical (LA-2A)", tb_opt_comp:"T4 photoelectric cell", tb_opt_atk:"Medium, program-dep.", tb_opt_car:"Smooth, invisible", tb_opt_app:"Lead vocals, bass",
+  tb_vm_name:"Vari-Mu (Fairchild)", tb_vm_comp:"Tube in variable mode", tb_vm_atk:"Slow, organic", tb_vm_car:"Creamy, tube-warm", tb_vm_app:"Master bus, mastering",
+  eq_vca:"VCA Compressor", eq_fet:"FET Compressor", eq_optico:"Optical Compressor", eq_varimu:"Vari-Mu Compressor",
+  sslgbusspec:"<strong>Ratio:</strong> 2:1 to 10:1 · <strong>Attack:</strong> 0.1 ms to 30 ms · <strong>Release:</strong> 0.1 s to 1.2 s · The most widely used bus compressor in history. It glues the mix with a consistency engineers describe as 'making everything sound like an album.'",
+  urei1176spec:"<strong>Ratio:</strong> 4:1, 8:1, 12:1, 20:1, All-buttons · <strong>Attack:</strong> 20 µs to 800 µs · <strong>Release:</strong> 50 ms to 1.1 s · The most-recorded compressor in history. Found on virtually every rock, pop, and R&B classic since the 60s.",
+  la2aspec:"<strong>Ratio:</strong> Fixed (~3:1 to 10:1 program-dependent) · <strong>Attack:</strong> ~10 ms · <strong>Release:</strong> ~60 ms (program-dep.) · The quintessential vocal compressor. Its T4 photoconductive cell responds organically to the music.",
+  fairchildspec:"<strong>Ratio:</strong> Variable · <strong>Attack:</strong> Program-dependent · <strong>Release:</strong> 6 selectable times · The rarest and most coveted compressor in audio history. Original units are worth between 30 and 50 thousand dollars.",
+  c4ey:"Dimension", c4title:"Space and Depth",
+  c4sub:"Real echo chambers, reverb plates, and tape delays — space before the digital era.",
+  c4_o1:"Before reverb plug-ins, creating the sense of space in a recording required real physical engineering. Studios built entire concrete rooms in their basements just to capture the echo. They manufactured door-sized steel plates suspended by springs inside wooden cabinets. And they used auxiliary tape machines solely to create controlled echoes.",
+  c4_o2:"These devices didn't simulate space. They were space. The reverb of a real echo chamber is the sound of physical air reflections bouncing off concrete walls. The reverb of an EMT 140 plate is the sound of a steel sheet vibrating with the music. These sonic signatures have a complexity that still inspires the best plug-ins on the market today.",
+  c4sh1:"Echo Chambers",
+  c4p1:"Dedicated rooms built with highly reflective concrete walls (often tiled). A loudspeaker sends the signal from the console into the room. Microphones positioned at specific points capture the reflections. The result is a completely natural reverb, with a density and complexity impossible to replicate algorithmically.",
+  c4l1:"Decay time (RT60) fixed by the room's acoustics — no parameter control",
+  c4l2:"Primary reflections with a unique character based on physical dimensions",
+  c4l3:"The sound of the echo chambers at Abbey Road, Capitol Studios, and Gold Star Studio is an integral part of rock and pop history",
+  c4sh2:"Plate Reverbs (EMT 140)",
+  c4p2:"A 2 m × 1.2 m steel sheet suspended by springs inside an isolated wooden cabinet. A transducer mounted at the center makes the metal vibrate with the audio signal. Pickups at the edges of the plate capture the metallic vibrations.",
+  c4l4:"Dense, bright reverb with fast attack and smooth decay",
+  c4l5:"Decay time adjustable via a physical damper",
+  c4l6:"Sits perfectly behind vocals and snare drums",
+  c4l7:"Still considered the reference standard for studio vocals today",
+  c4sh3:"Tape Delays (Echoplex, Roland RE-201)",
+  c4p3:"The signal is recorded by the record head of an auxiliary machine and played back by the playback head milliseconds later. The physical distance between the heads and the tape speed determine the delay time. Feeding the output back into the input creates feedback — echoes that degrade and saturate with each repetition.",
+  c4l8:"Each repetition gets slightly darker and more saturated — musical degradation",
+  c4l9:"Time variation through tape speed changes (intentional wow and flutter)",
+  c4l10:"The 60–120 ms 'slap delay' that defines rockabilly and early rock and roll",
+  c4l11:"Controlled feedback creates infinite echo effects and organized chaos",
+  c4cl_label:"Aux Sends and Effects Routing",
+  c4cl:"<strong>Pre-Fader:</strong> signal sent before the volume fader — independent of the channel level. Ideal for foldback or fixed-level effects. <strong>Post-Fader:</strong> signal proportional to the fader — follows volume adjustments. Standard for mix reverbs and delays.",
+  eq_plate:"Reverb Plate", eq_delay:"Tape Delay", eq_chamber:"Echo Chamber",
+  emt140spec:"<strong>Dimensions:</strong> 244 × 122 cm · <strong>Weight:</strong> ~270 kg · <strong>RT60:</strong> 0.5 s to 5 s (adjustable) · The most widely used reverb plate in audio history. Found at Abbey Road, AIR Studios, Hansa Studios.",
+  echoplexspec:"<strong>Speeds:</strong> Variable (20–800 ms) · <strong>Feedback:</strong> Adjustable regeneration · The most famous tape delay in history. Used by Jimmy Page, Eddie Van Halen, Brian May.",
+  re201spec:"<strong>Speeds:</strong> 11 head combinations · Integrated spring reverb · Found in reggae, dub, krautrock, and pioneering electronic music. Bob Marley, Can, Tangerine Dream.",
+  capitolname:"Echo Chamber — Capitol Studios",
+  capitolspec:"Eight underground echo chambers built in 1956. Each chamber has unique dimensions and decay times. The sound of Frank Sinatra, Nat King Cole, the Beach Boys, and hundreds of American classics.",
+  vf_title:"Next: Volume 03 — Mastering",
+  vf_desc:"With the mix finalized on the console, the next step is mastering — the process that prepares the sound for its final playback medium: the vinyl record.",
+  vf_back:"&#8592; Volume 01 — Capture & Recording",
+  vf_next:"Volume 03 — Mastering &#8594;",
+  ft_title:"Definitive Manual of Analog Recording, Mixing and Mastering — Volume 02",
+  ft_rights:"All rights reserved",
+  narration:{
+    1:"Chapter One. The Architecture of the Console. In analog mixing, twenty-four or more channels of electrical voltage converge physically at a single point of copper — the mix bus. This is not a mathematical sum. It is a real fusion of electrical currents, where transformers and line amplifiers interact in a nonlinear way, generating a harmonic cohesion that engineers call analog glue. Each channel follows a precise path: from the tape output, through the insert for external processing, through the EQ section, through the auxiliary sends, through the fader and pan, to the bus. The SSL 4000 G defined the sound of pop and rock in the eighties and nineties with its integrated bus compressor. The Neve 8078, with its 1073 modules in every channel, was the console of British rock classics. And the API 2488 carries the aggressive DNA of the Nashville and Los Angeles American sound.",
+    2:"Chapter Two. Analog Equalizers. Equalizing in the analog domain is modifying the phase of the signal through circuits of resistors, capacitors, and inductors. The passive equalizer, like the Pultec EQP-1A, uses copper coils wound around magnetic cores as the primary filtering element. It does not amplify — it only shapes. And the result is a curve so smooth and musical that it seems impossible to sound wrong. The famous Pultec trick consists of boosting and cutting the same low frequency simultaneously: the curves do not cancel perfectly, creating a massive gain with a natural cut just above — weight without mud. The active parametric equalizer, like the SSL 4000 E or the Neve 1073, uses amplifiers for precise boost and cut, with control of frequency, gain, and bandwidth. And all analog equalization introduces phase shift — a behavior seen as a problem in the digital domain, but which in analog is an integral part of the sound, contributing to the cohesion and character of the mix.",
+    3:"Chapter Three. Analog Compressors. The compressor controls the dynamic range of the signal — it reduces the volume when it exceeds a threshold, keeping everything at a coherent level. But what differentiates analog compression technologies is the physical component used to perform that attenuation, and that component completely defines the sonic character. The VCA, like the SSL G-Bus, uses a voltage-controlled amplifier — fast, precise response, transparent or aggressive depending on the settings. The FET, like the Urei 1176, uses a field-effect transistor with a minimum attack of twenty microseconds — ultrafast, with characteristic harmonic distortion that adds presence and attitude. The optical, like the Teletronix LA-2A, uses a photoconductive cell illuminated by an internal panel — the louder the signal, the brighter the light, the more the resistance drops. The result is a program-dependent compression that no other technology replicates. And the Vari-Mu, like the Fairchild 670, uses the tube itself to vary gain in an organic and nonlinear way — creamy, musical, tube-warm. Each technology is a distinct personality. Choosing the right compressor is choosing how the music will breathe.",
+    4:"Chapter Four. Space and Depth. Before plug-ins, creating the sensation of space in a mix required real physics. Echo chambers were concrete rooms built in the basements of studios — a loudspeaker sent the sound in, microphones captured the reflections off the walls. The result was the most real space possible, with a complexity of reflections that no algorithm has yet fully replicated. The EMT 140 reverb plate was a steel sheet over two meters wide, suspended by springs inside a wooden cabinet. A transducer at the center made the metal vibrate with the music. Pickups at the edges captured that metallic tremor — dense, bright, with a fast attack and smooth decay that sat perfectly behind any voice. And tape delay used an auxiliary machine to record and play back the signal with a delay determined by the physical distance between the heads. Each repetition became slightly darker and more saturated — a musical degradation that plug-ins spend decades trying to capture. These devices did not simulate space. They were space."
+  }
+}
+};
+
+var lang = 'pt';
+var voiceName = 'Charon';
+
+function setLang(l){
+  lang = l;
+  document.getElementById('htmlRoot').lang = l === 'pt' ? 'pt-BR' : 'en-US';
+  document.getElementById('btnPT').classList.toggle('active', l === 'pt');
+  document.getElementById('btnEN').classList.toggle('active', l === 'en');
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var k = el.getAttribute('data-i18n');
+    if(T[l][k] !== undefined) el.innerHTML = T[l][k];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(function(el){
+    var k = el.getAttribute('data-i18n-ph');
+    if(T[l][k] !== undefined) el.placeholder = T[l][k];
+  });
+  if(!isPlaying){ setStatus(T[lang].statusInit); }
+  updatePauseBtn();
+}
+
+function toggleKey(){ var i = document.getElementById('apiKey'); i.type = i.type==='password'?'text':'password'; }
+function setVoice(t){
+  voiceName = t==='masc'?'Charon':'Kore';
+  document.getElementById('btnM').classList.toggle('active',t==='masc');
+  document.getElementById('btnF').classList.toggle('active',t==='fem');
+  if(isPlaying) stopAudio();
+}
+
+(function(){
+  var vu = document.getElementById('vu');
+  var bars = [
+    {mn:'10px',mx:'46px',d:'.55s',c:'#3A9FEF'},{mn:'18px',mx:'44px',d:'.70s',c:'#D4A83A'},
+    {mn:'8px',mx:'48px',d:'.45s',c:'#3A9FEF'},{mn:'22px',mx:'40px',d:'.85s',c:'#D4A83A'},
+    {mn:'12px',mx:'48px',d:'.60s',c:'#3A9FEF'},{mn:'16px',mx:'36px',d:'.50s',c:'#D4A83A'},
+    {mn:'6px',mx:'46px',d:'.40s',c:'#3A9FEF'},{mn:'20px',mx:'42px',d:'.75s',c:'#3A9FEF'},
+    {mn:'14px',mx:'46px',d:'.65s',c:'#D4A83A'},{mn:'10px',mx:'38px',d:'.55s',c:'#3A9FEF'},
+    {mn:'24px',mx:'48px',d:'.80s',c:'#D4A83A'},{mn:'8px',mx:'44px',d:'.48s',c:'#3A9FEF'}
+  ];
+  bars.forEach(function(b){
+    var el = document.createElement('div');
+    el.className = 'vu-bar';
+    el.style.setProperty('--mn',b.mn);
+    el.style.setProperty('--mx',b.mx);
+    el.style.setProperty('--d',b.d);
+    el.style.background = b.c;
+    el.style.height = b.mn;
+    vu.appendChild(el);
+  });
+})();
+
+var sessionId = 0;
+var stopSignal = null;
+var pauseGate = null;
+var audioCtx = null;
+var currentSource = null;
+var isPlaying = false;
+var isPaused = false;
+var audioCache = {};
+
+function setStatus(msg, spin){
+  var el = document.getElementById('pStatus');
+  el.innerHTML = spin ? '<span class="spinner"></span>' + msg : msg;
+}
+function setChapStatus(ch, msg){
+  var el = document.getElementById('chapStatus'+ch);
+  if(el) el.textContent = msg;
+}
+function clearChapStatuses(){
+  for(var i=1;i<=4;i++) setChapStatus(i,'');
+}
+function highlightChapter(ch){
+  for(var i=1;i<=4;i++){
+    var btn = document.getElementById('chapPlayBtn'+i);
+    if(btn) btn.classList.toggle('playing', i===ch);
+  }
+}
+function updatePauseBtn(){
+  var btn = document.getElementById('btnPauseResume');
+  btn.disabled = !isPlaying;
+  btn.innerHTML = isPaused ? T[lang].btnResumeLabel : T[lang].btnPauseLabel;
+}
+function setPlayingUI(playing){
+  isPlaying = playing;
+  document.getElementById('btnPlayAll').disabled = playing;
+  for(var i=1;i<=4;i++){
+    var pb = document.getElementById('chapPlayBtn'+i);
+    var db = document.getElementById('chapDlBtn'+i);
+    if(pb) pb.disabled = playing;
+    if(db) db.disabled = playing;
+  }
+  updatePauseBtn();
+  if(!playing) highlightChapter(null);
+}
+
+function makeDeferred(){
+  var resolveFn, rejectFn;
+  var p = new Promise(function(resolve, reject){ resolveFn = resolve; rejectFn = reject; });
+  p.catch(function(){});
+  return { promise:p, resolve:resolveFn, reject:rejectFn };
+}
+
+function resetPlaybackState(){
+  sessionId++;
+  if(stopSignal){ try{ stopSignal.reject(new Error('stopped')); }catch(e){} }
+  if(pauseGate){ try{ pauseGate.resolve(); }catch(e){} }
+  if(currentSource){ try{ currentSource.stop(); }catch(e){} }
+  if(audioCtx){ try{ audioCtx.close(); }catch(e){} }
+  audioCtx = null; currentSource = null;
+  stopSignal = null; pauseGate = null;
+  isPaused = false;
+  setPlayingUI(false);
+}
+
+function stopAudio(){
+  resetPlaybackState();
+  setStatus(T[lang].statusStop);
+  clearChapStatuses();
+}
+
+function togglePause(){
+  if(!isPlaying) return;
+  if(!isPaused){
+    isPaused = true;
+    if(audioCtx) audioCtx.suspend();
+    pauseGate = makeDeferred();
+    setStatus(T[lang].statusPaused);
+  } else {
+    isPaused = false;
+    if(audioCtx) audioCtx.resume();
+    if(pauseGate){ pauseGate.resolve(); pauseGate = null; }
+  }
+  updatePauseBtn();
+}
+
+function fetchChapterAudio(ch, key){
+  var text = T[lang].narration[ch];
+  return fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key='+encodeURIComponent(key),{
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      contents:[{parts:[{text:text}]}],
+      generationConfig:{responseModalities:['AUDIO'],speechConfig:{voiceConfig:{prebuiltVoiceConfig:{voiceName:voiceName}}}}
+    })
+  }).then(function(r){ return r.json(); }).then(function(d){
+    if(d.error) throw new Error(d.error.message);
+    var part = d.candidates[0].content.parts[0];
+    var mime = part.inlineData.mimeType || 'audio/L16;rate=24000';
+    var rm = mime.match(/rate=(\d+)/);
+    var rate = rm ? parseInt(rm[1],10) : 24000;
+    return { b64: part.inlineData.data, rate: rate, voice: voiceName };
+  });
+}
+
+function playBuffer(bufData, mySession, ch){
+  return new Promise(function(resolve, reject){
+    try{
+      var bin = atob(bufData.b64), raw = new Uint8Array(bin.length);
+      for(var i=0;i<bin.length;i++) raw[i] = bin.charCodeAt(i);
+      if(audioCtx){ try{ audioCtx.close(); }catch(e){} }
+      audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+      var i16 = new Int16Array(raw.buffer), f32 = new Float32Array(i16.length);
+      for(var j=0;j<i16.length;j++) f32[j] = i16[j]/32768;
+      var ab = audioCtx.createBuffer(1, f32.length, bufData.rate);
+      ab.getChannelData(0).set(f32);
+      currentSource = audioCtx.createBufferSource();
+      currentSource.buffer = ab;
+      currentSource.connect(audioCtx.destination);
+      currentSource.onended = function(){ if(mySession === sessionId) resolve(); };
+      highlightChapter(ch);
+      currentSource.start();
+    }catch(e){ reject(e); }
+  });
+}
+
+async function playSequence(chapters){
+  var key = document.getElementById('apiKey').value.trim();
+  if(!key){ setStatus(T[lang].statusNoKey); return; }
+  resetPlaybackState();
+  var mySession = sessionId;
+  stopSignal = makeDeferred();
+  setPlayingUI(true);
+  clearChapStatuses();
+  try{
+    for(var i=0;i<chapters.length;i++){
+      if(mySession !== sessionId) return;
+      if(isPaused && pauseGate) await Promise.race([pauseGate.promise, stopSignal.promise]);
+      if(mySession !== sessionId) return;
+
+      var ch = chapters[i];
+      setStatus(T[lang].statusGen + ch + T[lang].statusGenOf + '4 — ' + voiceName + '...', true);
+      setChapStatus(ch, T[lang].statusGen + ch + '...');
+
+      var buf = await Promise.race([fetchChapterAudio(ch, key), stopSignal.promise]);
+      if(mySession !== sessionId) return;
+      audioCache[ch] = buf;
+
+      setStatus(T[lang].statusPlay + ch + ' · ' + voiceName);
+      setChapStatus(ch, T[lang].statusPlay + ch);
+
+      await Promise.race([playBuffer(buf, mySession, ch), stopSignal.promise]);
+      if(mySession !== sessionId) return;
+      setChapStatus(ch, T[lang].statusDone);
+    }
+    if(mySession === sessionId){
+      setStatus(chapters.length > 1 ? T[lang].statusDoneAll : T[lang].statusDone);
+    }
+  }catch(e){
+    if(mySession === sessionId){ setStatus(T[lang].statusErr + e.message); }
+  }finally{
+    if(mySession === sessionId) setPlayingUI(false);
+  }
+}
+
+function pcmBase64ToWavBlob(b64, sampleRate){
+  var bin = atob(b64), len = bin.length;
+  var pcm = new Uint8Array(len);
+  for(var i=0;i<len;i++) pcm[i] = bin.charCodeAt(i);
+  var blockAlign = 2, byteRate = sampleRate*blockAlign;
+  var buffer = new ArrayBuffer(44 + pcm.length);
+  var view = new DataView(buffer);
+  function writeStr(offset,str){ for(var i=0;i<str.length;i++) view.setUint8(offset+i, str.charCodeAt(i)); }
+  writeStr(0,'RIFF'); view.setUint32(4, 36+pcm.length, true); writeStr(8,'WAVE');
+  writeStr(12,'fmt '); view.setUint32(16,16,true); view.setUint16(20,1,true); view.setUint16(22,1,true);
+  view.setUint32(24,sampleRate,true); view.setUint32(28,byteRate,true); view.setUint16(32,blockAlign,true); view.setUint16(34,16,true);
+  writeStr(36,'data'); view.setUint32(40,pcm.length,true);
+  new Uint8Array(buffer,44).set(pcm);
+  return new Blob([buffer], {type:'audio/wav'});
+}
+
+function triggerDownload(blob, filename){
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+}
+
+async function downloadChapter(ch){
+  var key = document.getElementById('apiKey').value.trim();
+  if(!key){ setStatus(T[lang].statusNoKey); return; }
+  var dlBtn = document.getElementById('chapDlBtn'+ch);
+  try{
+    var buf = audioCache[ch];
+    if(!buf || buf.voice !== voiceName){
+      dlBtn.disabled = true;
+      setChapStatus(ch, T[lang].statusDownloading + ch + '...');
+      setStatus(T[lang].statusDownloading + ch + '...', true);
+      buf = await fetchChapterAudio(ch, key);
+      audioCache[ch] = buf;
+    }
+    var blob = pcmBase64ToWavBlob(buf.b64, buf.rate);
+    triggerDownload(blob, 'volume02-capitulo0'+ch+'-'+buf.voice.toLowerCase()+'.wav');
+    setChapStatus(ch, T[lang].statusDownloaded + ch + T[lang].statusDownloadedEnd);
+    setStatus(T[lang].statusDownloaded + ch + T[lang].statusDownloadedEnd);
+  }catch(e){
+    setStatus(T[lang].statusErr + e.message);
+    setChapStatus(ch, '');
+  }finally{
+    dlBtn.disabled = isPlaying;
+  }
+}
+
+setLang('pt');
+</script>
+</body>
+</html>
